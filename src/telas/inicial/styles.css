@@ -18,6 +18,40 @@
   gap: 18px;
 }
 
+.pagina-inicial__dashboard-toolbar {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 12px;
+}
+
+.pagina-inicial__dashboard-toolbar .month-field {
+  width: 190px;
+}
+
+.pagina-inicial__dashboard-toolbar .calendar-field__label {
+  color: #0f766e;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.pagina-inicial__dashboard-toolbar .calendar-field__trigger {
+  min-height: 50px;
+  border-color: #93c5fd;
+  background: #fff;
+  color: var(--text-strong);
+  font-size: 16px;
+  font-weight: 800;
+  box-shadow:
+    0 12px 30px rgba(37, 99, 235, 0.13),
+    0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.pagina-inicial__dashboard-toolbar .calendar-field__trigger svg {
+  width: 20px;
+  height: 20px;
+}
+
 .pagina-inicial__summary-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -47,5 +81,13 @@
 @media (max-width: 720px) {
   .pagina-inicial__main {
     padding: 22px 16px 34px;
+  }
+
+  .pagina-inicial__dashboard-toolbar {
+    justify-content: stretch;
+  }
+
+  .pagina-inicial__dashboard-toolbar .month-field {
+    width: 100%;
   }
 }

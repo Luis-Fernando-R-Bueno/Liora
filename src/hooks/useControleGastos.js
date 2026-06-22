@@ -6,7 +6,12 @@ import {
   saveCategories,
   saveExpenses,
 } from '../servicos/storageService'
-import { compareExpensesByDate, getCurrentMonthKey, getMonthKey } from '../utils/dateUtils'
+import {
+  compareExpensesByDate,
+  getCurrentMonthKey,
+  getMonthKey,
+  toInputDate,
+} from '../utils/dateUtils'
 import { formatCurrency, parseCurrencyInput } from '../utils/formatCurrency'
 
 function createId(prefix) {
@@ -77,7 +82,7 @@ function aggregateByMonth(expenses) {
     .sort((a, b) => String(b.id).localeCompare(String(a.id)))
 }
 
-export function useControleGastos() {
+export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
   const [categories, setCategories] = useState(loadCategories)
   const [expenses, setExpenses] = useState(loadExpenses)
 
@@ -111,9 +116,14 @@ export function useControleGastos() {
   )
 
   const dashboard = useMemo(() => {
-    const currentMonth = getCurrentMonthKey()
+    const selectedMonth = dashboardMonthKey || getCurrentMonthKey()
+    const today = toInputDate()
     const currentMonthExpenses = expensesWithCategory.filter(
-      (expense) => getMonthKey(expense.date) === currentMonth,
+      (expense) => getMonthKey(expense.date) === selectedMonth,
+    )
+    const recentExpenses = expensesWithCategory.filter(
+      (expense) =>
+        getMonthKey(expense.date) === selectedMonth && String(expense.date) <= today,
     )
     const categorySummary = aggregateByCategory(currentMonthExpenses)
     const monthSummary = aggregateByMonth(expensesWithCategory).slice(0, 8)
@@ -123,11 +133,12 @@ export function useControleGastos() {
       totalMonth,
       countMonth: currentMonthExpenses.length,
       topCategory: categorySummary[0] ?? null,
-      recentExpenses: expensesWithCategory.slice(0, 5),
+      recentExpenses: recentExpenses.slice(0, 5),
       categorySummary,
       monthSummary,
+      selectedMonth,
     }
-  }, [expensesWithCategory])
+  }, [dashboardMonthKey, expensesWithCategory])
 
   const addExpense = useCallback((expenseData) => {
     const now = new Date().toISOString()

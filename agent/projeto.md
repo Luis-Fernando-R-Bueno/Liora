@@ -216,6 +216,72 @@ Validações executadas:
 - `npm.cmd run lint`
 - `npm.cmd run build`
 
+## Ajuste de Espaçamento do Seletor do Dashboard - 22/06/2026
+
+Alterações realizadas:
+
+- Espaçamento vertical do seletor de mês do dashboard ajustado para equilibrar
+  a distância superior e inferior antes dos cards.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Remoção do Rótulo do Seletor do Dashboard - 22/06/2026
+
+Alterações realizadas:
+
+- Removido o rótulo `Mês` acima do seletor de mês do dashboard.
+- Seletor permanece centralizado e destacado.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Destaque do Seletor de Mês no Dashboard - 22/06/2026
+
+Alterações realizadas:
+
+- Seletor de mês do dashboard centralizado.
+- Campo recebeu mais destaque visual com tamanho maior, borda azul e sombra.
+- Ajuste aplicado apenas no dashboard, sem alterar o seletor de mês da tela de
+  gastos.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Seletor de Mês no Dashboard - 22/06/2026
+
+Alterações realizadas:
+
+- Adicionado seletor de mês no dashboard.
+- Cards mensais, maior categoria, gastos recentes e resumo por categoria passam
+  a considerar o mês selecionado.
+- `Gastos recentes` continua ignorando lançamentos com data futura, mesmo quando
+  o mês selecionado possui gastos cadastrados para dias posteriores ao atual.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Correção de Gastos Recentes - 22/06/2026
+
+Alterações realizadas:
+
+- Gastos com data superior ao dia atual não aparecem mais em `Gastos recentes`.
+- Gastos futuros continuam salvos e visíveis no histórico, apenas deixam de
+  compor a lista de registros recentes do dashboard.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
 ## Remoção do Cabeçalho da Lista de Gastos - 22/06/2026
 
 Alterações realizadas:

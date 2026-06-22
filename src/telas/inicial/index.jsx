@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import CategoryManager from '../../componentes/categorias/categoryManager'
 import AppHeader from '../../componentes/compartilhado/appHeader'
+import { MonthField } from '../../componentes/compartilhado/calendarField'
 import DashboardCards from '../../componentes/dashboard/dashboardCards'
 import RecentExpenses from '../../componentes/dashboard/recentExpenses'
 import SummaryList from '../../componentes/dashboard/summaryList'
@@ -8,6 +9,7 @@ import ExpenseFilters from '../../componentes/gastos/expenseFilters'
 import ExpenseForm from '../../componentes/gastos/expenseForm'
 import ExpenseList from '../../componentes/gastos/expenseList'
 import { useControleGastos } from '../../hooks/useControleGastos'
+import { getCurrentMonthKey } from '../../utils/dateUtils'
 import './styles.css'
 
 const INITIAL_FILTERS = {
@@ -17,6 +19,7 @@ const INITIAL_FILTERS = {
 }
 
 function Inicial() {
+  const [dashboardMonthKey, setDashboardMonthKey] = useState(getCurrentMonthKey)
   const {
     addCategory,
     addExpense,
@@ -29,7 +32,7 @@ function Inicial() {
     toggleCategoryStatus,
     updateCategory,
     updateExpense,
-  } = useControleGastos()
+  } = useControleGastos(dashboardMonthKey)
   const [activeView, setActiveView] = useState('dashboard')
   const [filters, setFilters] = useState(INITIAL_FILTERS)
   const [editingExpense, setEditingExpense] = useState(null)
@@ -81,13 +84,21 @@ function Inicial() {
       <main className="pagina-inicial__main">
         {activeView === 'dashboard' ? (
           <section className="pagina-inicial__view" aria-label="Dashboard mensal">
+            <div className="pagina-inicial__dashboard-toolbar">
+              <MonthField
+                label=""
+                value={dashboardMonthKey}
+                onChange={setDashboardMonthKey}
+              />
+            </div>
+
             <DashboardCards dashboard={dashboard} />
 
             <RecentExpenses expenses={dashboard.recentExpenses} />
 
             <div className="pagina-inicial__summary-grid">
               <SummaryList
-                emptyText="Nenhum gasto no mês atual."
+                emptyText="Nenhum gasto no mês selecionado."
                 items={dashboard.categorySummary}
                 title="Resumo por categoria"
                 type="category"

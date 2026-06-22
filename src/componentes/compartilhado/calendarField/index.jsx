@@ -218,7 +218,7 @@ export function MonthField({ label, onChange, value }) {
 
   return (
     <div className="calendar-field month-field" ref={fieldRef}>
-      <span className="calendar-field__label">{label}</span>
+      {label ? <span className="calendar-field__label">{label}</span> : null}
       <button
         className="calendar-field__trigger calendar-field__trigger--compact"
         type="button"
