@@ -1,4 +1,4 @@
-import { LayoutDashboard, ReceiptText, Tags } from 'lucide-react'
+import { History, LayoutDashboard, ReceiptText, Tags } from 'lucide-react'
 import './styles.css'
 
 const NAV_ITEMS = [
@@ -16,6 +16,11 @@ const NAV_ITEMS = [
     id: 'categorias',
     label: 'Categorias',
     Icon: Tags,
+  },
+  {
+    id: 'historico',
+    label: 'Histórico',
+    Icon: History,
   },
 ]
 

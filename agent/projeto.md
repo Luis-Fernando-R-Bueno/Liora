@@ -216,6 +216,83 @@ Validações executadas:
 - `npm.cmd run lint`
 - `npm.cmd run build`
 
+## Tela de Histórico Mensal - 23/06/2026
+
+Alterações realizadas:
+
+- Criada a aba `Histórico` no menu principal.
+- A nova tela lista apenas meses anteriores ao mês atual que possuem gastos
+  cadastrados.
+- Cada mês exibe total gasto, quantidade de lançamentos e maior categoria.
+- Adicionado botão `Ver no painel` para abrir o mês selecionado diretamente no
+  painel mensal.
+- Consolidação dos meses anteriores adicionada ao hook principal
+  `useControleGastos`.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Mês de Simulação no Histórico - 23/06/2026
+
+Alterações realizadas:
+
+- Adicionado botão `Criar mês de simulação` na tela `Histórico`.
+- O sistema cria lançamentos fictícios em um mês anterior sem registros para
+  permitir avaliar o estilo visual da tela.
+- Cada novo clique cria a simulação em outro mês anterior livre, permitindo ver
+  mais de um card lado a lado no histórico.
+- Após criar ou localizar a simulação, o sistema abre automaticamente o período
+  no painel mensal.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Limpeza das Simulações - 23/06/2026
+
+Alterações realizadas:
+
+- Botão `Criar mês de simulação` removido da tela `Histórico`.
+- Função de criação de meses simulados removida do hook principal.
+- Registros fictícios com descrição iniciada por `Simulação -` deixam de ser
+  carregados do `localStorage`.
+- O salvamento automático passa a regravar os gastos sem esses registros
+  simulados após a aplicação carregar.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Correção do Cabeçalho do Histórico - 23/06/2026
+
+Alterações realizadas:
+
+- Cabeçalho da tela `Histórico` corrigido para empilhar rótulo, título e texto
+  na vertical após a remoção do botão de simulação.
+- Removidas regras CSS antigas relacionadas ao botão que não existe mais.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Ajuste do Estado Vazio do Histórico - 23/06/2026
+
+Alterações realizadas:
+
+- Reduzida a altura do estado vazio da lista de meses anteriores.
+- Ícone e mensagem agora ficam agrupados no centro, com menor distância entre
+  eles.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
 ## Ajuste da Seta de Voltar - 22/06/2026
 
 Alterações realizadas:

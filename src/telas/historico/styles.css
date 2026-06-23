@@ -1,0 +1,27 @@
+.historico {
+  display: grid;
+  gap: 18px;
+}
+
+.historico__header {
+  display: grid;
+  gap: 8px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+
+.historico__header span {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.historico__header p {
+  max-width: 700px;
+  color: var(--text-muted);
+  font-size: 14px;
+}

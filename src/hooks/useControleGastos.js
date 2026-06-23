@@ -130,6 +130,56 @@ function aggregateByMonth(expenses) {
     .sort((a, b) => String(b.id).localeCompare(String(a.id)))
 }
 
+function aggregateHistoricalMonths(expenses) {
+  const currentMonthKey = getCurrentMonthKey()
+  const grouped = expenses.reduce((acc, expense) => {
+    const monthKey = getMonthKey(expense.date)
+
+    if (!monthKey || monthKey >= currentMonthKey) {
+      return acc
+    }
+
+    if (!acc[monthKey]) {
+      acc[monthKey] = {
+        id: monthKey,
+        label: monthKey,
+        total: 0,
+        count: 0,
+        categories: {},
+      }
+    }
+
+    const categoryId = expense.category.id
+
+    acc[monthKey].total += expense.value
+    acc[monthKey].count += 1
+
+    if (!acc[monthKey].categories[categoryId]) {
+      acc[monthKey].categories[categoryId] = {
+        id: categoryId,
+        label: expense.category.nome,
+        color: expense.category.cor,
+        total: 0,
+        count: 0,
+      }
+    }
+
+    acc[monthKey].categories[categoryId].total += expense.value
+    acc[monthKey].categories[categoryId].count += 1
+
+    return acc
+  }, {})
+
+  return Object.values(grouped)
+    .map((month) => ({
+      ...month,
+      topCategory:
+        Object.values(month.categories).sort((a, b) => b.total - a.total)[0] ??
+        null,
+    }))
+    .sort((a, b) => String(b.id).localeCompare(String(a.id)))
+}
+
 export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
   const [categories, setCategories] = useState(loadCategories)
   const [expenses, setExpenses] = useState(loadExpenses)
@@ -187,6 +237,11 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
       selectedMonth,
     }
   }, [dashboardMonthKey, expensesWithCategory])
+
+  const historicalMonths = useMemo(
+    () => aggregateHistoricalMonths(expensesWithCategory),
+    [expensesWithCategory],
+  )
 
   const addExpense = useCallback((expenseData) => {
     const now = new Date().toISOString()
@@ -373,6 +428,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     categories,
     expenses: expensesWithCategory,
     dashboard,
+    historicalMonths,
     addExpense,
     updateExpense,
     deleteExpense,

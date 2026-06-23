@@ -11,6 +11,7 @@ import ExpenseForm from '../../componentes/gastos/expenseForm'
 import ExpenseList from '../../componentes/gastos/expenseList'
 import { useControleGastos } from '../../hooks/useControleGastos'
 import Importar from '../importar'
+import Historico from '../historico'
 import { getCurrentMonthKey } from '../../utils/dateUtils'
 import './styles.css'
 
@@ -31,6 +32,7 @@ function Inicial() {
     exportRecords,
     expenses,
     filterExpenses,
+    historicalMonths,
     importRecords,
     removeCategory,
     toggleCategoryStatus,
@@ -86,6 +88,11 @@ function Inicial() {
 
   function closeImportView() {
     setActiveView(previousView)
+  }
+
+  function openDashboardMonth(monthKey) {
+    setDashboardMonthKey(monthKey)
+    setActiveView('dashboard')
   }
 
   return (
@@ -168,6 +175,13 @@ function Inicial() {
               onUpdateCategory={updateCategory}
             />
           </section>
+        ) : null}
+
+        {activeView === 'historico' ? (
+          <Historico
+            months={historicalMonths}
+            onOpenMonth={openDashboardMonth}
+          />
         ) : null}
 
         {activeView === 'importar' ? (

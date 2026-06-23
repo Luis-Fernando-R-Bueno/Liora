@@ -5,6 +5,7 @@ const STORAGE_KEYS = {
 }
 
 const CATEGORY_DEFAULTS_VERSION = 2
+const SIMULATION_DESCRIPTION_PREFIX = 'Simulação -'
 
 export const CATEGORY_COLORS = [
   '#2563eb',
@@ -122,15 +123,20 @@ export function loadExpenses() {
     return []
   }
 
-  return storedExpenses.map((expense) => ({
-    id: expense.id,
-    date: expense.date,
-    categoryId: expense.categoryId,
-    value: Number(expense.value) || 0,
-    description: expense.description ?? '',
-    createdAt: expense.createdAt ?? new Date().toISOString(),
-    updatedAt: expense.updatedAt ?? expense.createdAt ?? new Date().toISOString(),
-  }))
+  return storedExpenses
+    .map((expense) => ({
+      id: expense.id,
+      date: expense.date,
+      categoryId: expense.categoryId,
+      value: Number(expense.value) || 0,
+      description: expense.description ?? '',
+      createdAt: expense.createdAt ?? new Date().toISOString(),
+      updatedAt: expense.updatedAt ?? expense.createdAt ?? new Date().toISOString(),
+    }))
+    .filter(
+      (expense) =>
+        !String(expense.description).startsWith(SIMULATION_DESCRIPTION_PREFIX),
+    )
 }
 
 export function saveExpenses(expenses) {
