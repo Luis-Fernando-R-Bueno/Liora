@@ -293,6 +293,33 @@ Validações executadas:
 - `npm.cmd run lint`
 - `npm.cmd run build`
 
+## Correção de Largura da Tela de Gastos - 23/06/2026
+
+Alterações realizadas:
+
+- Reduzidas as larguras mínimas dos filtros da tela `Gastos`.
+- Reduzida a largura mínima da tabela de gastos para evitar quebra da coluna ao
+  lado do formulário.
+- Layout de duas colunas no desktop preservado.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Ajuste do Corpo do Histórico - 23/06/2026
+
+Alterações realizadas:
+
+- Altura do estado vazio do corpo da tela `Histórico` igualada ao padrão usado
+  nos demais estados vazios do sistema.
+- Distância entre ícone e mensagem permanece reduzida.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
 ## Ajuste da Seta de Voltar - 22/06/2026
 
 Alterações realizadas:

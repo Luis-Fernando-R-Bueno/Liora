@@ -8,7 +8,7 @@
 }
 
 .month-history-list .empty-state {
-  min-height: 112px;
+  min-height: 160px;
   place-content: center;
   gap: 8px;
 }
