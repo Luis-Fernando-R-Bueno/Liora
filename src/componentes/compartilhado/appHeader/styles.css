@@ -47,6 +47,16 @@
   padding: 0 16px;
   background: transparent;
   color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.app-header__tab svg {
+  flex: 0 0 auto;
+}
+
+.app-header__tab-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .app-header__tab:hover,
@@ -67,10 +77,33 @@
 
   .app-header__nav {
     width: 100%;
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    overflow: hidden;
   }
 
   .app-header__tab {
-    flex: 1 0 auto;
+    min-width: 0;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-header__nav {
+    max-width: 420px;
+  }
+
+  .app-header__tab {
+    min-height: 44px;
+    padding: 0;
+  }
+
+  .app-header__tab-label {
+    display: none;
+  }
+
+  .app-header__tab svg {
+    width: 21px;
+    height: 21px;
   }
 }

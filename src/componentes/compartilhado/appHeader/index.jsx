@@ -33,10 +33,12 @@ function AppHeader({ activeView, onChangeView }) {
             key={id}
             className={activeView === id ? 'app-header__tab is-active' : 'app-header__tab'}
             type="button"
+            aria-label={label}
+            title={label}
             onClick={() => onChangeView(id)}
           >
             <Icon size={18} aria-hidden="true" />
-            {label}
+            <span className="app-header__tab-label">{label}</span>
           </button>
         ))}
       </nav>

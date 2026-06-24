@@ -334,6 +334,49 @@ Validações executadas:
 - `npm.cmd run lint`
 - `npm.cmd run build`
 
+## PWA com Suporte Offline - 24/06/2026
+
+Alterações realizadas:
+
+- Adicionado `manifest.webmanifest` para permitir instalação do sistema no
+  celular como aplicativo.
+- Criados ícones PNG para instalação do PWA.
+- Adicionado `sw.js` com cache local do app para uso offline após o primeiro
+  carregamento.
+- Criado registro do service worker em `src/pwa/registerServiceWorker.js`,
+  ativo apenas em build de produção.
+- `index.html` recebeu metatags de PWA, tema, descrição e suporte a instalação
+  em dispositivos móveis.
+
+Observações:
+
+- O app precisa ser aberto uma vez com internet para o service worker salvar os
+  arquivos no cache.
+- Depois disso, a interface pode abrir offline no celular.
+- Os dados continuam locais no navegador/dispositivo, sem sincronização entre
+  aparelhos.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Responsividade do Menu Principal - 24/06/2026
+
+Alterações realizadas:
+
+- Menu principal ajustado para distribuir os itens em quatro colunas em telas
+  menores.
+- Em celulares, os textos dos itens do menu são ocultados e ficam apenas os
+  ícones.
+- Botões mantêm `aria-label` e `title` para preservar acessibilidade e dica do
+  item.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
 ## Ajuste da Seta de Voltar - 22/06/2026
 
 Alterações realizadas:
