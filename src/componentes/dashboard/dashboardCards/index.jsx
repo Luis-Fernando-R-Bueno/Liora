@@ -32,12 +32,9 @@ function DashboardCards({ dashboard }) {
     },
     {
       id: 'average',
-      label: 'Média por gasto',
-      value:
-        dashboard.countMonth > 0
-          ? formatCurrency(dashboard.totalMonth / dashboard.countMonth)
-          : formatCurrency(0),
-      detail: 'Valor médio no mês',
+      label: 'Média mensal',
+      value: formatCurrency(dashboard.averageMonthlyTotal),
+      detail: 'Média dos meses com gastos',
       Icon: BarChart3,
       tone: 'purple',
     },

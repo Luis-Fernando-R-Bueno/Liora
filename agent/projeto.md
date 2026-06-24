@@ -320,6 +320,20 @@ Validações executadas:
 - `npm.cmd run lint`
 - `npm.cmd run build`
 
+## Ajuste da Média Mensal do Painel - 24/06/2026
+
+Alterações realizadas:
+
+- Card de média do painel deixou de calcular média por lançamento do mês.
+- Novo cálculo soma os totais de todos os meses com gastos e divide pela
+  quantidade desses meses.
+- Texto do card alterado para `Média mensal`.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
 ## Ajuste da Seta de Voltar - 22/06/2026
 
 Alterações realizadas:

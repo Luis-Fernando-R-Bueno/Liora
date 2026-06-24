@@ -224,12 +224,19 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
         getMonthKey(expense.date) === selectedMonth && String(expense.date) <= today,
     )
     const categorySummary = aggregateByCategory(currentMonthExpenses)
-    const monthSummary = aggregateByMonth(expensesWithCategory).slice(0, 8)
+    const allMonthSummary = aggregateByMonth(expensesWithCategory)
+    const averageMonthlyTotal =
+      allMonthSummary.length > 0
+        ? allMonthSummary.reduce((sum, item) => sum + item.total, 0) /
+          allMonthSummary.length
+        : 0
+    const monthSummary = allMonthSummary.slice(0, 8)
     const totalMonth = currentMonthExpenses.reduce((sum, expense) => sum + expense.value, 0)
 
     return {
       totalMonth,
       countMonth: currentMonthExpenses.length,
+      averageMonthlyTotal,
       topCategory: categorySummary[0] ?? null,
       recentExpenses: recentExpenses.slice(0, 5),
       categorySummary,
