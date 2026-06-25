@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import AppHeader from '../../componentes/compartilhado/appHeader'
 import { MonthField } from '../../componentes/compartilhado/calendarField'
 import Rodape from '../../componentes/compartilhado/rodape'
@@ -45,6 +46,7 @@ function saveMonthlySalary(value) {
 }
 
 function Inicial({ onLogout, session }) {
+  const navigate = useNavigate()
   const [dashboardMonthKey, setDashboardMonthKey] = useState(getCurrentMonthKey)
   const {
     addCategory,
@@ -62,8 +64,6 @@ function Inicial({ onLogout, session }) {
     updateCategory,
     updateExpense,
   } = useControleGastos(dashboardMonthKey)
-  const [activeView, setActiveView] = useState('dashboard')
-  const [settingsView, setSettingsView] = useState('inicio')
   const [filters, setFilters] = useState(INITIAL_FILTERS)
   const [editingExpense, setEditingExpense] = useState(null)
   const [formFocusKey, setFormFocusKey] = useState(0)
@@ -96,9 +96,9 @@ function Inicial({ onLogout, session }) {
   }
 
   function handleEditExpense(expense) {
-    setActiveView('gastos')
     setEditingExpense(expense)
     setFormFocusKey((currentKey) => currentKey + 1)
+    navigate('/gastos')
   }
 
   function handleDeleteExpense(expenseId) {
@@ -121,184 +121,222 @@ function Inicial({ onLogout, session }) {
 
   function openDashboardMonth(monthKey) {
     setDashboardMonthKey(monthKey)
-    setActiveView('dashboard')
-  }
-
-  function handleChangeView(view) {
-    setActiveView(view)
-
-    if (view === 'configuracoes') {
-      setSettingsView('inicio')
-    }
-  }
-
-  function openSettingsView(view) {
-    setSettingsView(view)
-    setActiveView('configuracoes')
-  }
-
-  function closeSettingsSubpage() {
-    setSettingsView('inicio')
-  }
-
-  function renderSettingsContent() {
-    switch (settingsView) {
-      case 'perfil':
-        return (
-          <ConfiguracoesPerfil
-            monthlySalary={monthlySalary}
-            onBack={closeSettingsSubpage}
-            onUpdateMonthlySalary={handleUpdateMonthlySalary}
-            session={session}
-          />
-        )
-
-      case 'categorias':
-        return (
-          <ConfiguracoesCategorias
-            categories={categories}
-            expenses={expenses}
-            onAddCategory={addCategory}
-            onBack={closeSettingsSubpage}
-            onRemoveCategory={removeCategory}
-            onToggleCategory={toggleCategoryStatus}
-            onUpdateCategory={updateCategory}
-          />
-        )
-
-      case 'backup':
-        return (
-          <ConfiguracoesBackup
-            onBack={closeSettingsSubpage}
-            onExportRecords={exportRecords}
-            onImportRecords={importRecords}
-          />
-        )
-
-      case 'seguranca':
-        return <ConfiguracoesSeguranca onBack={closeSettingsSubpage} onLogout={onLogout} />
-
-      case 'saibaMais':
-        return (
-          <ConfiguracoesSaibaMais
-            onAbrirQuemSomos={() => openSettingsView('quemSomos')}
-            onAbrirTermos={() => openSettingsView('termos')}
-            onBack={closeSettingsSubpage}
-          />
-        )
-
-      case 'quemSomos':
-        return <ConfiguracoesQuemSomos onBack={() => openSettingsView('saibaMais')} />
-
-      case 'suporte':
-        return (
-          <ConfiguracoesSuporte
-            onAbrirDuvidas={() => openSettingsView('duvidasFrequentes')}
-            onAbrirParticipe={() => openSettingsView('participeDoProjeto')}
-            onBack={closeSettingsSubpage}
-          />
-        )
-
-      case 'duvidasFrequentes':
-        return <ConfiguracoesDuvidasFrequentes onBack={() => openSettingsView('suporte')} />
-
-      case 'participeDoProjeto':
-        return <ConfiguracoesParticipeDoProjeto onBack={() => openSettingsView('suporte')} />
-
-      case 'termos':
-        return <ConfiguracoesTermosDeUso onBack={() => openSettingsView('saibaMais')} />
-
-      default:
-        return (
-          <Configuracoes
-            onAbrirBackup={() => openSettingsView('backup')}
-            onAbrirCategorias={() => openSettingsView('categorias')}
-            onAbrirPerfil={() => openSettingsView('perfil')}
-            onAbrirSaibaMais={() => openSettingsView('saibaMais')}
-            onAbrirSeguranca={() => openSettingsView('seguranca')}
-            onAbrirSuporte={() => openSettingsView('suporte')}
-          />
-        )
-    }
+    navigate('/painel')
   }
 
   return (
     <div className="pagina-inicial">
-      <AppHeader
-        activeView={activeView}
-        onChangeView={handleChangeView}
-      />
+      <AppHeader />
 
       <main className="pagina-inicial__main">
-        {activeView === 'dashboard' ? (
-          <section className="pagina-inicial__view" aria-label="Painel mensal">
-            <div className="pagina-inicial__dashboard-toolbar">
-              <MonthField
-                label=""
-                value={dashboardMonthKey}
-                onChange={setDashboardMonthKey}
-              />
-            </div>
+        <Routes>
+          <Route path="/" element={<Navigate to="/painel" replace />} />
 
-            <DashboardCards dashboard={dashboardWithSalary} />
+          <Route
+            path="/painel"
+            element={
+              <section className="pagina-inicial__view" aria-label="Painel mensal">
+                <div className="pagina-inicial__dashboard-toolbar">
+                  <MonthField
+                    label=""
+                    value={dashboardMonthKey}
+                    onChange={setDashboardMonthKey}
+                  />
+                </div>
 
-            <RecentExpenses expenses={dashboard.recentExpenses} />
+                <DashboardCards dashboard={dashboardWithSalary} />
 
-            <div className="pagina-inicial__summary-grid">
-              <SummaryList
-                emptyText="Nenhum gasto no mês selecionado."
-                items={dashboard.categorySummary}
-                title="Resumo por categoria"
-                type="category"
-              />
-              <SummaryList
-                emptyText="Nenhum histórico mensal ainda."
-                items={dashboard.monthSummary}
-                title="Resumo por mês"
-                type="month"
-              />
-            </div>
-          </section>
-        ) : null}
+                <RecentExpenses expenses={dashboard.recentExpenses} />
 
-        {activeView === 'gastos' ? (
-          <section className="pagina-inicial__view" aria-label="Histórico de gastos">
-            <div className="pagina-inicial__expense-layout">
-              <ExpenseForm
-                key={`${editingExpense?.id ?? 'novo-gasto'}-${formFocusKey}`}
-                categories={categories}
-                editingExpense={editingExpense}
-                focusKey={formFocusKey}
-                onAddExpense={handleAddExpense}
-                onCancelEdit={() => setEditingExpense(null)}
-                onUpdateExpense={handleUpdateExpense}
-              />
-
-              <div className="pagina-inicial__expense-list">
-                <ExpenseFilters
-                  categories={categories}
-                  filters={filters}
-                  onChange={handleFilterChange}
-                  onClear={() => setFilters(INITIAL_FILTERS)}
-                />
-                <ExpenseList
-                  expenses={filteredExpenses}
-                  onDeleteExpense={handleDeleteExpense}
-                  onEditExpense={handleEditExpense}
-                />
-              </div>
-            </div>
-          </section>
-        ) : null}
-
-        {activeView === 'historico' ? (
-          <Historico
-            months={historicalMonths}
-            onOpenMonth={openDashboardMonth}
+                <div className="pagina-inicial__summary-grid">
+                  <SummaryList
+                    emptyText="Nenhum gasto no mês selecionado."
+                    items={dashboard.categorySummary}
+                    title="Resumo por categoria"
+                    type="category"
+                  />
+                  <SummaryList
+                    emptyText="Nenhum histórico mensal ainda."
+                    items={dashboard.monthSummary}
+                    title="Resumo por mês"
+                    type="month"
+                  />
+                </div>
+              </section>
+            }
           />
-        ) : null}
 
-        {activeView === 'configuracoes' ? renderSettingsContent() : null}
+          <Route
+            path="/gastos"
+            element={
+              <section className="pagina-inicial__view" aria-label="Histórico de gastos">
+                <div className="pagina-inicial__expense-layout">
+                  <ExpenseForm
+                    key={`${editingExpense?.id ?? 'novo-gasto'}-${formFocusKey}`}
+                    categories={categories}
+                    editingExpense={editingExpense}
+                    focusKey={formFocusKey}
+                    onAddExpense={handleAddExpense}
+                    onCancelEdit={() => setEditingExpense(null)}
+                    onUpdateExpense={handleUpdateExpense}
+                  />
+
+                  <div className="pagina-inicial__expense-list">
+                    <ExpenseFilters
+                      categories={categories}
+                      filters={filters}
+                      onChange={handleFilterChange}
+                      onClear={() => setFilters(INITIAL_FILTERS)}
+                    />
+                    <ExpenseList
+                      expenses={filteredExpenses}
+                      onDeleteExpense={handleDeleteExpense}
+                      onEditExpense={handleEditExpense}
+                    />
+                  </div>
+                </div>
+              </section>
+            }
+          />
+
+          <Route
+            path="/historico"
+            element={
+              <Historico
+                months={historicalMonths}
+                onOpenMonth={openDashboardMonth}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes"
+            element={
+              <Configuracoes
+                onAbrirBackup={() => navigate('/configuracoes/backup')}
+                onAbrirCategorias={() => navigate('/configuracoes/categorias')}
+                onAbrirPerfil={() => navigate('/configuracoes/perfil')}
+                onAbrirSaibaMais={() => navigate('/configuracoes/saiba-mais')}
+                onAbrirSeguranca={() => navigate('/configuracoes/seguranca-e-acesso')}
+                onAbrirSuporte={() => navigate('/configuracoes/suporte')}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes/perfil"
+            element={
+              <ConfiguracoesPerfil
+                monthlySalary={monthlySalary}
+                onBack={() => navigate('/configuracoes')}
+                onUpdateMonthlySalary={handleUpdateMonthlySalary}
+                session={session}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes/categorias"
+            element={
+              <ConfiguracoesCategorias
+                categories={categories}
+                expenses={expenses}
+                onAddCategory={addCategory}
+                onBack={() => navigate('/configuracoes')}
+                onRemoveCategory={removeCategory}
+                onToggleCategory={toggleCategoryStatus}
+                onUpdateCategory={updateCategory}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes/seguranca-e-acesso"
+            element={
+              <ConfiguracoesSeguranca
+                onBack={() => navigate('/configuracoes')}
+                onLogout={onLogout}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes/suporte"
+            element={
+              <ConfiguracoesSuporte
+                onAbrirDuvidas={() => navigate('/configuracoes/suporte/duvidas-frequentes')}
+                onAbrirParticipe={() => navigate('/configuracoes/suporte/participe-do-projeto')}
+                onBack={() => navigate('/configuracoes')}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes/suporte/duvidas-frequentes"
+            element={
+              <ConfiguracoesDuvidasFrequentes
+                onBack={() => navigate('/configuracoes/suporte')}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes/suporte/participe-do-projeto"
+            element={
+              <ConfiguracoesParticipeDoProjeto
+                onBack={() => navigate('/configuracoes/suporte')}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes/saiba-mais"
+            element={
+              <ConfiguracoesSaibaMais
+                onAbrirQuemSomos={() => navigate('/configuracoes/saiba-mais/quem-somos')}
+                onAbrirTermos={() =>
+                  navigate('/configuracoes/saiba-mais/termos-de-uso-e-privacidade')
+                }
+                onBack={() => navigate('/configuracoes')}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes/saiba-mais/quem-somos"
+            element={
+              <ConfiguracoesQuemSomos
+                onBack={() => navigate('/configuracoes/saiba-mais')}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes/saiba-mais/termos-de-uso-e-privacidade"
+            element={
+              <ConfiguracoesTermosDeUso
+                onBack={() => navigate('/configuracoes/saiba-mais')}
+              />
+            }
+          />
+
+          <Route
+            path="/configuracoes/backup"
+            element={
+              <ConfiguracoesBackup
+                onBack={() => navigate('/configuracoes')}
+                onExportRecords={exportRecords}
+                onImportRecords={importRecords}
+              />
+            }
+          />
+
+          <Route
+            path="/backup"
+            element={<Navigate to="/configuracoes/backup" replace />}
+          />
+          <Route path="*" element={<Navigate to="/painel" replace />} />
+        </Routes>
 
         <Rodape />
       </main>

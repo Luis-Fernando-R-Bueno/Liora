@@ -1,45 +1,53 @@
 import { History, LayoutDashboard, ReceiptText, Settings } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 import './styles.css'
 
 const NAV_ITEMS = [
   {
     id: 'dashboard',
     label: 'Painel',
+    path: '/painel',
+    end: true,
     Icon: LayoutDashboard,
   },
   {
     id: 'gastos',
     label: 'Gastos',
+    path: '/gastos',
     Icon: ReceiptText,
   },
   {
     id: 'historico',
     label: 'Histórico',
+    path: '/historico',
     Icon: History,
   },
   {
     id: 'configuracoes',
     label: 'Configurações',
+    path: '/configuracoes',
     Icon: Settings,
   },
 ]
 
-function AppHeader({ activeView, onChangeView }) {
+function AppHeader() {
   return (
     <header className="app-header">
       <nav className="app-header__nav" aria-label="Navegação principal">
-        {NAV_ITEMS.map(({ id, label, Icon }) => (
-          <button
+        {NAV_ITEMS.map(({ id, label, path, end, Icon }) => (
+          <NavLink
             key={id}
-            className={activeView === id ? 'app-header__tab is-active' : 'app-header__tab'}
-            type="button"
+            className={({ isActive }) =>
+              isActive ? 'app-header__tab is-active' : 'app-header__tab'
+            }
+            to={path}
+            end={end}
             aria-label={label}
             title={label}
-            onClick={() => onChangeView(id)}
           >
             <Icon size={18} aria-hidden="true" />
             <span className="app-header__tab-label">{label}</span>
-          </button>
+          </NavLink>
         ))}
       </nav>
     </header>

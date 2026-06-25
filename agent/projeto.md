@@ -716,6 +716,68 @@ Validações executadas:
 - `npm.cmd run lint`
 - `npm.cmd run build`
 
+## Rotas por Tela no App - 25/06/2026
+
+Alterações realizadas:
+
+- Adicionado `react-router-dom` ao projeto para seguir o padrão de navegação
+  usado no `SC-Censo-Diario`.
+- `main.jsx` passou a envolver a aplicação com `BrowserRouter`.
+- Menu principal deixou de navegar por estado interno e passou a usar links
+  reais com `NavLink`.
+- Tela inicial foi refatorada para renderizar telas por `Routes` e `Route`.
+- Cada área principal passou a ter URL própria:
+  - `/painel`
+  - `/gastos`
+  - `/historico`
+  - `/configuracoes`
+- A rota `/` permanece apenas como redirecionamento para o painel.
+- Subtelas de configurações também passaram a ter links próprios, como
+  `/configuracoes/perfil`, `/configuracoes/categorias`,
+  `/configuracoes/suporte/duvidas-frequentes` e
+  `/configuracoes/saiba-mais/termos-de-uso-e-privacidade`.
+- O estado central dos gastos, categorias, filtros, painel e salário permaneceu
+  concentrado na tela `Inicial`, sem alteração de regra de negócio.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Redirecionamento Seguro Após Logout - 25/06/2026
+
+Alterações realizadas:
+
+- `App.jsx` passou a usar `useNavigate` e `useLocation` para controlar a rota
+  durante autenticação local.
+- Ao sair do sistema, a sessão é limpa e a URL volta para `/login`, evitando manter
+  uma rota protegida como `/configuracoes/seguranca-e-acesso` na tela de login.
+- Ao fazer login novamente, o usuário sempre retorna para o painel inicial,
+  sem reabrir a tela protegida anterior.
+- Caso o app esteja sem sessão em qualquer rota interna, a URL é substituída por
+  `/login`.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Rotas Explícitas de Login e Painel - 25/06/2026
+
+Alterações realizadas:
+
+- Criada a rota pública `/login` para a tela de acesso local.
+- Criada a rota autenticada `/painel` para o dashboard principal.
+- Login bem-sucedido passa a redirecionar para `/painel`.
+- Logout passa a redirecionar para `/login`.
+- A navegação principal passou a apontar o item `Painel` para `/painel`.
+- A rota `/` passou a redirecionar para `/painel` quando houver sessão ativa.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
 ## Ajuste da Seta de Voltar - 22/06/2026
 
 Alterações realizadas:

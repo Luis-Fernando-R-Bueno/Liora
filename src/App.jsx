@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   clearLoginSession,
   loadLoginSession,
@@ -7,8 +8,24 @@ import {
 import Inicial from './telas/inicial'
 import Login from './telas/login'
 
+const LOGIN_ROUTE = '/login'
+const PANEL_ROUTE = '/painel'
+
 function App() {
   const [session, setSession] = useState(loadLoginSession)
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!session && location.pathname !== LOGIN_ROUTE) {
+      navigate(LOGIN_ROUTE, { replace: true })
+      return
+    }
+
+    if (session && location.pathname === LOGIN_ROUTE) {
+      navigate(PANEL_ROUTE, { replace: true })
+    }
+  }, [location.pathname, navigate, session])
 
   function handleLogin(credentials) {
     const nextSession = validateLogin(credentials)
@@ -18,12 +35,14 @@ function App() {
     }
 
     setSession(nextSession)
+    navigate(PANEL_ROUTE, { replace: true })
     return true
   }
 
   function handleLogout() {
     clearLoginSession()
     setSession(null)
+    navigate(LOGIN_ROUTE, { replace: true })
   }
 
   if (!session) {
