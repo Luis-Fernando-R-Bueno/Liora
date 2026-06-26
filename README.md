@@ -1,26 +1,24 @@
+```md id="3gwh3u"
 # 💰 Controle de Gastos
 
 <p align="center">
-  <strong>Um sistema web para organizar suas finanças pessoais de forma simples, rápida e intuitiva.</strong>
-</p>
-
-<p align="center">
-  <a href="LINK_DO_VERCEL">
-    <img src="https://img.shields.io/badge/Acessar%20Aplicação-9f1d2f?style=for-the-badge&logo=vercel&logoColor=white"/>
-  </a>
+  <strong>Uma aplicação desenvolvida para transformar uma necessidade pessoal em uma solução de software.</strong>
 </p>
 
 ---
 
-## 📖 Sobre o projeto
+## 📖 A história por trás do projeto
 
-O **Controle de Gastos** nasceu da necessidade de substituir uma planilha de Excel por uma aplicação moderna, prática e acessível de qualquer lugar.
+Este projeto nasceu quando percebi que uma planilha do Excel já não atendia mais às minhas necessidades de controle financeiro. Em vez de procurar outra ferramenta, decidi desenvolver a minha própria.
 
-O objetivo foi criar uma ferramenta que permitisse registrar despesas, acompanhar os gastos do mês e visualizar informações financeiras importantes de forma clara e organizada.
+Mais do que registrar receitas e despesas, o objetivo era criar uma aplicação intuitiva, organizada e que evoluísse junto com minhas necessidades, servindo também como um ambiente para aplicar e aprimorar conhecimentos em desenvolvimento web.
 
 ---
 
 ## ✨ Funcionalidades
+
+...
+```
 
 * 📅 Cadastro de gastos
 * ✏️ Edição e exclusão de lançamentos
