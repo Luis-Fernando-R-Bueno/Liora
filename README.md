@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://controle-de-gastos-phi-dun.vercel.app/login">
+  <a href="https://controle-de-gastos-phi-dun.vercel.app">
     <img src="https://img.shields.io/badge/🚀%20Acessar%20Aplicação-9f1d2f?style=for-the-badge&logo=vercel&logoColor=white" alt="Aplicação Online">
   </a>
 </p>
