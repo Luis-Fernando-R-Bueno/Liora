@@ -1,11 +1,10 @@
 ﻿.expense-form {
   min-width: 0;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-soft);
   text-align: left;
 }
 
@@ -29,7 +28,7 @@
 .expense-form label span {
   color: var(--text-muted);
   font-size: var(--font-size-sm);
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
 }
 
 .expense-form input,
@@ -49,6 +48,7 @@
 .expense-form input:focus,
 .expense-form select:focus {
   border-color: var(--color-accent-border);
+  background: var(--color-input-bg-focus);
   box-shadow: var(--shadow-focus);
 }
 

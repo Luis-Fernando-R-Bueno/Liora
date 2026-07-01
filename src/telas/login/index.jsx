@@ -37,10 +37,12 @@ function Login({ onLogin }) {
     <main className="login-page">
       <form className="login-card" onSubmit={handleSubmit}>
         <div className="login-card__header">
-          <img className="login-card__icon" src="/logo.svg" alt="" aria-hidden="true" />
-          <div>
-            <h1>Acessar gastos</h1>
+          <div className="login-card__brand">
+            <img src="/logo.svg" alt="" aria-hidden="true" />
+            <span>Liora</span>
           </div>
+          <h1>Entrar com clareza</h1>
+          <p>Um espaço leve para entender para onde seu dinheiro está indo.</p>
         </div>
 
         {errorMessage ? (

@@ -1,4 +1,4 @@
-import { BarChart3, CircleDollarSign, ReceiptText, Tags } from 'lucide-react'
+import { BarChart3, ReceiptText, Tags, TrendingUp } from 'lucide-react'
 import { formatCurrency } from '../../../utils/formatCurrency'
 import './styles.css'
 
@@ -9,8 +9,8 @@ function DashboardCards({ dashboard }) {
       label: 'Total do mês',
       value: formatCurrency(dashboard.totalMonth),
       detail: 'Somatório do mês atual',
-      Icon: CircleDollarSign,
-      tone: 'blue',
+      Icon: TrendingUp,
+      tone: 'amber',
     },
     {
       id: 'count',
@@ -37,34 +37,41 @@ function DashboardCards({ dashboard }) {
       value: formatCurrency(dashboard.averageMonthlyTotal),
       detail: 'Média dos meses com gastos',
       Icon: BarChart3,
-      tone: 'purple',
+      tone: 'neutral',
     },
   ]
 
   return (
     <section className="dashboard-cards" aria-label="Resumo financeiro">
-      {cards.map(({ id, label, value, detail, Icon, tone, categoryColor }) => (
-        <article
-          className={`dashboard-card dashboard-card--${tone}`}
-          key={id}
-          style={categoryColor ? { '--category-color': categoryColor } : undefined}
-        >
-          <div className="dashboard-card__icon">
-            <Icon size={20} aria-hidden="true" />
-          </div>
-          <div>
-            <span>{label}</span>
-            {categoryColor ? (
-              <strong className="category-badge dashboard-card__category">
-                {value}
-              </strong>
-            ) : (
-              <strong>{value}</strong>
-            )}
-            <small>{detail}</small>
-          </div>
-        </article>
-      ))}
+      {cards.map(({ id, label, value, detail, Icon, tone, categoryColor }) => {
+        const valueClassName =
+          id === 'top'
+            ? 'dashboard-card__value dashboard-card__value--text'
+            : 'dashboard-card__value dashboard-card__value--number'
+
+        return (
+          <article
+            className={`dashboard-card dashboard-card--${tone}`}
+            key={id}
+            style={categoryColor ? { '--category-color': categoryColor } : undefined}
+          >
+            <div className="dashboard-card__icon">
+              <Icon size={20} aria-hidden="true" />
+            </div>
+            <div className="dashboard-card__content">
+              <span>{label}</span>
+              {categoryColor ? (
+                <strong className="category-badge dashboard-card__category">
+                  {value}
+                </strong>
+              ) : (
+                <strong className={valueClassName}>{value}</strong>
+              )}
+              <small>{detail}</small>
+            </div>
+          </article>
+        )
+      })}
     </section>
   )
 }

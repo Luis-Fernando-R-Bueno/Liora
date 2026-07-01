@@ -1,8 +1,8 @@
 import {
   ArrowLeft,
   CalendarClock,
-  CircleDollarSign,
   Database,
+  LineChart,
   Pencil,
   ShieldCheck,
   Trash2,
@@ -166,7 +166,7 @@ function ConfiguracoesPerfil({
           <form className="perfil-config__salary-card" onSubmit={handleSaveSalary}>
             <div className="perfil-config__salary-heading">
               <div className="perfil-config__salary-title">
-                <CircleDollarSign size={22} aria-hidden="true" />
+                <LineChart size={22} aria-hidden="true" />
                 <div>
                   <span>Salário mensal</span>
                   <strong>{formatCurrency(monthlySalary)}</strong>

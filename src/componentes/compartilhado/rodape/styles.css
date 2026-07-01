@@ -3,7 +3,7 @@
   margin: calc(var(--spacing-xl) + var(--spacing-sm)) auto 0;
   padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
   border-top: 1px solid var(--border);
-  color: var(--text);
+  color: var(--text-muted);
 }
 
 .rodape__contacts {
@@ -19,9 +19,9 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-sm);
-  color: var(--text);
+  color: var(--text-muted);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   text-decoration: none;
   transition:
     color 160ms ease,
@@ -30,11 +30,11 @@
 
 .rodape__contacts svg {
   flex: 0 0 auto;
-  color: var(--accent);
+  color: var(--secondary);
 }
 
 .rodape__contacts a:hover {
-  color: var(--accent);
+  color: var(--color-accent-strong);
   transform: translateY(-1px);
 }
 
@@ -44,6 +44,6 @@
   }
 
   .rodape__contacts {
-    justify-content: flex-start;
+    justify-content: center;
   }
 }

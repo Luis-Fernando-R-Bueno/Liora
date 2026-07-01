@@ -3,7 +3,7 @@
 ## Escopo
 
 Este documento descreve como poderia ficar o banco de dados local do projeto
-Controle de Gastos Pessoais.
+Liora.
 
 O projeto é de uso pessoal e local. Portanto, esta modelagem não considera:
 

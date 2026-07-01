@@ -26,7 +26,7 @@ function ConfiguracoesSaibaMais({ onBack, onAbrirQuemSomos, onAbrirTermos }) {
             </span>
             <span className="configuracoes__info">
               <strong>Quem somos</strong>
-              <small>Origem e propósito do Controle de Gastos.</small>
+              <small>Origem e propósito da Liora.</small>
             </span>
           </button>
 

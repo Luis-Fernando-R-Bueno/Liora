@@ -4,19 +4,20 @@
   place-items: center;
   padding: var(--spacing-lg);
   background:
-    radial-gradient(circle at top, var(--color-bg-secondary), transparent 46%),
+    radial-gradient(circle at 50% 0%, var(--color-accent-soft), transparent 34%),
+    radial-gradient(circle at 80% 14%, var(--color-secondary-soft), transparent 28%),
     var(--color-bg-primary);
 }
 
 .login-card {
   position: relative;
   display: grid;
-  width: min(100%, 390px);
-  gap: var(--spacing-md);
+  width: min(100%, 452px);
+  gap: var(--spacing-xl);
   overflow: hidden;
-  padding: calc(var(--spacing-lg) + var(--spacing-xs));
+  padding: var(--spacing-2xl);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--surface);
   box-shadow: var(--shadow-medium);
   text-align: left;
@@ -24,13 +25,13 @@
 
 .login-card::before {
   position: absolute;
-  top: -62px;
-  right: -62px;
-  width: 220px;
-  height: 220px;
-  background: url('/logo.svg') center / contain no-repeat;
+  top: -80px;
+  right: -76px;
+  width: 240px;
+  height: 240px;
+  border-radius: var(--radius-round);
+  background: var(--color-accent-soft);
   content: '';
-  opacity: 0.08;
   pointer-events: none;
 }
 
@@ -41,29 +42,33 @@
 
 .login-card__header {
   display: grid;
-  justify-items: center;
+  gap: var(--spacing-md);
+}
+
+.login-card__brand {
+  display: inline-flex;
+  align-items: center;
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-xs);
-  text-align: center;
+  color: var(--text-strong);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
 }
 
-.login-card__icon {
-  width: 64px;
-  height: 64px;
-  border-radius: var(--radius-round);
-  box-shadow: var(--shadow-card-glow);
-}
-
-.login-card__header span,
-.login-card label span {
-  color: var(--text-muted);
-  font-size: var(--font-size-sm);
-  font-weight: 800;
+.login-card__brand img {
+  width: 40px;
+  height: 40px;
 }
 
 .login-card h1 {
-  margin-top: var(--spacing-2xs);
   font-size: var(--font-size-2xl);
+}
+
+.login-card__header p {
+  max-width: 34ch;
+  color: var(--text-muted);
+  font-size: var(--font-size-md);
 }
 
 .login-card label {
@@ -71,20 +76,32 @@
   gap: var(--spacing-sm);
 }
 
+.login-card__header span,
+.login-card label span {
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
 .login-card__field {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  min-height: 44px;
+  min-height: 50px;
   padding: 0 var(--spacing-md);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--color-input-bg);
   color: var(--text-muted);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
 }
 
 .login-card__field:focus-within {
   border-color: var(--color-accent-border);
+  background: var(--color-input-bg-focus);
   box-shadow: var(--shadow-focus);
 }
 
@@ -93,8 +110,8 @@
   min-width: 0;
   border: 0;
   background: transparent;
-  caret-color: var(--text);
-  color: var(--text);
+  caret-color: var(--accent);
+  color: var(--text-strong);
   font: inherit;
   font-size: var(--font-size-md);
   outline: 0;
@@ -102,7 +119,7 @@
 
 .login-card__field input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px var(--color-input-bg) inset;
-  -webkit-text-fill-color: var(--text);
+  -webkit-text-fill-color: var(--text-strong);
 }
 
 .login-card__toggle-password {
@@ -114,18 +131,18 @@
   border: 0;
   border-radius: var(--radius-sm);
   background: transparent;
-  color: var(--text);
+  color: var(--text-muted);
   cursor: pointer;
   padding: 0;
   transition:
-    background-color 160ms ease,
-    color 160ms ease;
+    background-color 180ms ease,
+    color 180ms ease;
 }
 
 .login-card__toggle-password:hover,
 .login-card__toggle-password:focus-visible {
-  background: var(--color-card-bg-strong);
-  color: var(--accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-strong);
 }
 
 .login-card__error {
@@ -135,9 +152,15 @@
   background: var(--danger-soft);
   color: var(--danger);
   font-size: var(--font-size-sm);
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
 }
 
 .login-card .button {
   width: 100%;
+}
+
+@media (max-width: 520px) {
+  .login-card {
+    padding: var(--spacing-xl);
+  }
 }

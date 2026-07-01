@@ -5,21 +5,21 @@
 
 .pagina-inicial__main {
   display: grid;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
   width: min(100%, 1240px);
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-2xl);
+  padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-2xl);
 }
 
 .pagina-inicial__view {
   display: grid;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
 }
 
 .pagina-inicial__dashboard-toolbar {
   display: flex;
   justify-content: center;
-  padding: 0 0 12px;
+  padding: 0 0 var(--spacing-sm);
 }
 
 .pagina-inicial__dashboard-toolbar .month-field {
@@ -36,11 +36,11 @@
 .pagina-inicial__dashboard-toolbar .calendar-field__trigger {
   min-height: 50px;
   border-color: var(--color-accent-border);
-  background: var(--color-card-bg-strong);
+  background: var(--surface);
   color: var(--text-strong);
   font-size: var(--font-size-md);
-  font-weight: 800;
-  box-shadow: var(--shadow-card-glow);
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--shadow-soft);
 }
 
 .pagina-inicial__dashboard-toolbar .calendar-field__trigger svg {
@@ -51,13 +51,13 @@
 .pagina-inicial__summary-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
 }
 
 .pagina-inicial__expense-layout {
   display: grid;
   grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
   align-items: start;
 }
 

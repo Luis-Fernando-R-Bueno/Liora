@@ -7,10 +7,9 @@
 .termos-config__lead,
 .termos-config__section {
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--color-card-bg-strong);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(18px);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .termos-config__hero {
@@ -26,16 +25,16 @@
   width: 56px;
   height: 56px;
   place-items: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--color-accent-soft);
-  color: var(--accent);
+  color: var(--color-accent-strong);
 }
 
 .termos-config__hero span,
 .termos-config__section > span {
   color: var(--accent);
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
 }
 
@@ -81,7 +80,7 @@
   width: 40px;
   height: 40px;
   place-items: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--color-accent-soft);
 }
 

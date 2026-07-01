@@ -1,12 +1,12 @@
 {
-  "name": "Controle de Gastos",
-  "short_name": "Gastos",
-  "description": "Controle de gastos pessoais com dados salvos localmente.",
+  "name": "Liora",
+  "short_name": "Liora",
+  "description": "Organize seus gastos locais com clareza, leveza e equilíbrio.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#2563eb",
+  "background_color": "#F4F2EC",
+  "theme_color": "#C97B18",
   "orientation": "portrait",
   "icons": [
     {

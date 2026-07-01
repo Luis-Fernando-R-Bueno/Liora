@@ -1,14 +1,19 @@
-# Controle de Gastos Pessoais
+# Liora
 
 ## Ideia do Projeto
 
-Criar um sistema web de controle de gastos pessoais para substituir uma planilha
-de Excel. A proposta é permitir que o usuário registre seus gastos de forma
-simples, sem precisar preencher manualmente uma tabela por mês e categoria.
+Criar a Liora, uma aplicação web local para substituir uma planilha de Excel no
+controle de gastos pessoais. A proposta é permitir que o usuário registre seus
+gastos de forma simples, sem precisar preencher manualmente uma tabela por mês e
+categoria.
 
 O sistema deve ter uma interface limpa, profissional e responsiva, com foco em
 praticidade para uso diário. A primeira versão será um MVP funcional, sem
 back-end, autenticação ou banco de dados.
+
+Liora significa luz, clareza e equilíbrio. A identidade visual deve transmitir
+uma ferramenta elegante de compreensão financeira pessoal, sem aparência de
+banco digital ou fintech.
 
 ## Objetivo do MVP
 
@@ -21,8 +26,8 @@ Entregar um sistema web funcional onde o usuário consiga:
 - Acompanhar um painel mensal atualizado automaticamente.
 - Persistir os dados localmente no navegador usando `localStorage`.
 
-O objetivo visual é parecer um pequeno sistema financeiro pessoal, e não apenas
-uma planilha digital.
+O objetivo visual é parecer uma ferramenta pessoal leve, clara e acolhedora para
+entender a vida financeira, e não apenas uma planilha digital.
 
 ## Tecnologias Desejadas
 
@@ -742,6 +747,80 @@ Alterações realizadas:
   System, mas com superfícies brancas e texto escuro.
 - Botões primários e confirmações passaram a usar `--color-on-accent` para
   manter contraste correto no tema claro.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Rebranding para Liora - 01/07/2026
+
+Alterações realizadas:
+
+- Nome visual do aplicativo alterado para `Liora`.
+- Identidade visual reposicionada para transmitir luz, clareza e equilíbrio,
+  evitando aparência de banco digital, fintech ou dashboard corporativo.
+- Paleta centralizada em `src/styles/tokens.css` com fundo claro, cards brancos,
+  texto escuro, âmbar como cor primária e verde sálvia como cor secundária.
+- `src/styles/base.css` ajustado para fundo claro, tipografia mais leve,
+  microinterações discretas, botões arredondados e superfícies com sombras
+  suaves.
+- Login, cabeçalho, cards do painel, tabelas, filtros, calendário, modais,
+  rodapé, perfil e telas de configurações foram realinhados à nova identidade.
+- Logo temporária criada com símbolo de luz/horizonte, sem cifrão, moeda ou
+  elementos bancários.
+- Favicon, manifesto PWA, ícones PNG e metadados do `index.html` atualizados
+  para `Liora`.
+- Textos visíveis de suporte, saiba mais, termos, backup e README foram
+  ajustados para a nova marca.
+- Nenhuma regra de negócio, persistência ou estrutura de dados foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Segunda Iteração Visual da Liora - 01/07/2026
+
+Alterações realizadas:
+
+- Paleta central de `src/styles/tokens.css` ajustada para a nova direção visual:
+  fundo `#F4F2EC`, cards brancos, texto principal mais escuro, âmbar mais
+  profundo e verde sálvia mais presente.
+- Sombras, bordas, espaçamentos e tamanhos de fonte foram reforçados nos tokens
+  para evitar a aparência de `bege sobre bege`.
+- `src/styles/base.css` recebeu fundo com luz natural discreta, botões mais
+  confiáveis, hover suave e microinterações com escala leve.
+- Menu superior passou a usar fundo branco, sombra leve, ícones em âmbar e aba
+  ativa com aparência de botão destacado.
+- Dashboard ganhou maior hierarquia visual, com destaque para `Total do mês`,
+  números maiores, cards com mais respiro e hover em escala discreta.
+- Formulários, filtros, tabelas, histórico, categorias, perfil, FAQ, termos,
+  quem somos e configurações receberam cards mais presentes, foco âmbar e
+  sombras mais elegantes.
+- Logo temporária, favicon, ícones PWA, manifesto, tema do navegador e badge do
+  README foram alinhados à nova paleta.
+- O `icons.svg` antigo deixou de ser carregado no cache inicial do PWA.
+- Nenhuma regra de negócio, persistência ou estrutura de dados foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Ajustes de Header, Favicon e Cards - 01/07/2026
+
+Alterações realizadas:
+
+- Navegação principal do menu superior centralizada em relação à largura da
+  tela.
+- Guia do navegador passou a usar explicitamente `favicon.svg`, com fallback em
+  `icon-192.png`.
+- Valores numéricos dos cards do painel passaram a usar classe visual própria
+  com `white-space: nowrap`, evitando quebra em `R$ 0,00` e outros valores.
+- Textos de categoria, como `Sem dados`, continuam podendo quebrar naturalmente
+  quando necessário.
+- Nenhuma regra de negócio, persistência ou estrutura de dados foi alterada.
 
 Validações executadas:
 

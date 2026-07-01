@@ -11,7 +11,6 @@
   position: absolute;
   inset: 0;
   background: var(--color-scrim);
-  backdrop-filter: blur(3px);
 }
 
 .confirm-dialog__panel {
@@ -23,10 +22,9 @@
   width: min(100%, 420px);
   padding: var(--spacing-lg);
   border: 1px solid var(--color-danger-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--surface);
   box-shadow: var(--shadow-medium);
-  backdrop-filter: blur(18px);
   text-align: left;
 }
 
@@ -35,7 +33,7 @@
   width: 48px;
   height: 48px;
   place-items: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--danger-soft);
   color: var(--danger);
 }

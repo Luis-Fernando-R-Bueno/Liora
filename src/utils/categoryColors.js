@@ -13,14 +13,14 @@ export const categoryColors = {
 }
 
 const fallbackCategoryColors = [
-  'var(--category-fallback-blue)',
-  'var(--category-fallback-pink)',
-  'var(--category-fallback-red)',
+  'var(--category-fallback-sage)',
+  'var(--category-fallback-rose)',
+  'var(--category-fallback-clay)',
   'var(--category-fallback-green)',
-  'var(--category-fallback-purple)',
-  'var(--category-fallback-yellow)',
-  'var(--category-fallback-orange)',
-  'var(--category-fallback-cyan)',
+  'var(--category-fallback-lilac)',
+  'var(--category-fallback-amber)',
+  'var(--category-fallback-caramel)',
+  'var(--category-fallback-mint)',
 ]
 
 function normalizeCategoryColorKey(name) {

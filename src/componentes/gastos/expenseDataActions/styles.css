@@ -4,11 +4,11 @@
   justify-content: space-between;
   gap: var(--spacing-md);
   min-width: 0;
-  padding: var(--spacing-md);
+  padding: var(--spacing-lg);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-soft);
 }
 
 .expense-data-actions__buttons {
@@ -21,7 +21,7 @@
 .expense-data-actions__feedback {
   color: var(--text-muted);
   font-size: var(--font-size-sm);
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
   text-align: right;
 }
 

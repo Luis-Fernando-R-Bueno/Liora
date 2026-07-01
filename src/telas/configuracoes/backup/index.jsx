@@ -40,7 +40,7 @@ function ConfiguracoesBackup({ onBack, onExportRecords, onImportRecords }) {
       setFeedback({
         type: 'error',
         title: 'Arquivo inválido',
-        details: ['Use um JSON exportado pelo Controle de Gastos.'],
+        details: ['Use um JSON exportado pela Liora.'],
       })
     } finally {
       event.target.value = ''

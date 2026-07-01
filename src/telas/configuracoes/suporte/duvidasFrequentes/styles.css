@@ -13,8 +13,19 @@
   gap: var(--spacing-md);
   padding: var(--spacing-lg);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--color-card-bg-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.faq-config__item:hover {
+  border-color: var(--color-accent-border);
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-3px) scale(1.01);
 }
 
 .faq-config__icon {
@@ -22,9 +33,9 @@
   width: 46px;
   height: 46px;
   place-items: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--color-accent-soft);
-  color: var(--accent);
+  color: var(--color-accent-strong);
 }
 
 .faq-config__content {
@@ -35,7 +46,7 @@
 .faq-config__content > span {
   color: var(--accent);
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
 }
 

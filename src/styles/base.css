@@ -23,8 +23,9 @@ body {
   min-height: 100svh;
   margin: 0;
   background:
-    radial-gradient(circle at top left, var(--color-bg-secondary), transparent 34%),
-    linear-gradient(180deg, var(--color-bg-primary), var(--color-card-bg) 100%),
+    radial-gradient(circle at 18% 0%, var(--color-accent-soft), transparent 34%),
+    radial-gradient(circle at 88% 14%, var(--color-secondary-soft), transparent 28%),
+    linear-gradient(180deg, var(--color-bg-primary), var(--color-bg-secondary) 100%),
     var(--color-bg-primary);
   background-attachment: fixed;
   background-color: var(--bg);
@@ -64,8 +65,8 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(var(--font-size-xl), 5vw, 44px);
-  line-height: 1.08;
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-display));
+  line-height: 1.02;
 }
 
 h2 {
@@ -87,9 +88,9 @@ a {
 
 .section-heading span {
   display: block;
-  color: var(--accent);
+  color: var(--secondary);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
 }
 
 .section-heading h2 {
@@ -101,45 +102,48 @@ a {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  min-height: 42px;
+  min-height: 46px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-pill);
   color: var(--text-strong);
   font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
   padding: 0 var(--spacing-md);
   transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease,
-    box-shadow 160ms ease,
-    transform 160ms ease;
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(1.01);
 }
 
 .button--primary {
   border-color: var(--color-accent-border);
   background: var(--accent);
   color: var(--color-on-accent);
-  box-shadow: var(--shadow-soft);
+  box-shadow: var(--shadow-card-glow);
 }
 
 .button--primary:hover {
   background: var(--accent-strong);
+  box-shadow: var(--shadow-medium);
 }
 
 .button--ghost {
   border-color: var(--border);
-  background: var(--color-input-bg);
+  background: var(--surface);
   color: var(--text-strong);
 }
 
 .button--ghost:hover {
-  background: var(--color-card-bg-strong);
+  border-color: var(--color-accent-border);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-strong);
 }
 
 .icon-button {
@@ -153,17 +157,17 @@ a {
   color: var(--text);
   cursor: pointer;
   transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease,
-    transform 160ms ease;
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .icon-button:hover {
   border-color: var(--color-accent-border);
   background: var(--color-accent-soft);
-  color: var(--accent);
-  transform: translateY(-1px);
+  color: var(--color-accent-strong);
+  transform: translateY(-1px) scale(1.02);
 }
 
 .icon-button--danger:hover {
@@ -206,7 +210,7 @@ a {
   padding: 0 calc(var(--spacing-md) - var(--spacing-xs));
   border: 1px solid color-mix(in srgb, var(--category-color) 42%, transparent);
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--category-color) 18%, transparent);
+  background: color-mix(in srgb, var(--category-color) 16%, white);
   color: var(--category-color);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);

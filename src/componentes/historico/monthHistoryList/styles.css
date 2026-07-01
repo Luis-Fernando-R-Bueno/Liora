@@ -1,11 +1,10 @@
 ﻿.month-history-list {
   min-width: 0;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-soft);
 }
 
 .month-history-list .empty-state {
@@ -17,7 +16,7 @@
 .month-history-list__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
   margin-top: var(--spacing-lg);
 }
 
@@ -26,9 +25,20 @@
   gap: var(--spacing-lg);
   padding: calc(var(--spacing-lg) - var(--spacing-xs));
   border: 1px solid var(--border-soft);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--color-card-bg-strong);
+  box-shadow: var(--shadow-soft);
   text-align: left;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.month-history-card:hover {
+  border-color: var(--color-accent-border);
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-3px) scale(1.02);
 }
 
 .month-history-card__top {
@@ -42,7 +52,7 @@
 .month-history-card__details {
   color: var(--text-muted);
   font-size: var(--font-size-sm);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .month-history-card__top strong {
@@ -50,7 +60,7 @@
   margin-top: var(--spacing-sm);
   color: var(--text-strong);
   font-size: var(--font-size-2xl);
-  font-weight: 800;
+  font-weight: var(--font-weight-bold);
   line-height: 1.12;
 }
 
@@ -62,7 +72,7 @@
   place-items: center;
   border-radius: var(--radius-md);
   background: var(--color-accent-soft);
-  color: var(--accent);
+  color: var(--color-accent-strong);
 }
 
 .month-history-card__details {

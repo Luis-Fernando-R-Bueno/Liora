@@ -16,9 +16,9 @@ import './styles.css'
 const LINHA_DO_TEMPO = [
   {
     periodo: 'Origem',
-    titulo: 'Uma planilha precisava virar sistema',
+    titulo: 'Uma planilha precisava ganhar clareza',
     texto:
-      'O projeto nasceu da necessidade de substituir controles manuais em Excel por uma rotina mais simples para registrar e consultar gastos pessoais.',
+      'A Liora nasceu da necessidade de transformar controles manuais em uma rotina mais leve para registrar e compreender gastos pessoais.',
     Icone: FileSpreadsheet,
   },
   {
@@ -37,7 +37,7 @@ const LINHA_DO_TEMPO = [
   },
   {
     periodo: 'Painel',
-    titulo: 'O mês começou a se resumir sozinho',
+    titulo: 'O mês começou a ficar mais claro',
     texto:
       'O dashboard passou a calcular totais, quantidade de lançamentos, maior categoria, gastos recentes e comparativos mensais automaticamente.',
     Icone: BarChart3,
@@ -51,9 +51,9 @@ const LINHA_DO_TEMPO = [
   },
   {
     periodo: 'Mobilidade',
-    titulo: 'O sistema virou PWA',
+    titulo: 'A Liora virou PWA',
     texto:
-      'Com manifesto, ícones e service worker, o Controle de Gastos pode ser instalado no celular e aberto novamente mesmo sem conexão após o primeiro acesso.',
+      'Com manifesto, ícones e service worker, a Liora pode ser instalada no celular e aberta novamente mesmo sem conexão após o primeiro acesso.',
     Icone: Smartphone,
   },
   {
@@ -156,10 +156,10 @@ function ConfiguracoesQuemSomos({ onBack }) {
 
       <section className="configuracoes__section quem-somos__section">
         <div className="quem-somos__intro">
-          <strong>Controle de Gastos Pessoais</strong>
+          <strong>Liora</strong>
           <span>
-            Uma linha do tempo da evolução do MVP: da planilha manual para um app
-            local, instalável e pronto para crescer.
+            Uma linha do tempo sobre como o app evoluiu de uma planilha manual
+            para um espaço local de clareza financeira.
           </span>
         </div>
 

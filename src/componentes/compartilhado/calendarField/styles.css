@@ -1,4 +1,4 @@
-﻿.calendar-field {
+.calendar-field {
   position: relative;
   display: grid;
   gap: var(--spacing-sm);
@@ -9,7 +9,7 @@
 .calendar-field__label {
   color: var(--text-muted);
   font-size: var(--font-size-sm);
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
 }
 
 .calendar-field__trigger {
@@ -30,8 +30,9 @@
   outline: 0;
   padding: 0 12px;
   transition:
-    border-color 160ms ease,
-    box-shadow 160ms ease;
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .calendar-field__trigger span {
@@ -43,12 +44,13 @@
 
 .calendar-field__trigger svg {
   flex: 0 0 auto;
-  color: var(--accent);
+  color: var(--color-accent-strong);
 }
 
 .calendar-field__trigger:hover,
 .calendar-field__trigger:focus {
   border-color: var(--color-accent-border);
+  background: var(--color-input-bg-focus);
   box-shadow: var(--shadow-focus);
 }
 
@@ -68,10 +70,9 @@
   width: 306px;
   padding: var(--spacing-md);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--surface);
   box-shadow: var(--shadow-medium);
-  backdrop-filter: blur(18px);
 }
 
 .calendar-field__popover--month {
@@ -89,7 +90,7 @@
 .calendar-field__header strong {
   color: var(--text-strong);
   font-size: var(--font-size-md);
-  font-weight: 800;
+  font-weight: var(--font-weight-bold);
   text-align: center;
 }
 
@@ -103,12 +104,16 @@
   background: var(--color-input-bg);
   color: var(--text-muted);
   cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
 }
 
 .calendar-field__header button:hover {
   border-color: var(--color-accent-border);
   background: var(--color-accent-soft);
-  color: var(--accent);
+  color: var(--color-accent-strong);
 }
 
 .calendar-field__weekdays,
@@ -125,7 +130,7 @@
 .calendar-field__weekdays span {
   color: var(--text-muted);
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
   text-align: center;
 }
 
@@ -140,7 +145,11 @@
   cursor: pointer;
   font: inherit;
   font-size: var(--font-size-sm);
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
 }
 
 .calendar-field__day {
@@ -152,7 +161,7 @@
 .calendar-field__months button:hover {
   border-color: var(--color-accent-border);
   background: var(--color-accent-soft);
-  color: var(--accent);
+  color: var(--color-accent-strong);
 }
 
 .calendar-field__day.is-muted {
@@ -160,8 +169,8 @@
 }
 
 .calendar-field__day.is-today {
-  border-color: var(--color-success-border);
-  color: var(--color-success);
+  border-color: var(--color-secondary-border);
+  color: var(--secondary);
 }
 
 .calendar-field__day.is-selected,

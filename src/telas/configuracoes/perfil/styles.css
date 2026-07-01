@@ -7,10 +7,9 @@
 .perfil-config__photo-card,
 .perfil-config__summary {
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-soft);
 }
 
 .perfil-config__photo-card {
@@ -18,7 +17,7 @@
   align-content: center;
   justify-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
   text-align: center;
 }
 
@@ -34,12 +33,12 @@
   gap: var(--spacing-md);
   padding: var(--spacing-md);
   border: 1px solid var(--border-soft);
-  border-radius: var(--radius-md);
-  background: var(--color-card-bg-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
 }
 
 .perfil-config__metric svg {
-  color: var(--accent);
+  color: var(--secondary);
 }
 
 .perfil-config__metric div {
@@ -50,14 +49,14 @@
 .perfil-config__metric span {
   color: var(--text-muted);
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
   text-transform: uppercase;
 }
 
 .perfil-config__metric strong {
   color: var(--text-strong);
   font-size: var(--font-size-md);
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
 }
 
 .perfil-config__salary-card {
@@ -65,8 +64,8 @@
   gap: var(--spacing-md);
   padding: var(--spacing-md);
   border: 1px solid var(--border-soft);
-  border-radius: var(--radius-md);
-  background: var(--color-card-bg-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-warm-panel);
 }
 
 .perfil-config__salary-heading {
@@ -85,7 +84,7 @@
 
 .perfil-config__salary-title svg {
   flex: 0 0 auto;
-  color: var(--accent);
+  color: var(--color-accent-strong);
 }
 
 .perfil-config__salary-title div,
@@ -98,14 +97,14 @@
 .perfil-config__salary-card label span {
   color: var(--text-muted);
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
 }
 
 .perfil-config__salary-title strong {
   color: var(--text-strong);
   font-size: var(--font-size-lg);
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
 }
 
 .perfil-config__salary-edit {
@@ -127,6 +126,7 @@
 
 .perfil-config__salary-card input:focus {
   border-color: var(--color-accent-border);
+  background: var(--color-input-bg-focus);
   box-shadow: var(--shadow-focus);
 }
 
@@ -146,7 +146,7 @@
   border: 1px solid var(--color-accent-border);
   border-radius: var(--radius-pill);
   background: var(--color-accent-soft);
-  color: var(--accent);
+  color: var(--color-accent-strong);
   cursor: pointer;
 }
 
@@ -164,7 +164,7 @@
 .perfil-config__identity strong {
   color: var(--text-strong);
   font-size: var(--font-size-3xl);
-  font-weight: 800;
+  font-weight: var(--font-weight-bold);
 }
 
 .perfil-config__actions {

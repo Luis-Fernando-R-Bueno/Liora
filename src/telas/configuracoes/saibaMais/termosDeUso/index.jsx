@@ -72,19 +72,19 @@ function ConfiguracoesTermosDeUso({ onBack }) {
           </span>
           <div>
             <span>Última atualização em 22 de junho de 2026</span>
-            <h1>Termos de Uso e Política de Privacidade do Controle de Gastos Pessoais</h1>
+            <h1>Termos de Uso e Política de Privacidade da Liora</h1>
           </div>
         </header>
 
         <section className="termos-config__lead">
           <ShieldCheck size={22} aria-hidden="true" />
           <p>
-            O Controle de Gastos Pessoais é uma aplicação web desenvolvida com o
-            objetivo de auxiliar usuários na organização, registro e análise de
-            seus gastos financeiros pessoais. O sistema funciona diretamente no
-            navegador, sem necessidade de criação de conta, autenticação ou
-            conexão com servidores externos nesta versão, utilizando
-            armazenamento local por meio da tecnologia localStorage.
+            A Liora é uma aplicação web desenvolvida para auxiliar na
+            organização, no registro e na leitura dos gastos financeiros
+            pessoais. O sistema funciona diretamente no navegador, sem
+            necessidade de criação de conta, autenticação ou conexão com
+            servidores externos nesta versão, utilizando armazenamento local por
+            meio da tecnologia localStorage.
           </p>
         </section>
 

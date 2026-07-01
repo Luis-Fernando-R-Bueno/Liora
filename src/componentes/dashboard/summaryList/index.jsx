@@ -3,7 +3,7 @@ import { formatCurrency } from '../../../utils/formatCurrency'
 import './styles.css'
 
 function SummaryList({ emptyText, items, title, type }) {
-  const defaultSummaryColor = 'var(--accent)'
+  const defaultSummaryColor = 'var(--secondary)'
 
   return (
     <section className="summary-list">

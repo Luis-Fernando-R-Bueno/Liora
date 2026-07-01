@@ -1,12 +1,12 @@
-# 💰 Controle de Gastos
+# Liora
 
 <p align="center">
-  <strong>Uma aplicação desenvolvida para transformar uma necessidade pessoal em uma solução de software.</strong>
+  <strong>Uma aplicação local para enxergar gastos pessoais com clareza, leveza e equilíbrio.</strong>
 </p>
 
 <p align="center">
   <a href="https://controle-de-gastos-phi-dun.vercel.app">
-    <img src="https://img.shields.io/badge/🚀%20Acessar%20Aplicação-9f1d2f?style=for-the-badge&logo=vercel&logoColor=white" alt="Aplicação Online">
+    <img src="https://img.shields.io/badge/Acessar%20Liora-C97B18?style=for-the-badge&logo=vercel&logoColor=white" alt="Aplicação Online">
   </a>
 </p>
 
@@ -14,9 +14,9 @@
 
 ## 📖 A história por trás do projeto
 
-Este projeto nasceu quando percebi que uma planilha do Excel já não atendia mais às minhas necessidades de controle financeiro. Em vez de procurar outra ferramenta, decidi desenvolver a minha própria.
+Este projeto nasceu quando percebi que uma planilha do Excel já não atendia mais às minhas necessidades de organização financeira. Em vez de procurar outra ferramenta, decidi desenvolver a minha própria.
 
-Mais do que registrar receitas e despesas, o objetivo era criar uma aplicação intuitiva, organizada e que evoluísse junto com minhas necessidades, servindo também como um ambiente para aplicar e aprimorar conhecimentos em desenvolvimento web.
+Mais do que registrar despesas, a Liora busca trazer clareza sobre para onde o dinheiro está indo, com uma interface leve e local.
 
 ---
 

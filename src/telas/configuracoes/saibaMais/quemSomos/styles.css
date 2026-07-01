@@ -8,16 +8,15 @@
   gap: var(--spacing-sm);
   padding: calc(var(--spacing-lg) - var(--spacing-xs)) var(--spacing-lg);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--color-card-bg-strong);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(18px);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .quem-somos__intro strong {
   color: var(--text-strong);
   font-size: var(--font-size-lg);
-  font-weight: 800;
+  font-weight: var(--font-weight-bold);
 }
 
 .quem-somos__intro span {
@@ -65,8 +64,7 @@
     calc(100% - 42px)
   );
   border-radius: var(--radius-pill);
-  background: linear-gradient(180deg, transparent, var(--color-accent-strong), var(--accent));
-  box-shadow: var(--shadow-card-glow);
+  background: linear-gradient(180deg, transparent, var(--color-secondary), var(--accent));
   content: '';
   transform: translateX(-50%);
 }
@@ -107,7 +105,7 @@
   border: 1px solid var(--color-accent-border);
   border-radius: var(--radius-round);
   color: var(--accent);
-  background: var(--color-card-bg-strong);
+  background: var(--surface);
   box-shadow: var(--shadow-soft);
   transform: translateX(-50%);
 }
@@ -116,10 +114,9 @@
   grid-column: 1;
   padding: calc(var(--spacing-lg) - var(--spacing-xs)) var(--spacing-lg);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--color-card-bg-strong);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(18px);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .quem-somos__marco--direita .quem-somos__card {
@@ -131,7 +128,7 @@
   margin-bottom: var(--spacing-sm);
   color: var(--accent);
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
 }
 

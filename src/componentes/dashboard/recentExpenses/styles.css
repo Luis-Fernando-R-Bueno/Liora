@@ -1,11 +1,10 @@
 ﻿.recent-expenses {
   min-width: 0;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-soft);
 }
 
 .recent-expenses__list {
@@ -21,8 +20,8 @@
   grid-template-columns: 12px minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--spacing-md);
-  min-height: 58px;
-  padding: var(--spacing-sm) 0;
+  min-height: 64px;
+  padding: var(--spacing-md) 0;
   border-bottom: 1px solid var(--border-soft);
   text-align: left;
 }
@@ -44,7 +43,7 @@
   overflow: hidden;
   color: var(--text-strong);
   font-size: var(--font-size-md);
-  font-weight: 800;
+  font-weight: var(--font-weight-bold);
   text-overflow: ellipsis;
   white-space: nowrap;
 }

@@ -33,6 +33,10 @@ const NAV_ITEMS = [
 function AppHeader() {
   return (
     <header className="app-header">
+      <div className="app-header__brand" aria-label="Liora">
+        <img src="/logo.svg" alt="" aria-hidden="true" />
+        <span>Liora</span>
+      </div>
       <nav className="app-header__nav" aria-label="Navegação principal">
         {NAV_ITEMS.map(({ id, label, path, end, Icon }) => (
           <NavLink

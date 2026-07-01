@@ -1,10 +1,10 @@
-﻿.expense-list {
+.expense-list {
   min-width: 0;
+  overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-soft);
   text-align: left;
 }
 
@@ -24,7 +24,7 @@
 
 .expense-list__table th,
 .expense-list__table td {
-  padding: var(--spacing-md) calc(var(--spacing-lg) - var(--spacing-xs));
+  padding: var(--spacing-md) var(--spacing-xl);
   border-top: 1px solid var(--border-soft);
   vertical-align: middle;
 }
@@ -32,9 +32,20 @@
 .expense-list__table th {
   color: var(--text-muted);
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
   text-align: left;
   text-transform: uppercase;
+}
+
+.expense-list__table tbody tr {
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.expense-list__table tbody tr:hover {
+  background: var(--color-card-bg-strong);
+  box-shadow: inset 4px 0 0 var(--accent);
 }
 
 .expense-list__sort-button {
@@ -53,15 +64,13 @@
   letter-spacing: 0;
   padding: 0 8px 0 0;
   text-transform: inherit;
+  transition: color 180ms ease;
 }
 
 .expense-list__sort-button:hover,
-.expense-list__sort-button:focus-visible {
-  color: var(--accent);
-}
-
+.expense-list__sort-button:focus-visible,
 .expense-list__sort-button.is-active {
-  color: var(--accent);
+  color: var(--color-accent-strong);
 }
 
 .expense-list__sort-button svg {
