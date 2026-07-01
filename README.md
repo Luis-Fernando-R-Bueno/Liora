@@ -16,7 +16,7 @@
 
 Este projeto nasceu quando percebi que uma planilha do Excel já não atendia mais às minhas necessidades de organização financeira. Em vez de procurar outra ferramenta, decidi desenvolver a minha própria.
 
-Mais do que registrar despesas, a Liora busca trazer clareza sobre para onde o dinheiro está indo, com uma interface leve e local.
+Mais do que registrar despesas, a Liora busca trazer clareza sobre para onde o dinheiro está indo, com uma interface leve e agradável.
 
 ---
 
