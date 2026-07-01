@@ -1,4 +1,4 @@
-import {
+﻿import {
   ArrowLeft,
   LineChart,
   Mail,
@@ -31,7 +31,6 @@ function ConfiguracoesPerfil({
   monthlySalary = 0,
   onBack,
   onUpdateMonthlySalary,
-  session,
 }) {
   const fileInputRef = useRef(null)
   const [photo, setPhoto] = useState(() => localStorage.getItem(PROFILE_PHOTO_KEY) || '')

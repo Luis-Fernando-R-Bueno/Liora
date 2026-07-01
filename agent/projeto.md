@@ -1,4 +1,4 @@
-# Liora
+﻿# Liora
 
 ## Ideia do Projeto
 
@@ -1303,3 +1303,184 @@ Validações executadas:
 
 - `npm.cmd run lint`
 - `npm.cmd run build`
+
+## Logo Oficial Importada - 01/07/2026
+
+Alterações realizadas:
+
+- Imagem `Logo Liora.png` importada para `public/logo-liora.png`.
+- Arquivo otimizado para uso na interface, reduzindo o peso da imagem original.
+- Header principal e tela de login passaram a usar `logo-liora.png` no lugar da logo temporária em SVG.
+- Service worker atualizado para incluir a nova logo no cache offline do PWA.
+- Removido parâmetro `session` sem uso da tela `Perfil`, mantendo o lint limpo.
+- Nenhuma regra de negócio, persistência ou estrutura de dados foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Refinamento da Logo no Header - 01/07/2026
+
+Alterações realizadas:
+
+- `public/logo-liora.png` foi recriada a partir da imagem original com recorte específico da marca.
+- O arquivo deixou de carregar o quadro grande completo da imagem enviada, melhorando nitidez e encaixe visual.
+- Header e login passaram a usar `object-fit: contain`, evitando corte, compressão ou distorção da logo.
+- Dimensões da logo foram ajustadas separadamente para header e login.
+- Service worker atualizado para `liora-pwa-v4`, garantindo atualização do asset no PWA.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Ajuste da Logo no Login - 01/07/2026
+
+Alterações realizadas:
+
+- Textos `Entrar com clareza` e `Um espaço leve para entender para onde seu dinheiro está indo.` removidos da tela de login.
+- Logo da Liora centralizada no topo do card de login.
+- Área visual da logo aumentada para dar mais destaque à marca.
+- Regras CSS antigas do título e parágrafo do login foram removidas.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Ampliação da Logo no Login - 01/07/2026
+
+Alterações realizadas:
+
+- `public/logo-liora.png` recriada com recorte mais justo da marca, reduzindo margem interna entre a logo e o texto da própria arte.
+- Logo da tela de login ampliada para `390px` de largura máxima.
+- Altura visual da logo ajustada para reduzir o espaço vazio antes dos campos.
+- Espaçamento interno do card de login reduzido de `spacing-xl` para `spacing-lg`.
+- Service worker atualizado para `liora-pwa-v5` para renovar o asset no PWA.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Correção de Escala da Logo no Login - 01/07/2026
+
+Alterações realizadas:
+
+- Card de login ampliado para `520px`, dando mais área útil para a marca.
+- Logo do login ampliada para `420px` de largura máxima e `190px` de altura.
+- Imagem da logo passou a usar `object-fit: cover` no login para reduzir o espaço visual vazio dentro do PNG.
+- Nenhuma regra de negócio, persistência ou estrutura de dados foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Logo Provisória Específica do Login - 01/07/2026
+
+Alterações realizadas:
+
+- Nova imagem `logo-liora-login.png` importada como fonte provisória da marca na tela de login.
+- Gerado asset otimizado em `public/logo-liora-login.png` com transparência e dimensões de `1200x654`.
+- Tela de login passou a usar `/logo-liora-login.png`, mantendo o header com a logo atual.
+- Logo do login configurada com `object-fit: contain`, evitando corte visual enquanto não há SVG profissional.
+- Service worker atualizado para `liora-pwa-v6` e passou a incluir `logo-liora-login.png` no cache offline.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Retorno da Logo Anterior no Login - 01/07/2026
+
+Alterações realizadas:
+
+- Tela de login voltou a usar `/logo-liora.png`.
+- Imagem provisória `public/logo-liora-login.png` removida do projeto.
+- Service worker atualizado para `liora-pwa-v7` e deixou de carregar a imagem provisória no cache offline.
+- Nenhuma regra de negócio, persistência ou estrutura de dados foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Logo SVG Provisória Apenas com Texto - 01/07/2026
+
+Alterações realizadas:
+
+- `public/liora-logo.svg` simplificado para exibir apenas a palavra `Liora` em fonte cursiva/serifada provisória.
+- Header e tela de login passaram a usar `/liora-logo.svg` como marca visível.
+- Dimensões da marca foram ajustadas no header e no login para o SVG textual.
+- Service worker atualizado para `liora-pwa-v8` e passou a cachear `liora-logo.svg`.
+- Logo PNG anterior deixou de ser usada na interface principal.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## SVG Vetorizado na Logo do Login - 01/07/2026
+
+Alterações realizadas:
+
+- SVG `liora-logo-vetorizada.svg` copiado de Downloads para `public/liora-logo-login.svg`.
+- `viewBox` do SVG ajustado para recortar a área útil da marca no login.
+- Tela de login passou a usar `/liora-logo-login.svg`.
+- Header permanece usando a logo textual provisória `/liora-logo.svg`.
+- Service worker atualizado para `liora-pwa-v9`, incluindo o novo SVG no cache offline.
+- Nenhuma regra de negócio, persistência ou estrutura de dados foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+
+## Refinamento da Logo do Login - 01/07/2026
+
+Alterações realizadas:
+
+- `public/liora-logo-login.svg` substituído por uma versão vetorial limpa, menor e sem ruído de vetorização de imagem.
+- Logo do login redesenhada com wordmark `Liora`, símbolo de nascer do sol e tagline em SVG puro.
+- Tamanho exibido da logo no login reduzido para evitar excesso de ocupação visual no formulário.
+- Cache do PWA atualizado para `liora-pwa-v10` para forçar a atualização do novo SVG.
+- Nenhuma regra de negócio, persistência ou estrutura de dados foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Logo Tipográfica Liora - 01/07/2026
+
+Alterações realizadas:
+
+- `public/liora-logo.svg` e `public/liora-logo-login.svg` substituídos por uma marca tipográfica simples, exibindo apenas `Liora`.
+- Símbolo de sol, rio e tagline foram removidos da logo do site e da tela de login.
+- `public/favicon.svg` e `public/logo.svg` substituídos por um ícone tipográfico com a letra `L`, mais legível na guia do navegador.
+- Cache do PWA atualizado para `liora-pwa-v11`.
+- Nenhuma regra de negócio, persistência ou estrutura de dados foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Atualização do README e Conceito Visual - 01/07/2026
+
+Alterações realizadas:
+
+- Imagem `Conceito.png` copiada para `public/liora-conceito.png` para uso direto na documentação do repositório.
+- README reescrito com foco na identidade atual da Liora, proposta do produto, direção de design, funcionalidades, tecnologias, execução local, acesso local, estrutura principal, persistência e status do MVP.
+- Botão `Acessar Liora` no README destacado com badge visual em destaque.
+- Demonstracao do README passou a usar a imagem conceitual da marca Liora.
+- Nenhuma regra de negocio, persistencia ou estrutura de dados foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run build`
+
+

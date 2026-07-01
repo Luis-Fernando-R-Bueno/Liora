@@ -1,4 +1,4 @@
-import { Eye, EyeOff, LockKeyhole, UserRound } from 'lucide-react'
+﻿import { Eye, EyeOff, LockKeyhole, UserRound } from 'lucide-react'
 import { useState } from 'react'
 import './styles.css'
 
@@ -38,11 +38,8 @@ function Login({ onLogin }) {
       <form className="login-card" onSubmit={handleSubmit}>
         <div className="login-card__header">
           <div className="login-card__brand">
-            <img src="/logo.svg" alt="" aria-hidden="true" />
-            <span>Liora</span>
+            <img src="/liora-logo-login.svg" alt="Liora" />
           </div>
-          <h1>Entrar com clareza</h1>
-          <p>Um espaço leve para entender para onde seu dinheiro está indo.</p>
         </div>
 
         {errorMessage ? (

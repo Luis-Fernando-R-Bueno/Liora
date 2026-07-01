@@ -1,4 +1,4 @@
-import { History, LayoutDashboard, ReceiptText, Settings } from 'lucide-react'
+﻿import { History, LayoutDashboard, ReceiptText, Settings } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import './styles.css'
 
@@ -34,8 +34,7 @@ function AppHeader() {
   return (
     <header className="app-header">
       <div className="app-header__brand" aria-label="Liora">
-        <img src="/logo.svg" alt="" aria-hidden="true" />
-        <span>Liora</span>
+        <img src="/liora-logo.svg" alt="Liora" />
       </div>
       <nav className="app-header__nav" aria-label="Navegação principal">
         {NAV_ITEMS.map(({ id, label, path, end, Icon }) => (

@@ -1,60 +1,87 @@
-# Liora
+﻿# Liora
 
 <p align="center">
-  <strong>Uma aplicação local para enxergar gastos pessoais com clareza, leveza e equilíbrio.</strong>
+  <img src="./public/liora-logo.svg" width="260" alt="Liora" />
 </p>
 
 <p align="center">
-  <a
-    href="https://controle-de-gastos-phi-dun.vercel.app"
-    style="display:inline-flex; align-items:center; justify-content:center; min-width:220px; padding:12px 20px; border-radius:999px; border:1px solid #ddd8cf; background:#f4f2ec; color:#1f2937; font-weight:700; text-decoration:none; box-shadow:0 10px 30px rgba(0,0,0,0.06);"
-  >
-    Acessar Liora
+  <strong>Clareza para suas finanças.</strong><br />
+  Uma aplicação local para registrar gastos, entender o mês e organizar a vida financeira com leveza.
+</p>
+
+<p align="center">
+  <a href="https://controle-de-gastos-phi-dun.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/ABRIR%20LIORA%20AGORA-C97B18?style=for-the-badge&labelColor=263E35&color=C97B18" alt="Abrir Liora agora" />
   </a>
 </p>
 
----
-
-## 📖 A história por trás do projeto
-
-Este projeto nasceu quando percebi que uma planilha do Excel já não atendia mais às minhas necessidades de organização financeira. Em vez de procurar outra ferramenta, decidi desenvolver a minha própria.
-
-Mais do que registrar despesas, a Liora busca trazer clareza sobre para onde o dinheiro está indo, com uma interface leve e agradável.
-
----
-
-## ✨ Funcionalidades
-
-* 📅 Cadastro de receitas e despesas
-* ✏️ Edição e exclusão de lançamentos
-* 🏷️ Categorias personalizadas
-* 🔍 Pesquisa dinâmica
-* 📊 Dashboard financeiro
-* 📆 Resumo mensal
-* 💾 Persistência dos dados com LocalStorage
-* 📱 Interface responsiva
-
----
-
-## 🖼️ Demonstração
-
-> **Adicione aqui screenshots ou um GIF da aplicação.**
-
 <p align="center">
-  <img src="./assets/dashboard.png" width="90%" alt="Dashboard">
+  <strong>Site publicado:</strong><br />
+  <a href="https://controle-de-gastos-phi-dun.vercel.app" target="_blank">https://controle-de-gastos-phi-dun.vercel.app</a>
 </p>
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## Visão Geral
+
+Liora é um sistema web de controle de gastos pessoais criado para substituir uma planilha de Excel. A proposta é registrar despesas de forma simples, acompanhar o resumo mensal e visualizar para onde o dinheiro está indo sem depender de fórmulas ou abas manuais.
+
+O projeto funciona como um MVP local: os dados ficam salvos no navegador por `localStorage`, sem back-end, banco externo ou sincronização em nuvem nesta versão.
+
+---
+
+## Caminho Visual Do Produto
+
+O caminho do site é o design: a Liora deve transmitir clareza, luz natural, equilíbrio e organização. A interface não busca parecer um banco digital ou uma fintech, mas uma ferramenta pessoal, elegante e acolhedora para entender melhor a vida financeira.
+
+A direção visual atual segue estes princípios:
+
+- Fundo claro e quente, inspirado em luz natural.
+- Cards brancos com sombra suave e bordas discretas.
+- Tipografia elegante, com hierarquia forte para valores financeiros.
+- Cor primária âmbar para ações e destaques.
+- Verde sálvia como apoio visual e sensação de equilíbrio.
+- Interface com bastante respiro, cantos suaves e microinterações discretas.
+
+Referência conceitual da marca:
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=react,vite,javascript,css,git,github,vscode" />
+  <img src="./public/liora-conceito.png" width="100%" alt="Conceito visual da marca Liora" />
 </p>
 
 ---
 
-## 🚀 Como executar o projeto
+## Funcionalidades
+
+- Dashboard mensal com total do mês, saldo restante, maior categoria, média mensal e resumos.
+- Cadastro de gastos com data, categoria, valor e descrição opcional.
+- Edição e exclusão de lançamentos.
+- Histórico completo com pesquisa dinâmica, filtro por categoria e filtro por mês.
+- Histórico de meses anteriores.
+- Gerenciamento de categorias ativas e inativas.
+- Perfil local com salário mensal editável.
+- Cálculo do valor restante do salário diante dos gastos do mês.
+- Backup e importação/exportação de dados em JSON.
+- Login local simples para uso pessoal.
+- PWA com suporte offline após o primeiro carregamento.
+- Interface responsiva para desktop, tablet e celular.
+
+---
+
+## Tecnologias
+
+- React
+- Vite
+- JavaScript
+- CSS organizado por componentes
+- CSS variables para tokens visuais
+- LocalStorage
+- Service Worker e Manifest para PWA
+- Lucide React para ícones
+
+---
+
+## Como Executar Localmente
 
 ```bash
 # Clone o repositório
@@ -70,35 +97,78 @@ npm install
 npm run dev
 ```
 
+A aplicação abre em modo desenvolvimento no endereço indicado pelo Vite, normalmente `http://localhost:5173`.
+
 ---
 
-## 📂 Estrutura do projeto
+## Acesso Local
 
-```text
-src/
-├── assets/
-├── componentes/
-├── hooks/
-├── servicos/
-├── telas/
-└── utils/
+Credenciais configuradas para o MVP local:
+
+```txt
+Usuário: luis.bueno
+Senha: rodrigues.bueno
 ```
 
----
-
-## 🌱 Próximas funcionalidades
-
-* 🔐 Sistema de autenticação
-* ☁️ Sincronização em nuvem
-* 🗄️ Integração com banco de dados
-* 📈 Gráficos financeiros
-* 📄 Exportação de relatórios
-* 👥 Controle para múltiplos usuários
+A autenticação é apenas uma trava local da interface. Ela não substitui uma autenticação real com servidor.
 
 ---
 
-## 👨‍💻 Autor
+## Estrutura Principal
+
+```txt
+src/
+  componentes/
+  hooks/
+  pwa/
+  rotas/
+  servicos/
+  styles/
+  telas/
+  utils/
+```
+
+Arquivos importantes:
+
+- `src/styles/tokens.css`: tokens do design system.
+- `src/estilos/global.css`: estilos globais da aplicação.
+- `src/rotas`: definição das rotas principais.
+- `src/servicos/storageService.js`: persistência local.
+- `public/manifest.webmanifest`: configuração do PWA.
+- `public/sw.js`: cache offline do aplicativo.
+
+---
+
+## Persistência E Privacidade
+
+Os dados cadastrados ficam no navegador do próprio dispositivo. Nenhuma informação é enviada para servidores externos nesta versão.
+
+Por isso, limpar dados do navegador, trocar de navegador ou usar outro dispositivo pode fazer os dados deixarem de aparecer. A tela de backup existe para exportar os registros quando necessário.
+
+---
+
+## Status Do Projeto
+
+O projeto está em fase de MVP funcional com foco em:
+
+- uso pessoal diário;
+- organização dos gastos;
+- clareza visual;
+- experiência responsiva;
+- base visual consistente para evolução futura.
+
+Possíveis evoluções futuras:
+
+- IndexedDB ou SQLite local;
+- back-end com Node.js;
+- banco MySQL ou PostgreSQL;
+- sincronização entre dispositivos;
+- gráficos mais completos;
+- exportação de relatórios.
+
+---
+
+## Autor
 
 Desenvolvido por **Luis Fernando Rodrigues Bueno**.
 
-Se este projeto foi útil ou interessante para você, deixe uma ⭐ no repositório.

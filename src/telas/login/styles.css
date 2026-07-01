@@ -1,4 +1,4 @@
-.login-page {
+﻿.login-page {
   display: grid;
   min-height: 100svh;
   place-items: center;
@@ -12,8 +12,8 @@
 .login-card {
   position: relative;
   display: grid;
-  width: min(100%, 452px);
-  gap: var(--spacing-xl);
+  width: min(100%, 520px);
+  gap: var(--spacing-lg);
   overflow: hidden;
   padding: var(--spacing-2xl);
   border: 1px solid var(--border);
@@ -42,34 +42,25 @@
 
 .login-card__header {
   display: grid;
-  gap: var(--spacing-md);
+  justify-items: center;
+  margin-bottom: 0;
 }
 
 .login-card__brand {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-xs);
-  color: var(--text-strong);
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .login-card__brand img {
-  width: 40px;
-  height: 40px;
+  display: block;
+  width: min(86vw, 340px);
+  height: auto;
+  max-height: 136px;
+  object-fit: contain;
+  object-position: center;
 }
 
-.login-card h1 {
-  font-size: var(--font-size-2xl);
-}
-
-.login-card__header p {
-  max-width: 34ch;
-  color: var(--text-muted);
-  font-size: var(--font-size-md);
-}
 
 .login-card label {
   display: grid;
@@ -164,3 +155,4 @@
     padding: var(--spacing-xl);
   }
 }
+

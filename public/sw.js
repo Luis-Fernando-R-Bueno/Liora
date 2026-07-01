@@ -1,10 +1,12 @@
-const CACHE_NAME = 'liora-pwa-v2'
+﻿const CACHE_NAME = 'liora-pwa-v11'
 const APP_SHELL_URLS = [
   '/',
   '/index.html',
   '/manifest.webmanifest',
   '/favicon.svg',
   '/logo.svg',
+  '/liora-logo.svg',
+  '/liora-logo-login.svg',
   '/icon-192.png',
   '/icon-512.png',
   '/maskable-icon-512.png',
@@ -91,3 +93,5 @@ async function handleCacheableRequest(request) {
 
   return networkResponse
 }
+
+
