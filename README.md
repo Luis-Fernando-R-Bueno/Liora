@@ -1,7 +1,5 @@
-﻿# Liora
-
-<p align="center">
-  <img src="./public/liora-logo.svg" width="260" alt="Liora" />
+﻿<p align="center">
+  ## Liora
 </p>
 
 <p align="center">
@@ -13,11 +11,6 @@
   <a href="https://controle-de-gastos-phi-dun.vercel.app" target="_blank">
     <img src="https://img.shields.io/badge/ABRIR%20LIORA%20AGORA-C97B18?style=for-the-badge&labelColor=263E35&color=C97B18" alt="Abrir Liora agora" />
   </a>
-</p>
-
-<p align="center">
-  <strong>Site publicado:</strong><br />
-  <a href="https://controle-de-gastos-phi-dun.vercel.app" target="_blank">https://controle-de-gastos-phi-dun.vercel.app</a>
 </p>
 
 ---
