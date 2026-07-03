@@ -5,21 +5,13 @@
 </p>
 
 <p align="center">
-  <strong>Aplicação web local para enxergar gastos pessoais com clareza, leveza e equilíbrio.</strong>
+  <strong>Clareza para suas finanças.</strong>
 </p>
 
 <p align="center">
   <a href="https://controle-de-gastos-phi-dun.vercel.app" target="_blank">
     <img src="https://img.shields.io/badge/%F0%9F%8C%85%20ACESSAR%20LIORA%20AGORA-C97B18?style=for-the-badge&labelColor=263E35&color=C97B18" alt="Acessar Liora agora">
   </a>
-</p>
-
-<p align="center">
-  <a href="#-demonstração">Demonstração</a> •
-  <a href="#-funcionalidades">Funcionalidades</a> •
-  <a href="#-experiência-interativa">Experiência</a> •
-  <a href="#-como-executar-o-projeto">Como executar</a> •
-  <a href="#-documentação-complementar">Documentação</a>
 </p>
 
 <p align="center">
