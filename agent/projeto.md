@@ -1484,3 +1484,18 @@ Validações executadas:
 - `npm.cmd run build`
 
 
+
+## README no Padrão do SC-Censo-Diario - 03/07/2026
+
+Alterações realizadas:
+
+- Repositório `SC-Censo-Diario` localizado em `C:\Users\User\Desktop\Pessoal\SC-Censo-Diario` e README usado como referência estrutural.
+- README da Liora refeito com título com emoji, logo central, badges, botão destacado, navegação interna, história do projeto, funcionalidades, demonstração, tecnologias, execução local, estrutura, próximas funcionalidades e documentação complementar.
+- Adicionadas seções interativas com `<details>` para caminho visual, acesso local, rotas principais, dados locais e design system.
+- Imagem `public/liora-conceito.png` mantida como demonstração visual principal.
+- Nenhuma regra de negócio, persistência ou estrutura de dados foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run build`
+
