@@ -120,12 +120,12 @@ A proposta visual atual prioriza tipografia clara, hierarquia forte nos valores 
 ## 🛠️ Tecnologias utilizadas
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=react,vite,javascript,css,git,github,vscode" alt="React, Vite, JavaScript, CSS, Git, GitHub e VS Code">
+  <img src="https://skillicons.dev/icons?i=react,vite,typescript,css,git,github,vscode" alt="React, Vite, TypeScript, CSS, Git, GitHub e VS Code">
 </p>
 
 * React 19
 * Vite 8
-* JavaScript
+* TypeScript
 * CSS organizado por componentes
 * CSS variables para tokens visuais
 * React Router DOM

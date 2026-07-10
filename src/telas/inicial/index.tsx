@@ -45,7 +45,7 @@ function saveMonthlySalary(value) {
   localStorage.setItem(MONTHLY_SALARY_KEY, String(Number(value) || 0))
 }
 
-function Inicial({ onLogout, session }) {
+function Inicial({ onLogout }) {
   const navigate = useNavigate()
   const [dashboardMonthKey, setDashboardMonthKey] = useState(getCurrentMonthKey)
   const {
@@ -230,7 +230,6 @@ function Inicial({ onLogout, session }) {
                 monthlySalary={monthlySalary}
                 onBack={() => navigate('/configuracoes')}
                 onUpdateMonthlySalary={handleUpdateMonthlySalary}
-                session={session}
               />
             }
           />

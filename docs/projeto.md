@@ -32,6 +32,7 @@ entender a vida financeira, e não apenas uma planilha digital.
 ## Tecnologias Desejadas
 
 - React + Vite no front-end.
+- TypeScript no código da aplicação.
 - CSS modular ou CSS organizado por componentes.
 - `localStorage` para persistência inicial.
 - Sem back-end na primeira versão.
@@ -1481,6 +1482,27 @@ Alterações realizadas:
 
 Validações executadas:
 
+- `npm.cmd run build`
+
+## Migração para TypeScript - 10/07/2026
+
+Alterações realizadas:
+
+- Arquivos da aplicação em `src` migrados de `.js` e `.jsx` para `.ts` e `.tsx`.
+- Adicionado `tsconfig.json` com configuração compatível com React, Vite e DOM.
+- `vite.config.js` migrado para `vite.config.ts`.
+- Entrada do HTML atualizada para carregar `src/main.tsx`.
+- ESLint configurado para analisar arquivos TypeScript com `typescript-eslint`.
+- Script `build` passou a executar `tsc -b` antes do `vite build`.
+- Adicionado script `check` para rodar `tsc -b --noEmit`.
+- Criada tipagem global para variáveis CSS customizadas usadas nos estilos inline.
+- Hook principal recebeu tipos locais para categorias, gastos e resumos.
+- Nenhuma regra de negócio, persistência ou fluxo visual foi alterado.
+
+Validações executadas:
+
+- `npm.cmd run check`
+- `npm.cmd run lint`
 - `npm.cmd run build`
 
 

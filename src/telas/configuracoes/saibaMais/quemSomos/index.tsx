@@ -73,7 +73,7 @@ const LINHA_DO_TEMPO = [
 ]
 
 function ConfiguracoesQuemSomos({ onBack }) {
-  const linhaRef = useRef(null)
+  const linhaRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     let frameLeitura = 0
@@ -133,15 +133,17 @@ function ConfiguracoesQuemSomos({ onBack }) {
       })
     }
 
+    const atualizarPorEvento = () => atualizarProgresso()
+
     atualizarProgresso(true)
-    window.addEventListener('scroll', atualizarProgresso, { passive: true })
-    window.addEventListener('resize', atualizarProgresso)
+    window.addEventListener('scroll', atualizarPorEvento, { passive: true })
+    window.addEventListener('resize', atualizarPorEvento)
 
     return () => {
       if (frameLeitura) window.cancelAnimationFrame(frameLeitura)
       if (frameAnimacao) window.cancelAnimationFrame(frameAnimacao)
-      window.removeEventListener('scroll', atualizarProgresso)
-      window.removeEventListener('resize', atualizarProgresso)
+      window.removeEventListener('scroll', atualizarPorEvento)
+      window.removeEventListener('resize', atualizarPorEvento)
     }
   }, [])
 

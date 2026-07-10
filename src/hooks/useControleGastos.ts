@@ -14,19 +14,55 @@ import {
 } from '../utils/dateUtils'
 import { formatCurrency, parseCurrencyInput } from '../utils/formatCurrency'
 
-function createId(prefix) {
+type Category = {
+  id: string
+  nome: string
+  cor: string
+  ativa: boolean
+  createdAt?: string
+}
+
+type Expense = {
+  id: string
+  date: string
+  categoryId: string
+  value: number
+  description: string
+  createdAt: string
+  updatedAt: string
+}
+
+type ExpenseWithCategory = Expense & {
+  category: Category
+}
+
+type SummaryItem = {
+  id: string
+  label: string
+  color?: string
+  total: number
+  count: number
+  percent: number
+}
+
+type HistoricalMonth = Omit<SummaryItem, 'percent' | 'color'> & {
+  categories: Record<string, Omit<SummaryItem, 'percent'>>
+  topCategory?: Omit<SummaryItem, 'percent'> | null
+}
+
+function createId(prefix: string) {
   const randomId = globalThis.crypto?.randomUUID?.()
   return randomId ? `${prefix}-${randomId}` : `${prefix}-${Date.now()}`
 }
 
-function normalizeText(value) {
+function normalizeText(value: unknown) {
   return String(value)
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
 }
 
-function getExpenseDuplicateKey(expense) {
+function getExpenseDuplicateKey(expense: Partial<Expense>) {
   return JSON.stringify({
     categoryId: String(expense.categoryId ?? ''),
     date: String(expense.date ?? ''),
@@ -35,46 +71,46 @@ function getExpenseDuplicateKey(expense) {
   })
 }
 
-function extractImportRecords(data) {
+function extractImportRecords(data: Record<string, unknown> | unknown[]) {
   if (Array.isArray(data)) {
     return data
   }
 
-  if (Array.isArray(data?.expenses)) {
+  if (Array.isArray(data.expenses)) {
     return data.expenses
   }
 
-  if (Array.isArray(data?.registros)) {
+  if (Array.isArray(data.registros)) {
     return data.registros
   }
 
   return []
 }
 
-function normalizeImportedExpense(expense) {
-  const date = String(expense?.date ?? expense?.data ?? '').slice(0, 10)
-  const categoryId = String(expense?.categoryId ?? expense?.categoriaId ?? '')
-  const value = parseCurrencyInput(expense?.value ?? expense?.valor)
+function normalizeImportedExpense(expense: Record<string, unknown>): Expense | null {
+  const date = String(expense.date ?? expense.data ?? '').slice(0, 10)
+  const categoryId = String(expense.categoryId ?? expense.categoriaId ?? '')
+  const value = parseCurrencyInput(expense.value ?? expense.valor)
 
   if (!date || !categoryId || !Number.isFinite(value) || value <= 0) {
     return null
   }
 
   const now = new Date().toISOString()
-  const createdAt = expense?.createdAt ? String(expense.createdAt) : now
+  const createdAt = expense.createdAt ? String(expense.createdAt) : now
 
   return {
-    id: expense?.id ? String(expense.id) : createId('gasto'),
+    id: expense.id ? String(expense.id) : createId('gasto'),
     date,
     categoryId,
     value,
-    description: String(expense?.description ?? expense?.descricao ?? '').trim(),
+    description: String(expense.description ?? expense.descricao ?? '').trim(),
     createdAt,
-    updatedAt: expense?.updatedAt ? String(expense.updatedAt) : createdAt,
+    updatedAt: expense.updatedAt ? String(expense.updatedAt) : createdAt,
   }
 }
 
-function aggregateByCategory(expenses) {
+function aggregateByCategory(expenses: ExpenseWithCategory[]) {
   const total = expenses.reduce((sum, expense) => sum + expense.value, 0)
   const grouped = expenses.reduce((acc, expense) => {
     const key = expense.category.id
@@ -92,7 +128,7 @@ function aggregateByCategory(expenses) {
     acc[key].total += expense.value
     acc[key].count += 1
     return acc
-  }, {})
+  }, {} as Record<string, Omit<SummaryItem, 'percent'>>)
 
   return Object.values(grouped)
     .map((item) => ({
@@ -102,7 +138,7 @@ function aggregateByCategory(expenses) {
     .sort((a, b) => b.total - a.total)
 }
 
-function aggregateByMonth(expenses) {
+function aggregateByMonth(expenses: ExpenseWithCategory[]) {
   const grouped = expenses.reduce((acc, expense) => {
     const monthKey = getMonthKey(expense.date)
 
@@ -118,11 +154,12 @@ function aggregateByMonth(expenses) {
     acc[monthKey].total += expense.value
     acc[monthKey].count += 1
     return acc
-  }, {})
+  }, {} as Record<string, Omit<SummaryItem, 'percent' | 'color'>>)
 
-  const highestTotal = Math.max(...Object.values(grouped).map((item) => item.total), 0)
+  const groupedMonths = Object.values(grouped)
+  const highestTotal = Math.max(...groupedMonths.map((item) => item.total), 0)
 
-  return Object.values(grouped)
+  return groupedMonths
     .map((item) => ({
       ...item,
       percent: highestTotal > 0 ? Math.round((item.total / highestTotal) * 100) : 0,
@@ -130,7 +167,7 @@ function aggregateByMonth(expenses) {
     .sort((a, b) => String(b.id).localeCompare(String(a.id)))
 }
 
-function aggregateHistoricalMonths(expenses) {
+function aggregateHistoricalMonths(expenses: ExpenseWithCategory[]) {
   const currentMonthKey = getCurrentMonthKey()
   const grouped = expenses.reduce((acc, expense) => {
     const monthKey = getMonthKey(expense.date)
@@ -168,7 +205,7 @@ function aggregateHistoricalMonths(expenses) {
     acc[monthKey].categories[categoryId].count += 1
 
     return acc
-  }, {})
+  }, {} as Record<string, HistoricalMonth>)
 
   return Object.values(grouped)
     .map((month) => ({
@@ -181,8 +218,8 @@ function aggregateHistoricalMonths(expenses) {
 }
 
 export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
-  const [categories, setCategories] = useState(loadCategories)
-  const [expenses, setExpenses] = useState(loadExpenses)
+  const [categories, setCategories] = useState<Category[]>(loadCategories)
+  const [expenses, setExpenses] = useState<Expense[]>(loadExpenses)
 
   useEffect(() => {
     saveCategories(categories)
