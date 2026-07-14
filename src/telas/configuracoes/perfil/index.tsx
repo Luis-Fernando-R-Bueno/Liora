@@ -13,6 +13,10 @@ import '../styles.css'
 import './styles.css'
 
 const PROFILE_PHOTO_KEY = 'controle-gastos:perfil-foto'
+const PROFILE_NAME_KEY = 'controle-gastos:perfil-nome'
+const PROFILE_PHONE_KEY = 'controle-gastos:perfil-telefone'
+const PROFILE_EMAIL_KEY = 'controle-gastos:perfil-email'
+const PROFILE_SALARY_KEY = 'controle-gastos:salario-mensal'
 
 function formatSalaryInput(value) {
   const numericValue = Number(value) || 0
@@ -27,17 +31,41 @@ function formatSalaryInput(value) {
   })
 }
 
+function loadProfileData() {
+  return {
+    name: localStorage.getItem(PROFILE_NAME_KEY) || 'Usuário',
+    phone: localStorage.getItem(PROFILE_PHONE_KEY) || '',
+    email: localStorage.getItem(PROFILE_EMAIL_KEY) || '',
+  }
+}
+
+function saveProfileData(key, value) {
+  localStorage.setItem(key, value)
+}
+
 function ConfiguracoesPerfil({
   monthlySalary = 0,
   onBack,
   onUpdateMonthlySalary,
+  onProfileUpdate,
 }) {
   const fileInputRef = useRef(null)
   const [photo, setPhoto] = useState(() => localStorage.getItem(PROFILE_PHOTO_KEY) || '')
+  const profileData = loadProfileData()
+  
+  const [name, setName] = useState(profileData.name)
+  const [phone, setPhone] = useState(profileData.phone)
+  const [email, setEmail] = useState(profileData.email)
+  
   const [salaryInput, setSalaryInput] = useState(() => formatSalaryInput(monthlySalary))
   const [salaryFeedback, setSalaryFeedback] = useState('')
-  const [isEditingSalary, setIsEditingSalary] = useState(false)
-  const displayName = 'Luis'
+  
+  const [editingFields, setEditingFields] = useState({
+    name: false,
+    phone: false,
+    email: false,
+    salary: false,
+  })
 
   function handleSelectPhoto(event) {
     const file = event.target.files?.[0]
@@ -62,10 +90,47 @@ function ConfiguracoesPerfil({
     localStorage.removeItem(PROFILE_PHOTO_KEY)
   }
 
+  function handleEditField(field) {
+    setEditingFields((prev) => ({
+      ...prev,
+      [field]: true,
+    }))
+  }
+
+  function handleSaveField(field) {
+    const fieldMap = {
+      name: { value: name, key: PROFILE_NAME_KEY },
+      phone: { value: phone, key: PROFILE_PHONE_KEY },
+      email: { value: email, key: PROFILE_EMAIL_KEY },
+    }
+
+    const { value, key } = fieldMap[field]
+    const trimmedValue = value.trim()
+
+    if (!trimmedValue && field === 'name') {
+      setName('Usuário')
+      saveProfileData(key, 'Usuário')
+    } else {
+      saveProfileData(key, trimmedValue)
+    }
+
+    setEditingFields((prev) => ({
+      ...prev,
+      [field]: false,
+    }))
+
+    if (onProfileUpdate) {
+      onProfileUpdate()
+    }
+  }
+
   function handleStartSalaryEdit() {
     setSalaryInput(formatSalaryInput(monthlySalary))
     setSalaryFeedback('')
-    setIsEditingSalary(true)
+    setEditingFields((prev) => ({
+      ...prev,
+      salary: true,
+    }))
   }
 
   function handleSaveSalary(event) {
@@ -81,7 +146,10 @@ function ConfiguracoesPerfil({
     onUpdateMonthlySalary(nextSalary)
     setSalaryInput(formatSalaryInput(nextSalary))
     setSalaryFeedback(nextSalary > 0 ? 'Salário salvo.' : 'Salário removido.')
-    setIsEditingSalary(false)
+    setEditingFields((prev) => ({
+      ...prev,
+      salary: false,
+    }))
   }
 
   return (
@@ -103,14 +171,14 @@ function ConfiguracoesPerfil({
             title="Selecionar foto de perfil"
           >
             {photo ? (
-              <img src={photo} alt={`Foto de ${displayName}`} />
+              <img src={photo} alt={`Foto de ${name}`} />
             ) : (
               <UserRound size={52} aria-hidden="true" />
             )}
           </button>
 
           <div className="perfil-config__identity">
-            <strong>{displayName}</strong>
+            <strong>{name}</strong>
           </div>
 
           {photo ? (
@@ -128,7 +196,32 @@ function ConfiguracoesPerfil({
             <UserRound size={22} aria-hidden="true" />
             <div>
               <span>Nome</span>
-              <strong>{displayName}</strong>
+              {editingFields.name ? (
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  onBlur={() => handleSaveField('name')}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSaveField('name')
+                  }}
+                  autoFocus
+                  className="perfil-config__input-field"
+                />
+              ) : (
+                <div className="perfil-config__field-display">
+                  <strong>{name}</strong>
+                  <button
+                    type="button"
+                    className="icon-button"
+                    onClick={() => handleEditField('name')}
+                    aria-label="Editar nome"
+                    title="Editar nome"
+                  >
+                    <Pencil size={16} aria-hidden="true" />
+                  </button>
+                </div>
+              )}
             </div>
           </article>
 
@@ -136,7 +229,33 @@ function ConfiguracoesPerfil({
             <Phone size={22} aria-hidden="true" />
             <div>
               <span>Telefone</span>
-              <strong>Não informado</strong>
+              {editingFields.phone ? (
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  onBlur={() => handleSaveField('phone')}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSaveField('phone')
+                  }}
+                  autoFocus
+                  placeholder="Seu número"
+                  className="perfil-config__input-field"
+                />
+              ) : (
+                <div className="perfil-config__field-display">
+                  <strong>{phone || 'Não informado'}</strong>
+                  <button
+                    type="button"
+                    className="icon-button"
+                    onClick={() => handleEditField('phone')}
+                    aria-label="Editar telefone"
+                    title="Editar telefone"
+                  >
+                    <Pencil size={16} aria-hidden="true" />
+                  </button>
+                </div>
+              )}
             </div>
           </article>
 
@@ -144,7 +263,33 @@ function ConfiguracoesPerfil({
             <Mail size={22} aria-hidden="true" />
             <div>
               <span>Email</span>
-              <strong>Não informado</strong>
+              {editingFields.email ? (
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() => handleSaveField('email')}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSaveField('email')
+                  }}
+                  autoFocus
+                  placeholder="seu.email@exemplo.com"
+                  className="perfil-config__input-field"
+                />
+              ) : (
+                <div className="perfil-config__field-display">
+                  <strong>{email || 'Não informado'}</strong>
+                  <button
+                    type="button"
+                    className="icon-button"
+                    onClick={() => handleEditField('email')}
+                    aria-label="Editar email"
+                    title="Editar email"
+                  >
+                    <Pencil size={16} aria-hidden="true" />
+                  </button>
+                </div>
+              )}
             </div>
           </article>
 
@@ -158,7 +303,7 @@ function ConfiguracoesPerfil({
                 </div>
               </div>
 
-              {!isEditingSalary ? (
+              {!editingFields.salary ? (
                 <button
                   className="icon-button perfil-config__salary-edit"
                   type="button"
@@ -171,7 +316,7 @@ function ConfiguracoesPerfil({
               ) : null}
             </div>
 
-            {isEditingSalary ? (
+            {editingFields.salary ? (
               <>
                 <label>
                   <span>Valor do salário</span>

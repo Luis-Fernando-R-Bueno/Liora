@@ -41,6 +41,7 @@ const OPTIONS = [
 ]
 
 function Configuracoes({
+  profileName,
   onAbrirBackup,
   onAbrirCategorias,
   onAbrirPerfil,
@@ -62,7 +63,7 @@ function Configuracoes({
       <section className="configuracoes__section">
         <div className="section-heading">
           <div>
-            <h1>Olá, Luis</h1>
+            <h1>Olá, {profileName}</h1>
           </div>
         </div>
 

@@ -32,12 +32,21 @@ const INITIAL_FILTERS = {
 }
 
 const MONTHLY_SALARY_KEY = 'controle-gastos:salario-mensal'
+const PROFILE_NAME_KEY = 'controle-gastos:perfil-nome'
 
 function loadMonthlySalary() {
   try {
     return Number(localStorage.getItem(MONTHLY_SALARY_KEY)) || 0
   } catch {
     return 0
+  }
+}
+
+function loadProfileName() {
+  try {
+    return localStorage.getItem(PROFILE_NAME_KEY) || 'Usuário'
+  } catch {
+    return 'Usuário'
   }
 }
 
@@ -68,6 +77,7 @@ function Inicial({ onLogout }) {
   const [editingExpense, setEditingExpense] = useState(null)
   const [formFocusKey, setFormFocusKey] = useState(0)
   const [monthlySalary, setMonthlySalary] = useState(loadMonthlySalary)
+  const [profileName, setProfileName] = useState(loadProfileName)
 
   const filteredExpenses = useMemo(
     () => filterExpenses(filters),
@@ -86,6 +96,10 @@ function Inicial({ onLogout }) {
   function handleUpdateMonthlySalary(value) {
     setMonthlySalary(value)
     saveMonthlySalary(value)
+  }
+
+  function handleUpdateProfileName() {
+    setProfileName(loadProfileName())
   }
 
   function handleFilterChange(field, value) {
@@ -213,6 +227,7 @@ function Inicial({ onLogout }) {
             path="/configuracoes"
             element={
               <Configuracoes
+                profileName={profileName}
                 onAbrirBackup={() => navigate('/configuracoes/backup')}
                 onAbrirCategorias={() => navigate('/configuracoes/categorias')}
                 onAbrirPerfil={() => navigate('/configuracoes/perfil')}
@@ -230,6 +245,7 @@ function Inicial({ onLogout }) {
                 monthlySalary={monthlySalary}
                 onBack={() => navigate('/configuracoes')}
                 onUpdateMonthlySalary={handleUpdateMonthlySalary}
+                onProfileUpdate={handleUpdateProfileName}
               />
             }
           />

@@ -189,6 +189,40 @@
   display: none;
 }
 
+.perfil-config__field-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+.perfil-config__field-display strong {
+  color: var(--text-strong);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  flex: 1;
+}
+
+.perfil-config__input-field {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid var(--color-accent-border);
+  border-radius: var(--radius-md);
+  background: var(--color-input-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--font-size-md);
+  outline: 0;
+  padding: 0 var(--spacing-md);
+}
+
+.perfil-config__input-field:focus {
+  border-color: var(--color-accent-border);
+  background: var(--color-input-bg-focus);
+  box-shadow: var(--shadow-focus);
+}
+
 @media (max-width: 820px) {
   .perfil-config__hero {
     grid-template-columns: 1fr;
