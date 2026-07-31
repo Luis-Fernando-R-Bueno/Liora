@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'liora-pwa-v11'
+﻿const CACHE_NAME = 'liora-pwa-v12'
 const APP_SHELL_URLS = [
   '/',
   '/index.html',
@@ -6,7 +6,6 @@ const APP_SHELL_URLS = [
   '/favicon.svg',
   '/logo.svg',
   '/liora-logo.svg',
-  '/liora-logo-login.svg',
   '/icon-192.png',
   '/icon-512.png',
   '/maskable-icon-512.png',

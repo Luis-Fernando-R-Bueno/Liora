@@ -116,7 +116,7 @@ function ExpenseForm({
           </select>
         </label>
 
-        <label>
+        <label className="expense-form__wide">
           <span>Valor</span>
           <input
             required

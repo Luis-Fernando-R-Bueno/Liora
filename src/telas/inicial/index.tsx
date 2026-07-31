@@ -11,16 +11,8 @@ import ExpenseForm from '../../componentes/gastos/expenseForm'
 import ExpenseList from '../../componentes/gastos/expenseList'
 import { useControleGastos } from '../../hooks/useControleGastos'
 import Configuracoes from '../configuracoes'
-import ConfiguracoesBackup from '../configuracoes/backup'
 import ConfiguracoesCategorias from '../configuracoes/categorias'
-import ConfiguracoesPerfil from '../configuracoes/perfil'
-import ConfiguracoesSaibaMais from '../configuracoes/saibaMais'
-import ConfiguracoesQuemSomos from '../configuracoes/saibaMais/quemSomos'
-import ConfiguracoesTermosDeUso from '../configuracoes/saibaMais/termosDeUso'
-import ConfiguracoesSeguranca from '../configuracoes/segurancaEAcesso'
-import ConfiguracoesSuporte from '../configuracoes/suporte'
-import ConfiguracoesDuvidasFrequentes from '../configuracoes/suporte/duvidasFrequentes'
-import ConfiguracoesParticipeDoProjeto from '../configuracoes/suporte/participeDoProjeto'
+import ConfiguracoesSalario from '../configuracoes/salario'
 import Historico from '../historico'
 import { getCurrentMonthKey } from '../../utils/dateUtils'
 import './styles.css'
@@ -32,7 +24,6 @@ const INITIAL_FILTERS = {
 }
 
 const MONTHLY_SALARY_KEY = 'controle-gastos:salario-mensal'
-const PROFILE_NAME_KEY = 'controle-gastos:perfil-nome'
 
 function loadMonthlySalary() {
   try {
@@ -42,19 +33,11 @@ function loadMonthlySalary() {
   }
 }
 
-function loadProfileName() {
-  try {
-    return localStorage.getItem(PROFILE_NAME_KEY) || 'Usuário'
-  } catch {
-    return 'Usuário'
-  }
-}
-
 function saveMonthlySalary(value) {
   localStorage.setItem(MONTHLY_SALARY_KEY, String(Number(value) || 0))
 }
 
-function Inicial({ onLogout }) {
+function Inicial() {
   const navigate = useNavigate()
   const [dashboardMonthKey, setDashboardMonthKey] = useState(getCurrentMonthKey)
   const {
@@ -63,11 +46,9 @@ function Inicial({ onLogout }) {
     categories,
     dashboard,
     deleteExpense,
-    exportRecords,
     expenses,
     filterExpenses,
     historicalMonths,
-    importRecords,
     removeCategory,
     toggleCategoryStatus,
     updateCategory,
@@ -77,7 +58,6 @@ function Inicial({ onLogout }) {
   const [editingExpense, setEditingExpense] = useState(null)
   const [formFocusKey, setFormFocusKey] = useState(0)
   const [monthlySalary, setMonthlySalary] = useState(loadMonthlySalary)
-  const [profileName, setProfileName] = useState(loadProfileName)
 
   const filteredExpenses = useMemo(
     () => filterExpenses(filters),
@@ -96,10 +76,6 @@ function Inicial({ onLogout }) {
   function handleUpdateMonthlySalary(value) {
     setMonthlySalary(value)
     saveMonthlySalary(value)
-  }
-
-  function handleUpdateProfileName() {
-    setProfileName(loadProfileName())
   }
 
   function handleFilterChange(field, value) {
@@ -227,25 +203,19 @@ function Inicial({ onLogout }) {
             path="/configuracoes"
             element={
               <Configuracoes
-                profileName={profileName}
-                onAbrirBackup={() => navigate('/configuracoes/backup')}
                 onAbrirCategorias={() => navigate('/configuracoes/categorias')}
-                onAbrirPerfil={() => navigate('/configuracoes/perfil')}
-                onAbrirSaibaMais={() => navigate('/configuracoes/saiba-mais')}
-                onAbrirSeguranca={() => navigate('/configuracoes/seguranca-e-acesso')}
-                onAbrirSuporte={() => navigate('/configuracoes/suporte')}
+                onAbrirSalario={() => navigate('/configuracoes/salario')}
               />
             }
           />
 
           <Route
-            path="/configuracoes/perfil"
+            path="/configuracoes/salario"
             element={
-              <ConfiguracoesPerfil
+              <ConfiguracoesSalario
                 monthlySalary={monthlySalary}
                 onBack={() => navigate('/configuracoes')}
                 onUpdateMonthlySalary={handleUpdateMonthlySalary}
-                onProfileUpdate={handleUpdateProfileName}
               />
             }
           />
@@ -265,91 +235,6 @@ function Inicial({ onLogout }) {
             }
           />
 
-          <Route
-            path="/configuracoes/seguranca-e-acesso"
-            element={
-              <ConfiguracoesSeguranca
-                onBack={() => navigate('/configuracoes')}
-                onLogout={onLogout}
-              />
-            }
-          />
-
-          <Route
-            path="/configuracoes/suporte"
-            element={
-              <ConfiguracoesSuporte
-                onAbrirDuvidas={() => navigate('/configuracoes/suporte/duvidas-frequentes')}
-                onAbrirParticipe={() => navigate('/configuracoes/suporte/participe-do-projeto')}
-                onBack={() => navigate('/configuracoes')}
-              />
-            }
-          />
-
-          <Route
-            path="/configuracoes/suporte/duvidas-frequentes"
-            element={
-              <ConfiguracoesDuvidasFrequentes
-                onBack={() => navigate('/configuracoes/suporte')}
-              />
-            }
-          />
-
-          <Route
-            path="/configuracoes/suporte/participe-do-projeto"
-            element={
-              <ConfiguracoesParticipeDoProjeto
-                onBack={() => navigate('/configuracoes/suporte')}
-              />
-            }
-          />
-
-          <Route
-            path="/configuracoes/saiba-mais"
-            element={
-              <ConfiguracoesSaibaMais
-                onAbrirQuemSomos={() => navigate('/configuracoes/saiba-mais/quem-somos')}
-                onAbrirTermos={() =>
-                  navigate('/configuracoes/saiba-mais/termos-de-uso-e-privacidade')
-                }
-                onBack={() => navigate('/configuracoes')}
-              />
-            }
-          />
-
-          <Route
-            path="/configuracoes/saiba-mais/quem-somos"
-            element={
-              <ConfiguracoesQuemSomos
-                onBack={() => navigate('/configuracoes/saiba-mais')}
-              />
-            }
-          />
-
-          <Route
-            path="/configuracoes/saiba-mais/termos-de-uso-e-privacidade"
-            element={
-              <ConfiguracoesTermosDeUso
-                onBack={() => navigate('/configuracoes/saiba-mais')}
-              />
-            }
-          />
-
-          <Route
-            path="/configuracoes/backup"
-            element={
-              <ConfiguracoesBackup
-                onBack={() => navigate('/configuracoes')}
-                onExportRecords={exportRecords}
-                onImportRecords={importRecords}
-              />
-            }
-          />
-
-          <Route
-            path="/backup"
-            element={<Navigate to="/configuracoes/backup" replace />}
-          />
           <Route path="*" element={<Navigate to="/painel" replace />} />
         </Routes>
 

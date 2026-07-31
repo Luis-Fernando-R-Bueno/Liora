@@ -42,6 +42,11 @@
   box-shadow: var(--shadow-focus);
 }
 
+.expense-filters .button {
+  min-height: 42px;
+  border-radius: var(--radius-md);
+}
+
 @media (max-width: 1060px) {
   .expense-filters {
     grid-template-columns: minmax(300px, 1fr) minmax(160px, 220px);

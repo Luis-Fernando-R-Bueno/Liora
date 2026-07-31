@@ -1,12 +1,12 @@
-import { Info, LifeBuoy, LockKeyhole, Save, Tags, UserRound } from 'lucide-react'
+import { Tags, Wallet } from 'lucide-react'
 import './styles.css'
 
 const OPTIONS = [
   {
-    id: 'perfil',
-    title: 'Perfil',
-    description: 'Dados do acesso local usado neste dispositivo.',
-    Icon: UserRound,
+    id: 'salario',
+    title: 'Salário',
+    description: 'Definir o salário mensal usado no painel.',
+    Icon: Wallet,
   },
   {
     id: 'categorias',
@@ -14,59 +14,20 @@ const OPTIONS = [
     description: 'Criar, editar, inativar ou remover categorias de gastos.',
     Icon: Tags,
   },
-  {
-    id: 'seguranca',
-    title: 'Segurança e acesso',
-    description: 'Consultar o acesso local e sair do sistema.',
-    Icon: LockKeyhole,
-  },
-  {
-    id: 'suporte',
-    title: 'Suporte',
-    description: 'Dúvidas frequentes e ideias de evolução do projeto.',
-    Icon: LifeBuoy,
-  },
-  {
-    id: 'saibaMais',
-    title: 'Saiba mais',
-    description: 'Quem somos, termos de uso e privacidade.',
-    Icon: Info,
-  },
-  {
-    id: 'backup',
-    title: 'Backup',
-    description: 'Exportar e importar os registros locais do aplicativo.',
-    Icon: Save,
-  },
 ]
 
 function Configuracoes({
-  profileName,
-  onAbrirBackup,
   onAbrirCategorias,
-  onAbrirPerfil,
-  onAbrirSaibaMais,
-  onAbrirSeguranca,
-  onAbrirSuporte,
+  onAbrirSalario,
 }) {
   const actions = {
-    backup: onAbrirBackup,
     categorias: onAbrirCategorias,
-    perfil: onAbrirPerfil,
-    saibaMais: onAbrirSaibaMais,
-    seguranca: onAbrirSeguranca,
-    suporte: onAbrirSuporte,
+    salario: onAbrirSalario,
   }
 
   return (
     <section className="configuracoes" aria-label="Configurações">
       <section className="configuracoes__section">
-        <div className="section-heading">
-          <div>
-            <h1>Olá, {profileName}</h1>
-          </div>
-        </div>
-
         <div className="configuracoes__cards">
           {OPTIONS.map(({ id, title, description, Icon }) => (
             <button

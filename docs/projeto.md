@@ -1505,8 +1505,6 @@ Validações executadas:
 - `npm.cmd run lint`
 - `npm.cmd run build`
 
-
-
 ## README no Padrão do SC-Censo-Diario - 03/07/2026
 
 Alterações realizadas:
@@ -1519,5 +1517,92 @@ Alterações realizadas:
 
 Validações executadas:
 
+- `npm.cmd run build`
+
+## Remoção de Suporte, Saiba Mais e Backup - 31/07/2026
+
+Alterações realizadas:
+
+- Cards de `Suporte`, `Saiba mais` e `Backup` removidos da tela
+  `Configurações`.
+- Rotas de `Suporte`, `Saiba mais`, `Backup` e suas subtelas internas removidas
+  da navegação autenticada.
+- Diretórios `src/telas/configuracoes/suporte`,
+  `src/telas/configuracoes/saibaMais` e `src/telas/configuracoes/backup`
+  excluídos do projeto.
+- Subtelas `Dúvidas frequentes`, `Participe do projeto`, `Quem somos` e
+  `Termos de uso e privacidade` também foram removidas.
+- A área de configurações passa a manter apenas `Perfil`, `Categorias` e
+  `Segurança e acesso`.
+- README atualizado para refletir as rotas atuais e a documentação real em
+  `docs/`.
+- Removida uma constante de salário não utilizada na tela `Perfil`, pois ela
+  bloqueava o lint.
+
+Validações executadas:
+
+- `npm.cmd run check`
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Remoção do Login e Troca de Perfil por Salário - 31/07/2026
+
+Alterações realizadas:
+
+- Tela de login removida do projeto.
+- Serviço de autenticação local e funções de sessão removidos.
+- O aplicativo passa a abrir diretamente na área interna, sem rota `/login`.
+- Tela `Configurações > Perfil` substituída por `Configurações > Salário`.
+- Pasta `src/telas/configuracoes/perfil` renomeada para
+  `src/telas/configuracoes/salario`.
+- A nova tela de salário mantém apenas a edição do salário mensal usado no
+  painel.
+- Campos de foto, nome, telefone e email do antigo perfil foram removidos.
+- Frase `Olá, Luis` removida da tela principal de configurações.
+- Tela `Segurança e acesso` atualizada para não exibir botão de logout nem
+  textos sobre sessão local.
+- Asset específico da tela de login removido do `public/`, e service worker
+  atualizado para o cache `liora-pwa-v12`.
+- README atualizado para refletir acesso direto, rota de salário e ausência de
+  login local.
+
+Validações executadas:
+
+- `npm.cmd run check`
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Remoção de Segurança e Ajuste do Salário - 31/07/2026
+
+Alterações realizadas:
+
+- Tela `Configurações > Segurança e acesso` removida do projeto.
+- Card e rota `/configuracoes/seguranca-e-acesso` removidos da navegação.
+- A área de configurações passa a manter apenas `Salário` e `Categorias`.
+- Campo de salário passou a formatar o texto digitado com pontos de milhar e
+  vírgula decimal no padrão brasileiro.
+- Placeholder do campo de salário ajustado para `Ex.: 3.500,00`.
+- Ícone da tela de salário centralizado verticalmente em relação ao painel.
+- README atualizado para refletir as rotas atuais.
+
+Validações executadas:
+
+- `npm.cmd run check`
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Ajuste do Formulário de Gastos - 31/07/2026
+
+Alterações realizadas:
+
+- Campo `Valor` do formulário `Novo gasto` passou a ocupar a largura das colunas
+  `Data` e `Categoria` juntas.
+- Botão `Limpar` dos filtros passou a usar o mesmo raio de borda dos campos de
+  pesquisa, categoria e mês.
+
+Validações executadas:
+
+- `npm.cmd run check`
+- `npm.cmd run lint`
 - `npm.cmd run build`
 

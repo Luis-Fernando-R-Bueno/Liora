@@ -29,7 +29,7 @@ A Liora nasceu da necessidade de substituir uma planilha de Excel usada para con
 
 > Para onde meu dinheiro está indo neste mês?
 
-O projeto foi evoluindo de um controle básico de lançamentos para uma aplicação com dashboard mensal, histórico, categorias, perfil local, cálculo de saldo do salário, backup e suporte offline como PWA.
+O projeto foi evoluindo de um controle básico de lançamentos para uma aplicação com dashboard mensal, histórico, categorias, tela de salário, cálculo de saldo do salário e suporte offline como PWA.
 
 Liora significa luz, clareza e equilíbrio. Essa direção guia tanto a interface quanto a organização do código.
 
@@ -44,10 +44,8 @@ Liora significa luz, clareza e equilíbrio. Essa direção guia tanto a interfac
 * 🏷️ Gerenciamento de categorias ativas e inativas
 * 📅 Histórico completo com filtros por mês e categoria
 * 🗂️ Arquivo de meses anteriores já encerrados
-* 👤 Perfil local com salário mensal editável
+* 💼 Tela de salário mensal editável
 * 🧮 Cálculo do que sobra do salário diante dos gastos do mês
-* 💾 Backup, importação e exportação de dados em JSON
-* 🔐 Login local simples para uso pessoal
 * 📱 Layout responsivo para desktop, tablet e celular
 * 🌐 PWA com suporte offline após o primeiro carregamento
 
@@ -76,24 +74,12 @@ O objetivo é fazer o usuário sentir que está abrindo uma ferramenta pessoal d
 </details>
 
 <details>
-  <summary><strong>🔐 Acesso local do MVP</strong></summary>
-
-```txt
-Usuário: luis.bueno
-Senha: rodrigues.bueno
-```
-
-A autenticação atual é apenas uma trava local da interface. Ela não substitui uma autenticação real com servidor.
-</details>
-
-<details>
   <summary><strong>📍 Rotas principais</strong></summary>
 
-* `/login`: entrada local do sistema
 * `/painel`: dashboard mensal
 * `/gastos`: cadastro, edição, exclusão, pesquisa e filtros
 * `/historico`: meses anteriores
-* `/configuracoes`: perfil, categorias, segurança, suporte, saiba mais e backup
+* `/configuracoes`: salário e categorias
 </details>
 
 <details>
@@ -101,7 +87,7 @@ A autenticação atual é apenas uma trava local da interface. Ela não substitu
 
 Os dados ficam salvos no navegador do próprio dispositivo usando `localStorage`. Nenhuma informação é enviada para servidores externos nesta versão.
 
-Se os dados do navegador forem apagados, os lançamentos podem ser perdidos. Por isso, a tela de backup existe para exportar os registros quando necessário.
+Se os dados do navegador forem apagados, os lançamentos podem ser perdidos. Nesta versão, os dados continuam locais no próprio dispositivo.
 </details>
 
 <details>
@@ -169,14 +155,13 @@ npm run build
 
 ```text
 Liora/
-├── agent/
+├── docs/
 │   ├── projeto.md
 │   └── desenho da api.md
 ├── public/
 │   ├── favicon.svg
 │   ├── liora-conceito.png
 │   ├── liora-logo.svg
-│   ├── liora-logo-login.svg
 │   ├── manifest.webmanifest
 │   └── sw.js
 └── src/
@@ -206,8 +191,8 @@ Liora/
 
 ## 📚 Documentação complementar
 
-* [`agent/projeto.md`](./agent/projeto.md): ideia, histórico de evolução e decisões do sistema
-* [`agent/desenho da api.md`](./agent/desenho%20da%20api.md): modelagem descritiva para uma futura persistência local estruturada
+* [`docs/projeto.md`](./docs/projeto.md): ideia, histórico de evolução e decisões do sistema
+* [`docs/desenho da api.md`](./docs/desenho%20da%20api.md): modelagem descritiva para uma futura persistência local estruturada
 * [`README-vite.md`](./README-vite.md): documentação original do template Vite preservada como referência
 
 ---

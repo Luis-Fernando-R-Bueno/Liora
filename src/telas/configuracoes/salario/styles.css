@@ -1,0 +1,111 @@
+.salario-config__panel {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.salario-config__icon {
+  display: grid;
+  align-self: center;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  border-radius: var(--radius-lg);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-strong);
+}
+
+.salario-config__card {
+  display: grid;
+  gap: var(--spacing-md);
+  min-width: 0;
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  background: var(--color-warm-panel);
+}
+
+.salario-config__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.salario-config__title {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.salario-config__title svg {
+  flex: 0 0 auto;
+  color: var(--color-accent-strong);
+}
+
+.salario-config__title div,
+.salario-config__card label {
+  display: grid;
+  gap: var(--spacing-3xs);
+}
+
+.salario-config__title span,
+.salario-config__card label span {
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+}
+
+.salario-config__title strong {
+  color: var(--text-strong);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.salario-config__edit {
+  flex: 0 0 auto;
+}
+
+.salario-config__card input {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--color-input-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--font-size-md);
+  outline: 0;
+  padding: 0 var(--spacing-md);
+}
+
+.salario-config__card input:focus {
+  border-color: var(--color-accent-border);
+  background: var(--color-input-bg-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+.salario-config__feedback {
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+@media (max-width: 720px) {
+  .salario-config__panel {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-lg);
+  }
+
+  .salario-config__icon {
+    width: 64px;
+    height: 64px;
+  }
+}
