@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import AppHeader from '../../componentes/compartilhado/appHeader'
 import { MonthField } from '../../componentes/compartilhado/calendarField'
 import Rodape from '../../componentes/compartilhado/rodape'
@@ -24,6 +24,7 @@ const INITIAL_FILTERS = {
 }
 
 const MONTHLY_SALARY_KEY = 'controle-gastos:salario-mensal'
+const MENU_ROUTE_ORDER = ['/painel', '/gastos', '/historico', '/configuracoes']
 
 function loadMonthlySalary() {
   try {
@@ -37,7 +38,28 @@ function saveMonthlySalary(value) {
   localStorage.setItem(MONTHLY_SALARY_KEY, String(Number(value) || 0))
 }
 
+function getMenuRouteIndex(pathname) {
+  return MENU_ROUTE_ORDER.indexOf(pathname)
+}
+
+function getMenuAnimationDirection(location) {
+  const currentMenuIndex = getMenuRouteIndex(location.pathname)
+  const menuTransition = location.state?.menuTransition
+
+  if (
+    currentMenuIndex === -1 ||
+    !menuTransition ||
+    menuTransition.toIndex !== currentMenuIndex ||
+    menuTransition.fromIndex === menuTransition.toIndex
+  ) {
+    return 'none'
+  }
+
+  return menuTransition.toIndex > menuTransition.fromIndex ? 'forward' : 'backward'
+}
+
 function Inicial() {
+  const location = useLocation()
   const navigate = useNavigate()
   const [dashboardMonthKey, setDashboardMonthKey] = useState(getCurrentMonthKey)
   const {
@@ -58,6 +80,7 @@ function Inicial() {
   const [editingExpense, setEditingExpense] = useState(null)
   const [formFocusKey, setFormFocusKey] = useState(0)
   const [monthlySalary, setMonthlySalary] = useState(loadMonthlySalary)
+  const menuAnimationDirection = getMenuAnimationDirection(location)
 
   const filteredExpenses = useMemo(
     () => filterExpenses(filters),
@@ -114,6 +137,22 @@ function Inicial() {
     navigate('/painel')
   }
 
+  function renderMenuView(element) {
+    const animationClass =
+      menuAnimationDirection === 'none'
+        ? ''
+        : ` pagina-inicial__route-transition--${menuAnimationDirection}`
+
+    return (
+      <div
+        className={`pagina-inicial__route-transition${animationClass}`}
+        key={location.pathname}
+      >
+        {element}
+      </div>
+    )
+  }
+
   return (
     <div className="pagina-inicial">
       <AppHeader />
@@ -124,7 +163,7 @@ function Inicial() {
 
           <Route
             path="/painel"
-            element={
+            element={renderMenuView(
               <section className="pagina-inicial__view" aria-label="Painel mensal">
                 <div className="pagina-inicial__dashboard-toolbar">
                   <MonthField
@@ -153,12 +192,12 @@ function Inicial() {
                   />
                 </div>
               </section>
-            }
+            )}
           />
 
           <Route
             path="/gastos"
-            element={
+            element={renderMenuView(
               <section className="pagina-inicial__view" aria-label="Histórico de gastos">
                 <div className="pagina-inicial__expense-layout">
                   <ExpenseForm
@@ -186,27 +225,27 @@ function Inicial() {
                   </div>
                 </div>
               </section>
-            }
+            )}
           />
 
           <Route
             path="/historico"
-            element={
+            element={renderMenuView(
               <Historico
                 months={historicalMonths}
                 onOpenMonth={openDashboardMonth}
               />
-            }
+            )}
           />
 
           <Route
             path="/configuracoes"
-            element={
+            element={renderMenuView(
               <Configuracoes
                 onAbrirCategorias={() => navigate('/configuracoes/categorias')}
                 onAbrirSalario={() => navigate('/configuracoes/salario')}
               />
-            }
+            )}
           />
 
           <Route

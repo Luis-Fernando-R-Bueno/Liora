@@ -8,7 +8,20 @@
   gap: var(--spacing-xl);
   width: min(100%, 1240px);
   margin: 0 auto;
+  overflow-x: clip;
   padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-2xl);
+}
+
+.pagina-inicial__route-transition {
+  min-width: 0;
+}
+
+.pagina-inicial__route-transition--forward {
+  animation: pagina-inicial-slide-from-right 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.pagina-inicial__route-transition--backward {
+  animation: pagina-inicial-slide-from-left 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .pagina-inicial__view {
@@ -85,5 +98,36 @@
 
   .pagina-inicial__dashboard-toolbar .month-field {
     width: 100%;
+  }
+}
+
+@keyframes pagina-inicial-slide-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(34px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pagina-inicial-slide-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-34px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pagina-inicial__route-transition--forward,
+  .pagina-inicial__route-transition--backward {
+    animation: none;
   }
 }

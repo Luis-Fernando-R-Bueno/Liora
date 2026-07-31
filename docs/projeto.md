@@ -1606,3 +1606,22 @@ Validações executadas:
 - `npm.cmd run lint`
 - `npm.cmd run build`
 
+## Animação Horizontal no Menu Principal - 31/07/2026
+
+Alterações realizadas:
+
+- Mudanças entre `Painel`, `Gastos`, `Histórico` e `Configurações` passaram a
+  usar animação horizontal com entrada pela esquerda ou direita conforme a ordem
+  do menu.
+- A animação foi aplicada apenas nas rotas principais do menu.
+- Telas internas de configurações, como `Salário` e `Categorias`, continuam sem
+  animação de troca.
+- Adicionado respeito a `prefers-reduced-motion` para desativar a animação em
+  ambientes configurados para reduzir movimento.
+
+Validações executadas:
+
+- `npm.cmd run check`
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
