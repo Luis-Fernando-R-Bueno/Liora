@@ -58,7 +58,7 @@ Liora significa luz, clareza e equilíbrio. Essa direção guia tanto a interfac
 </p>
 
 <p align="center">
-  <strong>Direção visual:</strong> luz natural, organização, calma, contraste suave e foco na clareza financeira.
+  <strong>Direção visual:</strong> tema escuro, grade fina, painéis retangulares, contraste alto e foco na leitura financeira.
 </p>
 
 ---
@@ -68,7 +68,7 @@ Liora significa luz, clareza e equilíbrio. Essa direção guia tanto a interfac
 <details open>
   <summary><strong>🌅 Caminho visual da Liora</strong></summary>
 
-A interface segue um caminho mais acolhedor e premium, com fundo claro e quente, cards brancos, sombras suaves, cantos arredondados e uma paleta centrada em âmbar e verde sálvia.
+A interface segue o modelo visual do repositório `winged-lion`, com fundo preto em grade, painéis quase pretos, textura diagonal discreta, bordas secas e tipografia condensada em controles e rótulos.
 
 O objetivo é fazer o usuário sentir que está abrindo uma ferramenta pessoal de organização, não um painel bancário.
 </details>
@@ -98,7 +98,7 @@ A identidade visual está centralizada em tokens CSS e estilos globais:
 * `src/styles/tokens.css`
 * `src/estilos/global.css`
 
-A proposta visual atual prioriza tipografia clara, hierarquia forte nos valores financeiros, botões âmbar, superfícies brancas e separação leve entre seções.
+A proposta visual atual prioriza superfícies escuras, hierarquia forte nos valores financeiros, botões retangulares, bordas de 2px e separação objetiva entre seções.
 </details>
 
 ---

@@ -1,10 +1,9 @@
 ﻿.summary-list {
   min-width: 0;
-  padding: var(--spacing-xl);
+  padding: 18px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  background: var(--panel-background);
 }
 
 .summary-list__items {
@@ -37,7 +36,7 @@
 }
 
 .summary-list__track {
-  height: 9px;
+  height: 8px;
   overflow: hidden;
   border-radius: var(--radius-pill);
   background: var(--color-track-bg);
@@ -48,7 +47,6 @@
   height: 100%;
   border-radius: inherit;
   background: var(--summary-color);
-  box-shadow: 0 6px 14px color-mix(in srgb, var(--summary-color) 22%, transparent);
 }
 
 .summary-list__item small,

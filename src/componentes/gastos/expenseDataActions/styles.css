@@ -4,11 +4,10 @@
   justify-content: space-between;
   gap: var(--spacing-md);
   min-width: 0;
-  padding: var(--spacing-lg);
+  padding: 14px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  background: var(--panel-background);
 }
 
 .expense-data-actions__buttons {

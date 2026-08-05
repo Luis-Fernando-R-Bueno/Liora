@@ -26,8 +26,9 @@ Entregar um sistema web funcional onde o usuário consiga:
 - Acompanhar um painel mensal atualizado automaticamente.
 - Persistir os dados localmente no navegador usando `localStorage`.
 
-O objetivo visual é parecer uma ferramenta pessoal leve, clara e acolhedora para
-entender a vida financeira, e não apenas uma planilha digital.
+O objetivo visual é parecer uma ferramenta pessoal objetiva, densa e legível
+para entender a vida financeira, com acabamento escuro inspirado no padrão
+visual do repositório `winged-lion`, e não apenas uma planilha digital.
 
 ## Tecnologias Desejadas
 
@@ -127,13 +128,14 @@ conforme o usuário digita.
 
 ## Design e Experiência
 
-A interface deve ter aparência profissional, moderna e simples.
+A interface deve ter aparência profissional, moderna e simples, seguindo o
+modelo visual escuro e retangular usado no repositório `winged-lion`.
 
 Preferências visuais:
 
-- Cores sóbrias.
+- Cores escuras, sóbrias e de alto contraste.
 - Boa hierarquia visual.
-- Cards para resumos.
+- Painéis retangulares com bordas secas e textura diagonal discreta.
 - Tabelas ou listas bem organizadas.
 - Botões claros para cadastrar, editar e excluir.
 - Layout responsivo para computador e celular.
@@ -1618,6 +1620,28 @@ Alterações realizadas:
   animação de troca.
 - Adicionado respeito a `prefers-reduced-motion` para desativar a animação em
   ambientes configurados para reduzir movimento.
+
+Validações executadas:
+
+- `npm.cmd run check`
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+## Estilização no Modelo Winged Lion - 05/08/2026
+
+Alterações realizadas:
+
+- Tema do Liora convertido para o padrão escuro do repositório `winged-lion`.
+- Fundo da aplicação passou a usar grade fina sobre base preta.
+- Painéis, cards, formulários, filtros, tabelas, modais, cabeçalho e rodapé
+  foram alinhados com superfícies quase pretas, textura diagonal discreta,
+  bordas de 2px e sem sombras suaves.
+- Navegação principal passou a usar abas retangulares, tipografia condensada em
+  caixa alta e logo clareado por CSS para manter contraste no tema escuro.
+- Campos, calendários, botões, ícones e badges foram ajustados para o mesmo
+  modelo visual, preservando as cores das categorias para identificação dos
+  gastos.
+- Nenhuma regra de negócio, persistência ou rota foi alterada.
 
 Validações executadas:
 

@@ -6,11 +6,10 @@
 .historico__header {
   display: grid;
   gap: var(--spacing-sm);
-  padding: var(--spacing-xl);
+  padding: 18px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  background: var(--panel-background);
   text-align: left;
 }
 

@@ -5,6 +5,14 @@
   text-align: left;
 }
 
+.search-field > span {
+  color: var(--text-muted);
+  font-family: var(--display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+}
+
 .search-bar {
   display: flex;
   align-items: center;
@@ -26,7 +34,7 @@
 .search-bar:focus-within {
   border-color: var(--color-accent-border);
   background: var(--color-input-bg-focus);
-  box-shadow: var(--shadow-focus);
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
 }
 
 .search-bar input {

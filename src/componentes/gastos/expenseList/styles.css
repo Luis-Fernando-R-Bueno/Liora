@@ -3,8 +3,7 @@
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  background: var(--panel-background);
   text-align: left;
 }
 
@@ -24,13 +23,15 @@
 
 .expense-list__table th,
 .expense-list__table td {
-  padding: var(--spacing-md) var(--spacing-xl);
+  padding: 12px 14px;
   border-top: 1px solid var(--border-soft);
   vertical-align: middle;
 }
 
 .expense-list__table th {
-  color: var(--text-muted);
+  background: var(--color-card-bg-muted);
+  color: var(--text-strong);
+  font-family: var(--display);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   text-align: left;
@@ -44,7 +45,7 @@
 }
 
 .expense-list__table tbody tr:hover {
-  background: var(--color-card-bg-strong);
+  background: var(--color-card-bg-muted);
   box-shadow: inset 4px 0 0 var(--accent);
 }
 
@@ -70,7 +71,7 @@
 .expense-list__sort-button:hover,
 .expense-list__sort-button:focus-visible,
 .expense-list__sort-button.is-active {
-  color: var(--color-accent-strong);
+  color: var(--text-strong);
 }
 
 .expense-list__sort-button svg {

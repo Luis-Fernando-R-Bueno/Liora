@@ -3,11 +3,10 @@
   grid-template-columns: minmax(220px, 1fr) minmax(145px, 180px) minmax(120px, 140px) auto;
   align-items: end;
   gap: var(--spacing-md);
-  padding: var(--spacing-lg);
+  padding: 14px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  background: var(--panel-background);
 }
 
 .expense-filters label {
@@ -19,8 +18,10 @@
 
 .expense-filters label span {
   color: var(--text-muted);
+  font-family: var(--display);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
 }
 
 .expense-filters select {
@@ -39,7 +40,7 @@
 .expense-filters select:focus {
   border-color: var(--color-accent-border);
   background: var(--color-input-bg-focus);
-  box-shadow: var(--shadow-focus);
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
 }
 
 .expense-filters .button {

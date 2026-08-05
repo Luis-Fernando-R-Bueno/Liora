@@ -1,10 +1,9 @@
 ﻿.month-history-list {
   min-width: 0;
-  padding: var(--spacing-xl);
+  padding: 18px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  background: var(--panel-background);
 }
 
 .month-history-list .empty-state {
@@ -22,23 +21,20 @@
 
 .month-history-card {
   display: grid;
-  gap: var(--spacing-lg);
-  padding: calc(var(--spacing-lg) - var(--spacing-xs));
+  gap: 14px;
+  padding: 14px;
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
   background: var(--color-card-bg-strong);
-  box-shadow: var(--shadow-soft);
   text-align: left;
   transition:
     border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+    background-color 180ms ease;
 }
 
 .month-history-card:hover {
-  border-color: var(--color-accent-border);
-  box-shadow: var(--shadow-medium);
-  transform: translateY(-3px) scale(1.02);
+  border-color: var(--color-border);
+  background: var(--color-card-bg-muted);
 }
 
 .month-history-card__top {
@@ -71,8 +67,9 @@
   flex: 0 0 auto;
   place-items: center;
   border-radius: var(--radius-md);
-  background: var(--color-accent-soft);
-  color: var(--color-accent-strong);
+  border: 1px solid var(--color-border-muted);
+  background: var(--color-card-bg-muted);
+  color: var(--color-accent);
 }
 
 .month-history-card__details {

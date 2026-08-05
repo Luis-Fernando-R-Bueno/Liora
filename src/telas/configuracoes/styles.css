@@ -5,7 +5,7 @@
 }
 
 .configuracoes__section > .section-heading span {
-  color: var(--secondary);
+  color: var(--color-accent-muted);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
 }
@@ -20,11 +20,10 @@
   display: grid;
   gap: var(--spacing-lg);
   min-width: 0;
-  padding: var(--spacing-xl);
+  padding: 18px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  background: var(--panel-background);
 }
 
 .configuracoes__section > .section-heading h1 {
@@ -44,23 +43,21 @@
   gap: var(--spacing-md);
   width: 100%;
   min-height: 78px;
-  padding: var(--spacing-lg);
+  padding: 14px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
+  background: var(--color-card-bg-strong);
   color: inherit;
   cursor: pointer;
   text-align: left;
   transition:
     border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+    background-color 180ms ease;
 }
 
 .configuracoes__card:hover {
-  border-color: var(--color-accent-border);
-  box-shadow: var(--shadow-medium);
-  transform: translateY(-3px) scale(1.01);
+  border-color: var(--color-border);
+  background: var(--color-card-bg-muted);
 }
 
 .configuracoes__icon {
@@ -69,9 +66,10 @@
   height: 44px;
   flex: 0 0 auto;
   place-items: center;
+  border: 1px solid var(--color-border-muted);
   border-radius: var(--radius-md);
-  background: var(--color-accent-soft);
-  color: var(--color-accent-strong);
+  background: var(--color-card-bg-muted);
+  color: var(--color-accent);
 }
 
 .configuracoes__info {
@@ -105,18 +103,18 @@
   background: transparent;
   color: var(--text-muted);
   cursor: pointer;
-  font: inherit;
-  font-size: var(--font-size-md);
+  font-family: var(--display);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   padding: 0;
+  text-transform: uppercase;
   transition:
     color 180ms ease,
     transform 180ms ease;
 }
 
 .configuracoes__voltar:hover {
-  color: var(--color-accent-strong);
-  transform: translateX(-2px);
+  color: var(--text-strong);
 }
 
 .configuracoes__conteudo {
@@ -169,8 +167,7 @@
   padding: var(--spacing-md);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  background: var(--color-card-bg-strong);
 }
 
 .configuracoes__dado span {

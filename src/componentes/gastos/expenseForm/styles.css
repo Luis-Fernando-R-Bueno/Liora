@@ -1,10 +1,9 @@
 ﻿.expense-form {
   min-width: 0;
-  padding: var(--spacing-xl);
+  padding: 18px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  background: var(--panel-background);
   text-align: left;
 }
 
@@ -27,8 +26,10 @@
 
 .expense-form label span {
   color: var(--text-muted);
+  font-family: var(--display);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
 }
 
 .expense-form input,
@@ -49,7 +50,7 @@
 .expense-form select:focus {
   border-color: var(--color-accent-border);
   background: var(--color-input-bg-focus);
-  box-shadow: var(--shadow-focus);
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
 }
 
 .expense-form__wide {

@@ -1,40 +1,47 @@
 :root {
-  --color-bg-primary: #f4f2ec;
-  --color-bg-secondary: #ebe6db;
-  --color-text-primary: #1f2937;
-  --color-text-secondary: #4b5563;
-  --color-text-muted: #6b7280;
-  --color-accent: #c97b18;
-  --color-accent-strong: #a96511;
-  --color-accent-soft: rgb(201 123 24 / 0.16);
-  --color-accent-border: rgb(201 123 24 / 0.42);
-  --color-secondary: #3d8c58;
-  --color-secondary-soft: rgb(61 140 88 / 0.14);
-  --color-secondary-border: rgb(61 140 88 / 0.34);
-  --color-border: #ddd8cf;
-  --color-border-soft: rgb(221 216 207 / 0.86);
-  --color-card-bg: #ffffff;
-  --color-card-bg-strong: #ffffff;
-  --color-card-bg-muted: #f8f4ec;
-  --color-warm-panel: #fff8ec;
-  --color-sage-panel: #f0f7f2;
-  --color-footer-bg: #f4f2ec;
-  --color-footer-panel-bg: #ffffff;
-  --color-input-bg: #ffffff;
-  --color-input-bg-focus: #fff6e7;
-  --color-track-bg: #e6dfd4;
-  --color-on-accent: #ffffff;
-  --color-danger: #d9534f;
-  --color-danger-bg: rgb(217 83 79 / 0.12);
-  --color-danger-border: rgb(217 83 79 / 0.34);
-  --color-success: #4caf50;
-  --color-success-bg: rgb(76 175 80 / 0.14);
-  --color-success-border: rgb(76 175 80 / 0.34);
-  --color-warning: #e7a321;
-  --color-focus-ring: rgb(201 123 24 / 0.24);
-  --color-scrim: rgb(31 41 55 / 0.28);
+  color-scheme: dark;
+  --color-bg-primary: #030303;
+  --color-bg-secondary: #030303;
+  --color-background: var(--color-bg-primary);
+  --color-text-primary: #ededee;
+  --color-text-secondary: #c9c9cc;
+  --color-text-muted: #818184;
+  --color-placeholder: #68686b;
+  --color-accent: #b8b8bb;
+  --color-accent-strong: #ededee;
+  --color-accent-muted: #8f8f92;
+  --color-accent-soft: rgb(255 255 255 / 0.08);
+  --color-accent-border: #3a3a3d;
+  --color-secondary: #8f8f92;
+  --color-secondary-soft: rgb(255 255 255 / 0.06);
+  --color-secondary-border: #3a3a3d;
+  --color-border: #3a3a3d;
+  --color-border-soft: #242426;
+  --color-card-bg: #0b0b0c;
+  --color-card-bg-strong: #101011;
+  --color-card-bg-muted: #171719;
+  --color-surface: var(--color-card-bg);
+  --color-surface-muted: var(--color-card-bg-strong);
+  --color-surface-raised: var(--color-card-bg-muted);
+  --color-warm-panel: #101011;
+  --color-sage-panel: #101011;
+  --color-footer-bg: #030303;
+  --color-footer-panel-bg: #0b0b0c;
+  --color-input-bg: #101011;
+  --color-input-bg-focus: #171719;
+  --color-track-bg: #242426;
+  --color-on-accent: #050505;
+  --color-danger: #d7d7d9;
+  --color-danger-bg: rgb(255 255 255 / 0.08);
+  --color-danger-border: #3a3a3d;
+  --color-success: #d7d7d9;
+  --color-success-bg: rgb(255 255 255 / 0.08);
+  --color-success-border: #3a3a3d;
+  --color-warning: #b8b8bb;
+  --color-focus-ring: rgb(255 255 255 / 0.1);
+  --color-scrim: rgb(0 0 0 / 0.78);
   --shadow-focus: 0 0 0 3px var(--color-focus-ring);
-  --shadow-card-glow: 0 14px 34px rgb(201 123 24 / 0.18);
+  --shadow-card-glow: none;
 
   --category-credit-card: #b76b1c;
   --category-food: #3d8c58;
@@ -75,18 +82,18 @@
   --font-size-xl: 36px;
   --font-size-display: 46px;
   --font-weight-regular: 400;
-  --font-weight-medium: 600;
-  --font-weight-bold: 800;
+  --font-weight-medium: 900;
+  --font-weight-bold: 900;
 
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --radius-pill: 999px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-pill: 2px;
   --radius-round: 50%;
 
-  --shadow-soft: 0 10px 30px rgb(0 0 0 / 0.06);
-  --shadow-medium: 0 18px 46px rgb(31 41 55 / 0.12);
-  --shadow-header: 0 8px 28px rgb(31 41 55 / 0.08);
+  --shadow-soft: none;
+  --shadow-medium: none;
+  --shadow-header: none;
 
   --bg: var(--color-bg-primary);
   --surface: var(--color-card-bg);
@@ -102,11 +109,21 @@
   --danger: var(--color-danger);
   --danger-soft: var(--color-danger-bg);
   --shadow-sm: var(--shadow-soft);
-  --sans: Inter, ui-sans-serif, system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  --sans: 'Segoe UI', Arial, Helvetica, sans-serif;
+  --display: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   --social-bg: var(--color-card-bg-strong);
   --text-h: var(--text-strong);
   --shadow: var(--shadow-soft);
   --accent-bg: var(--color-accent-soft);
   --accent-border: var(--color-accent-border);
+  --panel-background:
+    repeating-linear-gradient(
+      -45deg,
+      rgb(255 255 255 / 2.2%) 0,
+      rgb(255 255 255 / 2.2%) 1px,
+      transparent 1px,
+      transparent 8px
+    ),
+    var(--surface);
 }

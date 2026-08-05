@@ -30,12 +30,11 @@
 
 .rodape__contacts svg {
   flex: 0 0 auto;
-  color: var(--secondary);
+  color: var(--color-accent);
 }
 
 .rodape__contacts a:hover {
-  color: var(--color-accent-strong);
-  transform: translateY(-1px);
+  color: var(--text-strong);
 }
 
 @media (max-width: 760px) {

@@ -9,13 +9,12 @@
   min-width: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  background: var(--panel-background);
 }
 
 .category-manager__intro {
   align-self: start;
-  padding: var(--spacing-xl);
+  padding: 18px;
   text-align: left;
 }
 
@@ -42,8 +41,10 @@
 
 .category-manager__form label span {
   color: var(--text-muted);
+  font-family: var(--display);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
 }
 
 .category-manager__form input,
@@ -64,7 +65,7 @@
 .category-manager__main input:focus {
   border-color: var(--color-accent-border);
   background: var(--color-input-bg-focus);
-  box-shadow: var(--shadow-focus);
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
 }
 
 .category-manager__feedback {
@@ -104,7 +105,7 @@
 .category-manager__color {
   width: 12px;
   height: 32px;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   background: var(--category-color);
   box-shadow:
     0 0 0 3px color-mix(in srgb, var(--category-color) 12%, transparent);
