@@ -38,7 +38,12 @@ function readStorage(key, fallback) {
 }
 
 function writeStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value))
+  try {
+    localStorage.setItem(key, JSON.stringify(value))
+    return true
+  } catch {
+    return false
+  }
 }
 
 function normalizeCategoryName(name) {
@@ -106,7 +111,7 @@ export function loadCategories() {
 }
 
 export function saveCategories(categories) {
-  writeStorage(STORAGE_KEYS.categories, categories)
+  return writeStorage(STORAGE_KEYS.categories, categories)
 }
 
 export function loadExpenses() {
@@ -133,5 +138,5 @@ export function loadExpenses() {
 }
 
 export function saveExpenses(expenses) {
-  writeStorage(STORAGE_KEYS.expenses, expenses)
+  return writeStorage(STORAGE_KEYS.expenses, expenses)
 }

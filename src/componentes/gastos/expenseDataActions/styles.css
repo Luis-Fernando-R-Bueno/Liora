@@ -24,6 +24,10 @@
   text-align: right;
 }
 
+.expense-data-actions__feedback--error {
+  color: var(--danger);
+}
+
 @media (max-width: 720px) {
   .expense-data-actions {
     align-items: stretch;

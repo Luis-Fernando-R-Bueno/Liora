@@ -6,6 +6,7 @@ import Rodape from '../../componentes/compartilhado/rodape'
 import DashboardCards from '../../componentes/dashboard/dashboardCards'
 import RecentExpenses from '../../componentes/dashboard/recentExpenses'
 import SummaryList from '../../componentes/dashboard/summaryList'
+import ExpenseDataActions from '../../componentes/gastos/expenseDataActions'
 import ExpenseFilters from '../../componentes/gastos/expenseFilters'
 import ExpenseForm from '../../componentes/gastos/expenseForm'
 import ExpenseList from '../../componentes/gastos/expenseList'
@@ -70,9 +71,12 @@ function Inicial() {
     dashboard,
     deleteExpense,
     expenses,
+    exportRecords,
     filterExpenses,
     historicalMonths,
+    importRecords,
     removeCategory,
+    storageError,
     toggleCategoryStatus,
     updateCategory,
     updateExpense,
@@ -169,6 +173,12 @@ function Inicial() {
       <AppHeader />
 
       <main className="pagina-inicial__main">
+        {storageError ? (
+          <p className="pagina-inicial__storage-error" role="alert">
+            {storageError}
+          </p>
+        ) : null}
+
         <Routes>
           <Route path="/" element={<Navigate to="/painel" replace />} />
 
@@ -232,6 +242,10 @@ function Inicial() {
                       expenses={filteredExpenses}
                       onDeleteExpense={handleDeleteExpense}
                       onEditExpense={handleEditExpense}
+                    />
+                    <ExpenseDataActions
+                      onExportRecords={exportRecords}
+                      onImportRecords={importRecords}
                     />
                   </div>
                 </div>

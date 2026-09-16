@@ -16,6 +16,16 @@
   min-width: 0;
 }
 
+.pagina-inicial__storage-error {
+  padding: 12px 16px;
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  color: var(--danger);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
 .pagina-inicial__route-transition--forward {
   animation: pagina-inicial-slide-from-right 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }

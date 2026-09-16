@@ -257,16 +257,26 @@ function aggregateHistoricalMonths(expenses: ExpenseWithCategory[]) {
     .sort((a, b) => String(b.id).localeCompare(String(a.id)))
 }
 
+const STORAGE_ERROR_MESSAGE =
+  'Não foi possível salvar os dados neste navegador. O espaço de armazenamento pode estar cheio ou indisponível (ex.: modo de navegação privada) — suas últimas alterações podem não ter sido salvas.'
+
 export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
   const [categories, setCategories] = useState<Category[]>(loadCategories)
   const [expenses, setExpenses] = useState<Expense[]>(loadExpenses)
+  const [storageError, setStorageError] = useState('')
 
   useEffect(() => {
-    saveCategories(categories)
+    const success = saveCategories(categories)
+    // Adiado para fora do corpo síncrono do efeito: o próprio efeito já
+    // sincroniza `categories` com o localStorage (um sistema externo); o
+    // aviso de falha é uma reação a esse resultado, não parte da mesma
+    // sincronização.
+    queueMicrotask(() => setStorageError(success ? '' : STORAGE_ERROR_MESSAGE))
   }, [categories])
 
   useEffect(() => {
-    saveExpenses(expenses)
+    const success = saveExpenses(expenses)
+    queueMicrotask(() => setStorageError(success ? '' : STORAGE_ERROR_MESSAGE))
   }, [expenses])
 
   const categoryMap = useMemo(
@@ -394,23 +404,78 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
   const exportRecords = useCallback(
     () => ({
       exportedAt: new Date().toISOString(),
+      categories: categories.map((category) => ({ id: category.id, nome: category.nome })),
       expenses,
       recordsCount: expenses.length,
       type: 'controle-gastos-registros',
       version: 1,
     }),
-    [expenses],
+    [categories, expenses],
   )
 
   const importRecords = useCallback((data) => {
     const records = extractImportRecords(data)
+    // O id de categoria é local a cada instalação (não é portável entre
+    // dispositivos). Por isso a importação resolve a categoria de cada
+    // gasto pelo nome — presente no arquivo através da lista `categories`
+    // exportada junto dos registros — criando a categoria no destino
+    // quando ela ainda não existir, em vez de perder a categorização.
+    const rawImportedCategories: unknown[] = Array.isArray((data as { categories?: unknown })?.categories)
+      ? ((data as { categories: unknown[] }).categories)
+      : []
+    const importedCategoryNames = new Map<string, string>()
+
+    rawImportedCategories.forEach((rawCategory) => {
+      const category = rawCategory as Record<string, unknown>
+      importedCategoryNames.set(
+        String(category?.id ?? ''),
+        String(category?.nome ?? category?.name ?? '').trim(),
+      )
+    })
+
+    let workingCategories = categories
+    const categoryIdByName = new Map<string, string>(
+      workingCategories.map((category) => [normalizeText(category.nome), category.id]),
+    )
+
+    function resolveCategoryId(rawCategoryId: unknown): string {
+      const importedName = importedCategoryNames.get(String(rawCategoryId ?? ''))
+
+      if (!importedName) {
+        return String(rawCategoryId ?? '')
+      }
+
+      const normalizedName = normalizeText(importedName)
+      const existingId = categoryIdByName.get(normalizedName)
+
+      if (existingId) {
+        return existingId
+      }
+
+      const newCategory = {
+        id: createId('categoria'),
+        nome: importedName,
+        cor: getCategoryColor(importedName, workingCategories.length),
+        ativa: true,
+        createdAt: new Date().toISOString(),
+      }
+
+      workingCategories = [...workingCategories, newCategory]
+      categoryIdByName.set(normalizedName, newCategory.id)
+      return newCategory.id
+    }
+
     const existingKeys = new Set(expenses.map(getExpenseDuplicateKey))
     const importedExpenses = []
     let invalidCount = 0
     let skippedCount = 0
 
     records.forEach((record) => {
-      const normalizedExpense = normalizeImportedExpense(record)
+      const rawCategoryId = record?.categoryId ?? record?.categoriaId
+      const normalizedExpense = normalizeImportedExpense({
+        ...record,
+        categoryId: resolveCategoryId(rawCategoryId),
+      })
 
       if (!normalizedExpense) {
         invalidCount += 1
@@ -428,6 +493,10 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
       importedExpenses.push(normalizedExpense)
     })
 
+    if (workingCategories !== categories) {
+      setCategories(workingCategories)
+    }
+
     if (importedExpenses.length > 0) {
       setExpenses((currentExpenses) => [...importedExpenses, ...currentExpenses])
     }
@@ -438,7 +507,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
       skippedCount,
       totalCount: records.length,
     }
-  }, [expenses])
+  }, [categories, expenses])
 
   const addCategory = useCallback((categoryName) => {
     const cleanName = categoryName.trim()
@@ -550,6 +619,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     expenses: expensesWithCategory,
     dashboard,
     historicalMonths,
+    storageError,
     addExpense,
     updateExpense,
     deleteExpense,

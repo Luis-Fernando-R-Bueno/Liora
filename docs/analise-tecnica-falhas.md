@@ -27,7 +27,9 @@ abaixo são de **correção de cálculo, integridade de dados e robustez**.
 | 3.1 - `updateCategory` sem checagem de duplicidade | Corrigido | Passou a usar a mesma validação de nome único do `addCategory`. |
 | 3.2 - Média mensal incluindo mês corrente/futuro | Corrigido | Passou a considerar apenas meses encerrados (`id < getCurrentMonthKey()`). |
 | 3.3 - Validação de gasto só existia no HTML | Corrigido | `addExpense`/`updateExpense` agora validam no hook e retornam sucesso/erro para a UI. |
-| 2.1, 2.2, 2.3 (backup/robustez) | Em aberto | — |
+| 2.1 - Importação inacessível pela UI | Corrigido | `ExpenseDataActions` (exportar/importar) voltou a ser renderizado na tela `Gastos`. |
+| 2.2 - IDs de categoria não portáveis | Corrigido | Exportação passou a incluir `categories`; importação resolve por nome e cria categorias ausentes no destino. |
+| 2.3 - `localStorage` sem tratamento de erro / sem Error Boundary | Corrigido | `writeStorage` captura exceções; hook expõe `storageError` (mostrado em banner); adicionado `ErrorBoundary` global em `main.tsx`. |
 | 4.1, 4.2, 4.3 (dívida técnica) | Em aberto | — |
 
 ## Resumo executivo
