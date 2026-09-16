@@ -14,7 +14,6 @@ import ExpenseList from '../../componentes/gastos/expenseList'
 import { useControleGastos } from '../../hooks/useControleGastos'
 import Configuracoes from '../configuracoes'
 import ConfiguracoesCategorias from '../configuracoes/categorias'
-import ConfiguracoesSalario from '../configuracoes/salario'
 import Historico from '../historico'
 import { getCurrentMonthKey, shiftMonthKey } from '../../utils/dateUtils'
 import { fromCents, toCents } from '../../utils/formatCurrency'
@@ -292,21 +291,11 @@ function Inicial() {
             path="/configuracoes"
             element={renderMenuView(
               <Configuracoes
-                onAbrirCategorias={() => navigate('/configuracoes/categorias')}
-                onAbrirSalario={() => navigate('/configuracoes/salario')}
-              />
-            )}
-          />
-
-          <Route
-            path="/configuracoes/salario"
-            element={
-              <ConfiguracoesSalario
                 monthlySalary={monthlySalary}
-                onBack={() => navigate('/configuracoes')}
+                onAbrirCategorias={() => navigate('/configuracoes/categorias')}
                 onUpdateMonthlySalary={handleUpdateMonthlySalary}
               />
-            }
+            )}
           />
 
           <Route

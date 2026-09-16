@@ -1669,3 +1669,26 @@ Validações executadas:
 - `npm.cmd run lint`
 - `npm.cmd run build`
 
+## Remoção da Aba de Salário e Ícone de Gastos Recentes - 16/09/2026
+
+Alterações realizadas:
+
+- Removido o ícone do cabeçalho da seção `Gastos recentes` do painel,
+  mantendo apenas o ícone do estado vazio.
+- Tela dedicada `Configurações > Salário` removida do projeto, junto da rota
+  `/configuracoes/salario`.
+- Painel de edição do salário mensal (valor atual, edição em linha e campo
+  formatado) passou a ficar embutido diretamente na tela `Configurações`,
+  posicionado acima do card `Categorias`.
+- `Configurações` passou a receber o salário e o atualizador diretamente,
+  em vez de navegar para uma subtela própria.
+- Estilos do painel de salário movidos para o CSS compartilhado de
+  `Configurações`.
+- Nenhuma regra de negócio, persistência ou dado salvo foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run check`
+- `npm.cmd run lint`
+- `npm.cmd run build`
+

@@ -11,7 +11,6 @@ function RecentExpenses({ expenses }) {
           <span>Últimos registros</span>
           <h2>Gastos recentes</h2>
         </div>
-        <ReceiptText size={20} aria-hidden="true" />
       </div>
 
       {expenses.length > 0 ? (
