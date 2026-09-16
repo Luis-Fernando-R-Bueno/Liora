@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://controle-de-gastos-phi-dun.vercel.app" target="_blank">
+  <a href="https://liora-rho.vercel.app" target="_blank">
     <img src="https://img.shields.io/badge/%F0%9F%8C%85%20ACESSAR%20LIORA%20AGORA-C97B18?style=for-the-badge&labelColor=263E35&color=C97B18" alt="Acessar Liora agora">
   </a>
 </p>
