@@ -1,5 +1,8 @@
 ﻿.expense-form {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
+  height: 100%;
   padding: 18px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -68,7 +71,8 @@
   display: flex;
   justify-content: flex-end;
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
+  margin-top: auto;
+  padding-top: var(--spacing-lg);
 }
 
 .expense-form__actions .button--primary {
