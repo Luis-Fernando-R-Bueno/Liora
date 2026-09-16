@@ -302,12 +302,18 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     )
     const categorySummary = aggregateByCategory(currentMonthExpenses)
     const allMonthSummary = aggregateByMonth(expensesWithCategory)
+    // A média considera apenas meses já encerrados: o mês corrente está
+    // incompleto e gastos com data futura ainda não aconteceram, então
+    // incluí-los distorceria a média para baixo ou para cima.
+    const closedMonthsSummary = allMonthSummary.filter(
+      (item) => item.id < getCurrentMonthKey(),
+    )
     const averageMonthlyTotal =
-      allMonthSummary.length > 0
+      closedMonthsSummary.length > 0
         ? fromCents(
             Math.round(
-              allMonthSummary.reduce((sum, item) => sum + toCents(item.total), 0) /
-                allMonthSummary.length,
+              closedMonthsSummary.reduce((sum, item) => sum + toCents(item.total), 0) /
+                closedMonthsSummary.length,
             ),
           )
         : 0
@@ -334,21 +340,34 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
   )
 
   const addExpense = useCallback((expenseData) => {
+    const value = fromCents(toCents(parseCurrencyInput(expenseData.value)))
+
+    if (!expenseData.date || !expenseData.categoryId || !Number.isFinite(value) || value <= 0) {
+      return false
+    }
+
     const now = new Date().toISOString()
     const newExpense = {
       id: createId('gasto'),
       date: expenseData.date,
       categoryId: expenseData.categoryId,
-      value: fromCents(toCents(parseCurrencyInput(expenseData.value))),
-      description: expenseData.description.trim(),
+      value,
+      description: String(expenseData.description ?? '').trim(),
       createdAt: now,
       updatedAt: now,
     }
 
     setExpenses((currentExpenses) => [newExpense, ...currentExpenses])
+    return true
   }, [])
 
   const updateExpense = useCallback((expenseId, expenseData) => {
+    const value = fromCents(toCents(parseCurrencyInput(expenseData.value)))
+
+    if (!expenseData.date || !expenseData.categoryId || !Number.isFinite(value) || value <= 0) {
+      return false
+    }
+
     setExpenses((currentExpenses) =>
       currentExpenses.map((expense) =>
         expense.id === expenseId
@@ -356,13 +375,14 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
               ...expense,
               date: expenseData.date,
               categoryId: expenseData.categoryId,
-              value: fromCents(toCents(parseCurrencyInput(expenseData.value))),
-              description: expenseData.description.trim(),
+              value,
+              description: String(expenseData.description ?? '').trim(),
               updatedAt: new Date().toISOString(),
             }
           : expense,
       ),
     )
+    return true
   }, [])
 
   const deleteExpense = useCallback((expenseId) => {
@@ -456,6 +476,15 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
       return false
     }
 
+    const exists = categories.some(
+      (category) =>
+        category.id !== categoryId && normalizeText(category.nome) === normalizeText(cleanName),
+    )
+
+    if (exists) {
+      return false
+    }
+
     setCategories((currentCategories) =>
       currentCategories.map((category) =>
         category.id === categoryId
@@ -465,7 +494,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     )
 
     return true
-  }, [])
+  }, [categories])
 
   const toggleCategoryStatus = useCallback((categoryId) => {
     setCategories((currentCategories) =>

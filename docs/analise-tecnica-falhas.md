@@ -18,6 +18,18 @@ Não foram encontradas falhas de segurança relevantes (o app é 100% local, sem
 rede, sem autenticação, conforme o próprio escopo do projeto). Os achados
 abaixo são de **correção de cálculo, integridade de dados e robustez**.
 
+## Status das correções
+
+| Item | Status | Observação |
+| --- | --- | --- |
+| 1.1 - Bug do campo Salário | Corrigido | Novo parser dedicado (`parseLocalizedCurrencyInput`) para entradas com separador de milhar. |
+| 1.2 - Ponto flutuante nas somas | Corrigido | Somas passaram a ser feitas em centavos inteiros (`toCents`/`fromCents`), sem migrar o formato de armazenamento. |
+| 3.1 - `updateCategory` sem checagem de duplicidade | Corrigido | Passou a usar a mesma validação de nome único do `addCategory`. |
+| 3.2 - Média mensal incluindo mês corrente/futuro | Corrigido | Passou a considerar apenas meses encerrados (`id < getCurrentMonthKey()`). |
+| 3.3 - Validação de gasto só existia no HTML | Corrigido | `addExpense`/`updateExpense` agora validam no hook e retornam sucesso/erro para a UI. |
+| 2.1, 2.2, 2.3 (backup/robustez) | Em aberto | — |
+| 4.1, 4.2, 4.3 (dívida técnica) | Em aberto | — |
+
 ## Resumo executivo
 
 | Severidade | Quantidade | Resumo |

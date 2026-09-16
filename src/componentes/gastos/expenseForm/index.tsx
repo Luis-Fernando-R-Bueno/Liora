@@ -41,6 +41,7 @@ function ExpenseForm({
   const [formData, setFormData] = useState(() =>
     getInitialFormData(editingExpense, initialCategoryId),
   )
+  const [feedback, setFeedback] = useState('')
 
   const availableCategories = useMemo(
     () =>
@@ -73,16 +74,21 @@ function ExpenseForm({
   function handleSubmit(event) {
     event.preventDefault()
 
-    if (isEditing) {
-      onUpdateExpense(editingExpense.id, formData)
-    } else {
-      onAddExpense(formData)
+    const success = isEditing
+      ? onUpdateExpense(editingExpense.id, formData)
+      : onAddExpense(formData)
+
+    if (!success) {
+      setFeedback('Preencha data, categoria e um valor maior que zero.')
+      return
     }
 
+    setFeedback('')
     resetForm()
   }
 
   function handleCancel() {
+    setFeedback('')
     resetForm()
     onCancelEdit()
   }
@@ -139,6 +145,8 @@ function ExpenseForm({
           />
         </label>
       </div>
+
+      {feedback ? <p className="expense-form__feedback">{feedback}</p> : null}
 
       <div className="expense-form__actions">
         {isEditing ? (

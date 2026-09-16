@@ -57,6 +57,13 @@
   grid-column: 1 / -1;
 }
 
+.expense-form__feedback {
+  margin-top: var(--spacing-md);
+  color: var(--danger);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
 .expense-form__actions {
   display: flex;
   justify-content: flex-end;

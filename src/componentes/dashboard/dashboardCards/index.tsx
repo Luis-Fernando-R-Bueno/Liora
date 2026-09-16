@@ -35,7 +35,7 @@ function DashboardCards({ dashboard }) {
       id: 'average',
       label: 'Média mensal',
       value: formatCurrency(dashboard.averageMonthlyTotal),
-      detail: 'Média dos meses com gastos',
+      detail: 'Média dos meses encerrados',
       Icon: BarChart3,
       tone: 'neutral',
     },

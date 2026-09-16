@@ -58,7 +58,7 @@ function CategoryManager({
       return
     }
 
-    setFeedback('Informe um nome válido para a categoria.')
+    setFeedback('Informe um nome único para a categoria.')
   }
 
   function cancelEditing() {

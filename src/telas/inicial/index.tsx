@@ -124,13 +124,23 @@ function Inicial() {
   }
 
   function handleAddExpense(expenseData) {
-    addExpense(expenseData)
-    setEditingExpense(null)
+    const success = addExpense(expenseData)
+
+    if (success) {
+      setEditingExpense(null)
+    }
+
+    return success
   }
 
   function handleUpdateExpense(expenseId, expenseData) {
-    updateExpense(expenseId, expenseData)
-    setEditingExpense(null)
+    const success = updateExpense(expenseId, expenseData)
+
+    if (success) {
+      setEditingExpense(null)
+    }
+
+    return success
   }
 
   function openDashboardMonth(monthKey) {
