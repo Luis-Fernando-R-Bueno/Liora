@@ -1649,3 +1649,23 @@ Validações executadas:
 - `npm.cmd run lint`
 - `npm.cmd run build`
 
+## Setas de Navegação de Mês no Painel - 16/09/2026
+
+Alterações realizadas:
+
+- Adicionadas setas de navegação (mês anterior/próximo) ao lado do seletor de
+  mês do painel, permitindo avançar ou retroceder o período exibido sem abrir
+  o calendário.
+- Criada a função utilitária `shiftMonthKey` em `src/utils/dateUtils.ts` para
+  somar ou subtrair um mês a uma chave `YYYY-MM`.
+- Botões de navegação ajustados para a mesma altura do campo de data do
+  painel, reaproveitando o estilo global `icon-button` com uma regra de maior
+  especificidade para garantir o tamanho correto.
+- Nenhuma regra de negócio, persistência ou rota foi alterada.
+
+Validações executadas:
+
+- `npm.cmd run check`
+- `npm.cmd run lint`
+- `npm.cmd run build`
+

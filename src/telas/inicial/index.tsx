@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import AppHeader from '../../componentes/compartilhado/appHeader'
@@ -15,7 +16,7 @@ import Configuracoes from '../configuracoes'
 import ConfiguracoesCategorias from '../configuracoes/categorias'
 import ConfiguracoesSalario from '../configuracoes/salario'
 import Historico from '../historico'
-import { getCurrentMonthKey } from '../../utils/dateUtils'
+import { getCurrentMonthKey, shiftMonthKey } from '../../utils/dateUtils'
 import { fromCents, toCents } from '../../utils/formatCurrency'
 import './styles.css'
 
@@ -147,6 +148,10 @@ function Inicial() {
     return success
   }
 
+  function handleShiftDashboardMonth(offset) {
+    setDashboardMonthKey((currentMonthKey) => shiftMonthKey(currentMonthKey, offset))
+  }
+
   function openDashboardMonth(monthKey) {
     setDashboardMonthKey(monthKey)
     navigate('/painel')
@@ -187,11 +192,31 @@ function Inicial() {
             element={renderMenuView(
               <section className="pagina-inicial__view" aria-label="Painel mensal">
                 <div className="pagina-inicial__dashboard-toolbar">
+                  <button
+                    className="icon-button pagina-inicial__month-nav"
+                    type="button"
+                    onClick={() => handleShiftDashboardMonth(-1)}
+                    aria-label="Mês anterior"
+                    title="Mês anterior"
+                  >
+                    <ChevronLeft size={18} aria-hidden="true" />
+                  </button>
+
                   <MonthField
                     label=""
                     value={dashboardMonthKey}
                     onChange={setDashboardMonthKey}
                   />
+
+                  <button
+                    className="icon-button pagina-inicial__month-nav"
+                    type="button"
+                    onClick={() => handleShiftDashboardMonth(1)}
+                    aria-label="Próximo mês"
+                    title="Próximo mês"
+                  >
+                    <ChevronRight size={18} aria-hidden="true" />
+                  </button>
                 </div>
 
                 <DashboardCards dashboard={dashboardWithSalary} />

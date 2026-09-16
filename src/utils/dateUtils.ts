@@ -38,6 +38,15 @@ export function getMonthKey(dateValue) {
   return String(dateValue).slice(0, 7)
 }
 
+export function shiftMonthKey(monthKey, offset) {
+  const [year, month] = String(monthKey || getCurrentMonthKey())
+    .split('-')
+    .map(Number)
+  const date = new Date(year, month - 1 + offset, 1)
+
+  return `${date.getFullYear()}-${padDatePart(date.getMonth() + 1)}`
+}
+
 export function formatDate(dateValue) {
   if (!dateValue) {
     return '-'
