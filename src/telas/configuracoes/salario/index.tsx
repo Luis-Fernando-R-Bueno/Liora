@@ -1,6 +1,6 @@
 import { ArrowLeft, LineChart, Pencil, Wallet } from 'lucide-react'
 import { useState } from 'react'
-import { formatCurrency, parseCurrencyInput } from '../../../utils/formatCurrency'
+import { formatCurrency, parseLocalizedCurrencyInput } from '../../../utils/formatCurrency'
 import '../styles.css'
 import './styles.css'
 
@@ -52,7 +52,7 @@ function ConfiguracoesSalario({
   function handleSaveSalary(event) {
     event.preventDefault()
 
-    const nextSalary = salaryInput.trim() ? parseCurrencyInput(salaryInput) : 0
+    const nextSalary = salaryInput.trim() ? parseLocalizedCurrencyInput(salaryInput) : 0
 
     if (!Number.isFinite(nextSalary) || nextSalary < 0) {
       setSalaryFeedback('Informe um salário válido.')

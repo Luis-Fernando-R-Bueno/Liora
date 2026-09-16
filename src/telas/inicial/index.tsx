@@ -15,6 +15,7 @@ import ConfiguracoesCategorias from '../configuracoes/categorias'
 import ConfiguracoesSalario from '../configuracoes/salario'
 import Historico from '../historico'
 import { getCurrentMonthKey } from '../../utils/dateUtils'
+import { fromCents, toCents } from '../../utils/formatCurrency'
 import './styles.css'
 
 const INITIAL_FILTERS = {
@@ -91,7 +92,7 @@ function Inicial() {
     () => ({
       ...dashboard,
       monthlySalary,
-      salaryRemaining: monthlySalary - dashboard.totalMonth,
+      salaryRemaining: fromCents(toCents(monthlySalary) - toCents(dashboard.totalMonth)),
     }),
     [dashboard, monthlySalary],
   )

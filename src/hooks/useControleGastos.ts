@@ -12,7 +12,7 @@ import {
   getMonthKey,
   toInputDate,
 } from '../utils/dateUtils'
-import { formatCurrency, parseCurrencyInput } from '../utils/formatCurrency'
+import { formatCurrency, fromCents, parseCurrencyInput, toCents } from '../utils/formatCurrency'
 
 type Category = {
   id: string
@@ -110,8 +110,12 @@ function normalizeImportedExpense(expense: Record<string, unknown>): Expense | n
   }
 }
 
+// Os totais são acumulados em centavos (inteiros) e só convertidos de volta
+// para reais no fim de cada agregação, evitando que a soma de muitos
+// valores decimais em ponto flutuante gere diferenças de centavos no total
+// exibido (ex.: 0.1 + 0.2 !== 0.3 em JavaScript).
 function aggregateByCategory(expenses: ExpenseWithCategory[]) {
-  const total = expenses.reduce((sum, expense) => sum + expense.value, 0)
+  const totalCents = expenses.reduce((sum, expense) => sum + toCents(expense.value), 0)
   const grouped = expenses.reduce((acc, expense) => {
     const key = expense.category.id
 
@@ -120,20 +124,24 @@ function aggregateByCategory(expenses: ExpenseWithCategory[]) {
         id: key,
         label: expense.category.nome,
         color: expense.category.cor,
-        total: 0,
+        totalCents: 0,
         count: 0,
       }
     }
 
-    acc[key].total += expense.value
+    acc[key].totalCents += toCents(expense.value)
     acc[key].count += 1
     return acc
-  }, {} as Record<string, Omit<SummaryItem, 'percent'>>)
+  }, {} as Record<string, { id: string; label: string; color: string; totalCents: number; count: number }>)
 
   return Object.values(grouped)
     .map((item) => ({
-      ...item,
-      percent: total > 0 ? Math.round((item.total / total) * 100) : 0,
+      id: item.id,
+      label: item.label,
+      color: item.color,
+      count: item.count,
+      total: fromCents(item.totalCents),
+      percent: totalCents > 0 ? Math.round((item.totalCents / totalCents) * 100) : 0,
     }))
     .sort((a, b) => b.total - a.total)
 }
@@ -146,23 +154,27 @@ function aggregateByMonth(expenses: ExpenseWithCategory[]) {
       acc[monthKey] = {
         id: monthKey,
         label: monthKey,
-        total: 0,
+        totalCents: 0,
         count: 0,
       }
     }
 
-    acc[monthKey].total += expense.value
+    acc[monthKey].totalCents += toCents(expense.value)
     acc[monthKey].count += 1
     return acc
-  }, {} as Record<string, Omit<SummaryItem, 'percent' | 'color'>>)
+  }, {} as Record<string, { id: string; label: string; totalCents: number; count: number }>)
 
   const groupedMonths = Object.values(grouped)
-  const highestTotal = Math.max(...groupedMonths.map((item) => item.total), 0)
+  const highestTotalCents = Math.max(...groupedMonths.map((item) => item.totalCents), 0)
 
   return groupedMonths
     .map((item) => ({
-      ...item,
-      percent: highestTotal > 0 ? Math.round((item.total / highestTotal) * 100) : 0,
+      id: item.id,
+      label: item.label,
+      count: item.count,
+      total: fromCents(item.totalCents),
+      percent:
+        highestTotalCents > 0 ? Math.round((item.totalCents / highestTotalCents) * 100) : 0,
     }))
     .sort((a, b) => String(b.id).localeCompare(String(a.id)))
 }
@@ -180,15 +192,16 @@ function aggregateHistoricalMonths(expenses: ExpenseWithCategory[]) {
       acc[monthKey] = {
         id: monthKey,
         label: monthKey,
-        total: 0,
+        totalCents: 0,
         count: 0,
         categories: {},
       }
     }
 
     const categoryId = expense.category.id
+    const expenseCents = toCents(expense.value)
 
-    acc[monthKey].total += expense.value
+    acc[monthKey].totalCents += expenseCents
     acc[monthKey].count += 1
 
     if (!acc[monthKey].categories[categoryId]) {
@@ -196,24 +209,51 @@ function aggregateHistoricalMonths(expenses: ExpenseWithCategory[]) {
         id: categoryId,
         label: expense.category.nome,
         color: expense.category.cor,
-        total: 0,
+        totalCents: 0,
         count: 0,
       }
     }
 
-    acc[monthKey].categories[categoryId].total += expense.value
+    acc[monthKey].categories[categoryId].totalCents += expenseCents
     acc[monthKey].categories[categoryId].count += 1
 
     return acc
-  }, {} as Record<string, HistoricalMonth>)
+  }, {} as Record<
+    string,
+    {
+      id: string
+      label: string
+      totalCents: number
+      count: number
+      categories: Record<string, { id: string; label: string; color: string; totalCents: number; count: number }>
+    }
+  >)
 
   return Object.values(grouped)
-    .map((month) => ({
-      ...month,
-      topCategory:
-        Object.values(month.categories).sort((a, b) => b.total - a.total)[0] ??
-        null,
-    }))
+    .map((month) => {
+      const categories = Object.entries(month.categories).reduce(
+        (acc, [categoryId, category]) => {
+          acc[categoryId] = {
+            id: category.id,
+            label: category.label,
+            color: category.color,
+            count: category.count,
+            total: fromCents(category.totalCents),
+          }
+          return acc
+        },
+        {} as HistoricalMonth['categories'],
+      )
+
+      return {
+        id: month.id,
+        label: month.label,
+        count: month.count,
+        total: fromCents(month.totalCents),
+        categories,
+        topCategory: Object.values(categories).sort((a, b) => b.total - a.total)[0] ?? null,
+      }
+    })
     .sort((a, b) => String(b.id).localeCompare(String(a.id)))
 }
 
@@ -264,11 +304,17 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     const allMonthSummary = aggregateByMonth(expensesWithCategory)
     const averageMonthlyTotal =
       allMonthSummary.length > 0
-        ? allMonthSummary.reduce((sum, item) => sum + item.total, 0) /
-          allMonthSummary.length
+        ? fromCents(
+            Math.round(
+              allMonthSummary.reduce((sum, item) => sum + toCents(item.total), 0) /
+                allMonthSummary.length,
+            ),
+          )
         : 0
     const monthSummary = allMonthSummary.slice(0, 8)
-    const totalMonth = currentMonthExpenses.reduce((sum, expense) => sum + expense.value, 0)
+    const totalMonth = fromCents(
+      currentMonthExpenses.reduce((sum, expense) => sum + toCents(expense.value), 0),
+    )
 
     return {
       totalMonth,
@@ -293,7 +339,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
       id: createId('gasto'),
       date: expenseData.date,
       categoryId: expenseData.categoryId,
-      value: parseCurrencyInput(expenseData.value),
+      value: fromCents(toCents(parseCurrencyInput(expenseData.value))),
       description: expenseData.description.trim(),
       createdAt: now,
       updatedAt: now,
@@ -310,7 +356,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
               ...expense,
               date: expenseData.date,
               categoryId: expenseData.categoryId,
-              value: parseCurrencyInput(expenseData.value),
+              value: fromCents(toCents(parseCurrencyInput(expenseData.value))),
               description: expenseData.description.trim(),
               updatedAt: new Date().toISOString(),
             }
