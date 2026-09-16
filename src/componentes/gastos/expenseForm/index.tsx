@@ -5,11 +5,19 @@ import { isCreditCardCategory, sortCategoriesByName } from '../../../utils/categ
 import { toInputDate } from '../../../utils/dateUtils'
 import './styles.css'
 
-function getInitialFormData(editingExpense, initialCategoryId) {
+function getInitialFormData(editingExpense, initialCategoryId, categories) {
   if (editingExpense) {
+    // Se a categoria do gasto não existe mais (ex.: categoria excluída),
+    // cair no id original deixaria o <select> sem nenhuma opção
+    // correspondente e o gasto "preso" em uma categoria fantasma — usa a
+    // mesma categoria padrão de um gasto novo nesse caso.
+    const hasValidCategory = categories.some(
+      (category) => category.id === editingExpense.categoryId,
+    )
+
     return {
       date: editingExpense.date,
-      categoryId: editingExpense.categoryId,
+      categoryId: hasValidCategory ? editingExpense.categoryId : initialCategoryId,
       value: String(editingExpense.value),
       description: editingExpense.description,
     }
@@ -39,7 +47,7 @@ function ExpenseForm({
     return creditCardCategory?.id ?? activeCategories[0]?.id ?? categories[0]?.id ?? ''
   }, [categories])
   const [formData, setFormData] = useState(() =>
-    getInitialFormData(editingExpense, initialCategoryId),
+    getInitialFormData(editingExpense, initialCategoryId, categories),
   )
   const [feedback, setFeedback] = useState('')
 
@@ -68,7 +76,7 @@ function ExpenseForm({
   }
 
   function resetForm() {
-    setFormData(getInitialFormData(null, initialCategoryId))
+    setFormData(getInitialFormData(null, initialCategoryId, categories))
   }
 
   function handleSubmit(event) {

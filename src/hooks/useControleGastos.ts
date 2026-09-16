@@ -36,6 +36,19 @@ type ExpenseWithCategory = Expense & {
   category: Category
 }
 
+type ExpenseInput = {
+  date: string
+  categoryId: string
+  value: string | number
+  description?: string
+}
+
+type ExpenseFilters = {
+  search?: string
+  categoryId?: string
+  monthKey?: string
+}
+
 type SummaryItem = {
   id: string
   label: string
@@ -48,6 +61,42 @@ type SummaryItem = {
 type HistoricalMonth = Omit<SummaryItem, 'percent' | 'color'> & {
   categories: Record<string, Omit<SummaryItem, 'percent'>>
   topCategory?: Omit<SummaryItem, 'percent'> | null
+}
+
+// Categoria de fallback para gastos cujo categoryId não existe mais (ex.:
+// categoria excluída). Instância única e estável — evita recriar um objeto
+// novo a cada renderização para cada gasto órfão.
+const UNCATEGORIZED_CATEGORY: Category = {
+  id: 'sem-categoria',
+  nome: 'Sem categoria',
+  cor: getCategoryColor('Sem categoria'),
+  ativa: false,
+}
+
+// Arredonda percentuais de forma que a soma dê exatamente 100 (método dos
+// maiores restos): arredonda todos para baixo e distribui os pontos que
+// faltam para os itens com a maior parte fracionária descartada.
+function distributeIntegerPercentages(values: number[]): number[] {
+  const total = values.reduce((sum, value) => sum + value, 0)
+
+  if (total <= 0) {
+    return values.map(() => 0)
+  }
+
+  const exact = values.map((value) => (value / total) * 100)
+  const base = exact.map((value) => Math.floor(value))
+  const missingPoints = 100 - base.reduce((sum, value) => sum + value, 0)
+  const byRemainderDesc = exact
+    .map((value, index) => ({ index, remainder: value - base[index] }))
+    .sort((a, b) => b.remainder - a.remainder)
+
+  const result = [...base]
+
+  for (let i = 0; i < missingPoints; i += 1) {
+    result[byRemainderDesc[i % byRemainderDesc.length].index] += 1
+  }
+
+  return result
 }
 
 function createId(prefix: string) {
@@ -115,7 +164,6 @@ function normalizeImportedExpense(expense: Record<string, unknown>): Expense | n
 // valores decimais em ponto flutuante gere diferenças de centavos no total
 // exibido (ex.: 0.1 + 0.2 !== 0.3 em JavaScript).
 function aggregateByCategory(expenses: ExpenseWithCategory[]) {
-  const totalCents = expenses.reduce((sum, expense) => sum + toCents(expense.value), 0)
   const grouped = expenses.reduce((acc, expense) => {
     const key = expense.category.id
 
@@ -134,14 +182,19 @@ function aggregateByCategory(expenses: ExpenseWithCategory[]) {
     return acc
   }, {} as Record<string, { id: string; label: string; color: string; totalCents: number; count: number }>)
 
-  return Object.values(grouped)
-    .map((item) => ({
+  const items = Object.values(grouped)
+  // Percentuais de categoria representam partes de um todo (o total do
+  // período), então precisam somar exatamente 100.
+  const percentages = distributeIntegerPercentages(items.map((item) => item.totalCents))
+
+  return items
+    .map((item, index) => ({
       id: item.id,
       label: item.label,
       color: item.color,
       count: item.count,
       total: fromCents(item.totalCents),
-      percent: totalCents > 0 ? Math.round((item.totalCents / totalCents) * 100) : 0,
+      percent: percentages[index],
     }))
     .sort((a, b) => b.total - a.total)
 }
@@ -167,6 +220,9 @@ function aggregateByMonth(expenses: ExpenseWithCategory[]) {
   const groupedMonths = Object.values(grouped)
   const highestTotalCents = Math.max(...groupedMonths.map((item) => item.totalCents), 0)
 
+  // Aqui o percentual é relativo ao maior mês (para a largura da barra no
+  // "Resumo por mês"), não uma fatia de um total — não faz sentido somar
+  // 100, então o arredondamento simples é suficiente.
   return groupedMonths
     .map((item) => ({
       id: item.id,
@@ -289,12 +345,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
       expenses
         .map((expense) => ({
           ...expense,
-          category: categoryMap.get(expense.categoryId) ?? {
-            id: 'sem-categoria',
-            nome: 'Sem categoria',
-            cor: getCategoryColor('Sem categoria'),
-            ativa: false,
-          },
+          category: categoryMap.get(expense.categoryId) ?? UNCATEGORIZED_CATEGORY,
         }))
         .sort(compareExpensesByDate),
     [categoryMap, expenses],
@@ -349,7 +400,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     [expensesWithCategory],
   )
 
-  const addExpense = useCallback((expenseData) => {
+  const addExpense = useCallback((expenseData: ExpenseInput) => {
     const value = fromCents(toCents(parseCurrencyInput(expenseData.value)))
 
     if (!expenseData.date || !expenseData.categoryId || !Number.isFinite(value) || value <= 0) {
@@ -371,7 +422,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     return true
   }, [])
 
-  const updateExpense = useCallback((expenseId, expenseData) => {
+  const updateExpense = useCallback((expenseId: string, expenseData: ExpenseInput) => {
     const value = fromCents(toCents(parseCurrencyInput(expenseData.value)))
 
     if (!expenseData.date || !expenseData.categoryId || !Number.isFinite(value) || value <= 0) {
@@ -395,7 +446,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     return true
   }, [])
 
-  const deleteExpense = useCallback((expenseId) => {
+  const deleteExpense = useCallback((expenseId: string) => {
     setExpenses((currentExpenses) =>
       currentExpenses.filter((expense) => expense.id !== expenseId),
     )
@@ -413,8 +464,8 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     [categories, expenses],
   )
 
-  const importRecords = useCallback((data) => {
-    const records = extractImportRecords(data)
+  const importRecords = useCallback((data: unknown) => {
+    const records = extractImportRecords(data as Record<string, unknown> | unknown[])
     // O id de categoria é local a cada instalação (não é portável entre
     // dispositivos). Por isso a importação resolve a categoria de cada
     // gasto pelo nome — presente no arquivo através da lista `categories`
@@ -509,7 +560,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     }
   }, [categories, expenses])
 
-  const addCategory = useCallback((categoryName) => {
+  const addCategory = useCallback((categoryName: string) => {
     const cleanName = categoryName.trim()
 
     if (!cleanName) {
@@ -538,7 +589,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     return true
   }, [categories])
 
-  const updateCategory = useCallback((categoryId, categoryName) => {
+  const updateCategory = useCallback((categoryId: string, categoryName: string) => {
     const cleanName = categoryName.trim()
 
     if (!cleanName) {
@@ -565,7 +616,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     return true
   }, [categories])
 
-  const toggleCategoryStatus = useCallback((categoryId) => {
+  const toggleCategoryStatus = useCallback((categoryId: string) => {
     setCategories((currentCategories) =>
       currentCategories.map((category) =>
         category.id === categoryId ? { ...category, ativa: !category.ativa } : category,
@@ -573,7 +624,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
     )
   }, [])
 
-  const removeCategory = useCallback((categoryId) => {
+  const removeCategory = useCallback((categoryId: string) => {
     const categoryIsUsed = expenses.some((expense) => expense.categoryId === categoryId)
 
     if (categoryIsUsed) {
@@ -592,7 +643,7 @@ export function useControleGastos(dashboardMonthKey = getCurrentMonthKey()) {
   }, [expenses])
 
   const filterExpenses = useCallback(
-    ({ search = '', categoryId = 'todos', monthKey = '' }) => {
+    ({ search = '', categoryId = 'todos', monthKey = '' }: ExpenseFilters) => {
       const normalizedSearch = normalizeText(search)
 
       return expensesWithCategory.filter((expense) => {
